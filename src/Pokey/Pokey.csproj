@@ -40,7 +40,7 @@
     <IsPackable>true</IsPackable>
     <PackageId>PokeySharp</PackageId>
     <Title>PokeySharp - Atari POKEY audio emulation</Title>
-    <Description>A cycle-level emulation of the POKEY (C012294) audio section in pure C#, with no dependencies: four channels, the 4/5/17-bit poly counters, AUDCTL joining and clock selection, high-pass filters and volume-only mode, rendered through a box filter and a DC blocker. Includes a sound-design layer, step envelopes and a frame-based music driver that plays a text song format.</Description>
+    <Description>An emulation of the POKEY (C012294) audio section in pure C#, stepped at the chip's own clock and with no dependencies: four channels, the 4/5/17-bit poly counters, AUDCTL joining and clock selection, high-pass filters and volume-only mode, rendered through a box filter and a DC blocker. Includes a sound-design layer, step envelopes and a frame-based music driver that plays a text song format.</Description>
     <PackageTags>atari;pokey;chiptune;emulation;audio;synthesis;8-bit;retro;sound;music</PackageTags>
     <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
