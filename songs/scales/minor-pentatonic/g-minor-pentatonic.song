@@ -1,0 +1,67 @@
+# G MINOR PENTATONIC - a scale to hear, play along with, and read. Made by PokeyTracker's
+# scale songs (File > New scale song), by rule: every note follows from the scale's steps.
+# Five notes, the natural minor without its second and sixth: the scale of rock and blues solos.
+# Going up:   G3 Bb3 C4 D4 F4 G4
+# The format is in Demo1/CLAUDE.md, under "Song files".
+
+song   G MINOR PENTATONIC
+key    G MINOR
+
+# A soft piano-like voice on the 16-bit table: every note within two cents of true.
+instrument PIANO
+  table      wide
+  volume     14 13 12 11 10 10 9 9 8 8 7 7 7 6
+  distortion tone
+  release    3
+
+instrument HOME_NOTE
+  table      wide
+  volume     7 7 6
+  distortion tone
+  release    2
+
+channel 1 pair LOW BYTE
+  note  The low byte of channel 2's 16-bit divider. AUDCTL 78 joins 1 and 2, and 3 and 4.
+
+channel 2 notes HOME
+  note  The home note, held low under the scale when the drone is on - every note of the
+  note  scale is heard against it, which is how a scale's character is learned. The lines
+  note  play it where they name HOME; put . there to leave it out.
+  voice HOME_NOTE
+  track HOME G1 . . .  . . . .  . . . .  . . . .
+
+channel 3 pair LOW BYTE
+  note  The low byte of channel 4's 16-bit divider.
+
+channel 4 notes SCALE
+  note  G Minor Pentatonic: one octave up and down in quarter notes, two in eighths,
+  note  and the home chord as an arpeggio.
+  voice PIANO
+  track O1 G3 . . .  Bb3 . . .  C4 . . .  D4 . . .
+  track O2 F4 . . .  G4 . . .  F4 . . .  D4 . . .
+  track O3 C4 . . .  Bb3 . . .  G3 . . .  . . . .
+  track T1 G3 . Bb3 .  C4 . D4 .  F4 . G4 .  Bb4 . C5 .
+  track T2 D5 . F5 .  G5 . F5 .  D5 . C5 .  Bb4 . G4 .
+  track T3 F4 . D4 .  C4 . Bb3 .  G3 . . .  . . . .
+  track A1 G3 . . .  Bb3 . . .  D4 . . .  G4 . . .
+  track A2 Bb4 . . .  D5 . . .  G5 . . .  D5 . . .
+  track A3 Bb4 . . .  G4 . . .  D4 . . .  Bb3 . . .
+  track A4 G3 . . .  . . . .  . . . .  . . . .
+
+# The order list: the scale's sections, then the song ends.
+audctl $78
+speed  11
+section ONE OCTAVE
+line   .  .     .  O1
+line   .  .     .  O2
+line   .  .     .  O3
+section TWO OCTAVES
+line   .  .     .  T1
+line   .  .     .  T2
+line   .  .     .  T3
+section ARPEGGIO
+line   .  .     .  A1
+line   .  .     .  A2
+line   .  .     .  A3
+line   .  .     .  A4
+end

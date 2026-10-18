@@ -1,0 +1,183 @@
+# Vector rock shooter, 1979 -- evocations, not the originals, and they cannot be.
+#
+# This one is different from the other evocation banks here. The maze chase and the fixed
+# shooter both had a sound chip, so a POKEY version of them is one chip standing in for
+# another. This one had no sound chip at all. Its cabinet has a board of discrete analog
+# circuits -- oscillators, a noise source, envelope shapers -- and the 6502 does not
+# generate a waveform at any point. It writes bits to seven write-only latches that gate
+# and steer those circuits, and everything else happens in hardware:
+#
+#     EXPSND = $3600   explosion.  D7-D6 = pitch, D5-D2 = volume
+#     THUMP  = $3A00   the heartbeat.  D4 = on, D3-D0 = frequency
+#     SCRSND = $3C00   saucer warble, D7 = on
+#     SCRFIR = $3C01   saucer fire, D7 = on
+#     SCRSEL = $3C02   saucer size.  D7 = 0 small, 1 large
+#     SHPSND = $3C03   ship thrust, D7 = on
+#     SHPFIR = $3C04   ship fire, D7 = on
+#     TONE   = $3C05   extra-life tone, D7 = on
+#     NRESET = $3E00   noise reset
+#
+# (ASTDEC.XX, the declaration file, github.com/historicalsource/asteroids.)
+#
+# So there is no waveform in that source to transcribe, and nothing below is a copy of one.
+# What IS in the source, exactly, is the timing and the structure: how long each sound is
+# gated on, which of them decay and how fast, and what the game changes between one firing
+# and the next. Those numbers are transcribed faithfully and each note says where from.
+# The pitches and the textures are chosen by ear, because the source does not contain them.
+#
+# Two rates run this game, and the source states both. The NMI is headed "NMI INTERRUPT
+# EVERY 4 MS" -- 250 Hz -- and every fourth one it ticks SYNC, commented "MAIN LINE SYNC UP
+# (16 MS)". The main loop waits on SYNC and calls SOUNDS once per pass, so
+#
+#     sound routine   62.5 Hz   one frame, 16 ms
+#     NMI             250 Hz    4 ms, and the extra-life tone is the only sound on it
+#
+# Everything below is therefore in 16 ms frames: 3.52 ticks each at the 220 Hz tick this
+# file declares. (COIN65.XX calls a frame 1/60 in prose; the NMI's own arithmetic is 16 ms,
+# so 62.5 Hz is the number to work from.)
+#
+# The clock and tick below are POKEY's, not the cabinet's. Nothing in this cabinet divides a
+# 1.512 MHz clock -- that is the rate the emulated chip runs at so these dividers land on
+# the pitches they were chosen for.
+
+bank   Space shooter
+clock  1512000
+tick   220
+
+category Weapons
+
+sound Ship fire
+audf  10 1 +3 56
+audc  170 5 -1 11
+amp   0.45
+note  SOUND1 (A35131.1A) latches SHPFIR on and loads SND1 with $10 -- sixteen frames, 256
+note  ms, which is what these 56 ticks are. That is a long gate for a shot, and it is why
+note  the hardware's own envelope decay does the shaping: the volume fade here stands in
+note  for it. Both fire sounds run through the same routine and the same length.
+
+sound Saucer fire
+audf  40 2 +7 28
+audc  41 5 -1 10
+amp   0.40
+note  The same sixteen frames through the same SOUND1 call with X=1 instead of X=0 -- the
+note  game distinguishes the two shots by which latch it writes, not by length. Lower and
+note  coarser here, on the 5-bit poly, which is the usual way to say "not yours".
+
+category Movement
+
+sound Ship thrust
+audf  200 8 0 16
+audc  137 128 0 1
+amp   0.35
+note  SHPSND is held on for as long as the thrust switch is, and cleared the moment the
+note  ship is not alive (STA A,SHPSND at the 25$ label). So it has no envelope of its own:
+note  this is half a second of the loop, and a game holds it or retriggers it.
+
+sound Saucer, large
+audf  150 6 0 1
+audf  120 6 0 1
+audf  150 6 0 1
+audf  120 6 0 1
+audf  150 6 0 1
+audf  120 6 0 1
+audf  150 6 0 1
+audf  120 6 0 1
+audc  41 48 0 1
+amp   0.40
+note  SCRSND is gated on while a saucer is alive and SCRSEL takes D7 of the saucer's own
+note  size byte, so large and small differ only in what the analog circuit is switched to.
+note  The alternation is the character of it: two dividers swapped every six ticks.
+
+sound Saucer, small
+audf  70 5 0 1
+audf  55 5 0 1
+audf  70 5 0 1
+audf  55 5 0 1
+audf  70 5 0 1
+audf  55 5 0 1
+audf  70 5 0 1
+audf  55 5 0 1
+audc  41 40 0 1
+amp   0.35
+note  The same gesture higher and quicker. In the cabinet this is one bit of difference --
+note  SCRSEL D7 -- which is the cheapest characterisation of an enemy in the whole set.
+
+category Impacts
+
+sound Explosion, large rock
+audf  180 14 +5 16
+audc  143 14 -1 16
+amp   0.60
+note  The explosion latch is loaded once and then walked down by the frame loop: 50$ reads
+note  LEXPSND, DEX, and stores it back until the low six bits are zero. Loaded with $3F
+note  that is 63 frames -- a full second of decay -- and because the byte is decremented
+note  whole, the volume field D5-D2 steps down once every four frames. Sixteen levels over
+note  a second, which is the staircase this fade reproduces.
+note  A large rock's pitch bits are 00, the lowest the circuit offers. The sweep finishes
+note  on divider 255 exactly -- the last value a byte holds, and one more step would wrap.
+
+sound Explosion, medium rock
+audf  60 14 +12 16
+audc  143 14 -1 16
+amp   0.55
+note  Pitch bits 11, the highest of the four. The size byte is EOR'd with 2 and rotated
+note  twice into D7-D6 at the 70$ label, which maps large to 00, small to 10 and medium to
+note  11 -- so medium, not small, is the highest-pitched explosion in the game.
+
+sound Explosion, small rock
+audf  100 14 +9 16
+audc  143 14 -1 16
+amp   0.50
+note  Pitch bits 10. Same volume byte and therefore the same one-second decay as the other
+note  two: the game varies the pitch of an explosion by what was destroyed and never its
+note  length or its loudness.
+
+sound Ship destroyed
+audf  180 14 +5 16
+audc  143 14 -1 16
+amp   0.70
+note  LDX I,3E / STX LEXPSND at the 93$ label. That is the large rock's value less two, so
+note  the player's own death is the same pitch, the same volume and two frames shorter than
+note  a big rock going up -- a genuinely surprising thing to find in the source. Only the
+note  amplitude here separates them, which is this bank editorialising and saying so.
+
+category States
+
+sound Thump, low
+audf  220 1 +2 14
+audc  170 14 0 1
+amp   0.50
+note  THUMP1 is loaded with 4 -- four frames on, 64 ms, these 14 ticks -- and then the
+note  latch is cleared. The beat itself is the gap, not the sound.
+
+sound Thump, high
+audf  170 1 +3 14
+audc  170 14 0 1
+amp   0.50
+note  The pair alternates because the game writes EOR I,14 to LTHUMP: $10 toggles the
+note  sound on and $04 flips one frequency bit at the same time, so every other beat is
+note  the other tone. Two notes out of one exclusive-or.
+
+sound Extra life
+audf  25 308 0 1
+audc  170 28 0 1
+audc  160 28 0 1
+audc  170 28 0 1
+audc  160 28 0 1
+audc  170 28 0 1
+audc  160 28 0 1
+audc  170 28 0 1
+audc  160 28 0 1
+audc  170 28 0 1
+audc  160 28 0 1
+audc  170 28 0 1
+amp   0.40
+note  POINTS loads SND3 with $B0 on every 1000 points, and this is the one sound driven
+note  from the NMI rather than the frame loop -- so it is worth following carefully. The
+note  handler decrements SND3 whenever FRAME is odd, and it runs four times a frame, so
+note  176 counts are spent over 88 frames: 1.4 seconds, which is what these 308 ticks are.
+note  The gate bit is FRAME bit 3 (the three RORs after the DEC put it in D7), so the tone
+note  is on eight frames and off eight -- 128 ms each way, the 28 ticks per step here, and
+note  about five and a half pulses before it stops.
+note  The pitch chain never moves. The rhythm is entirely in AUDC, exactly as the
+note  original's is entirely in one gate bit.

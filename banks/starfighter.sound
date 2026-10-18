@@ -1,0 +1,98 @@
+# Fixed shooter, 1981 -- evocations, not the originals.
+#
+# The arcade used a Namco WSG for the short effects and sampled waveforms for the longer
+# ones, so as with the maze game nothing here can be a copy. What is worth reproducing is
+# the shape of the set: this game's sounds are unusually long for 1981, and several of them
+# are pitch gestures that last a whole second or more while something moves on screen.
+#
+# That is the thing to take from it. Most arcade sound is a fiftieth of a second; a capture
+# beam holding for a second and a half is what makes an event feel like an event.
+
+bank   Starfighter
+clock  1512000
+tick   220
+
+category Weapons
+
+sound Player fire
+audf  20 1 +9 14
+audc  170 1 -1 10
+amp   0.4
+note  Short, high, falling. A fixed shooter fires constantly, so the shot has to be brief
+note  enough to overlap itself without turning to mud.
+
+sound Enemy fire
+audf  70 1 +6 12
+audc  73 1 0 12
+amp   0.3
+note  Lower and rougher than yours, which is the entire design rule for enemy weapons.
+
+category Impacts
+
+sound Enemy hit
+audf  25 2 +13 18
+audc  140 2 -1 13
+amp   0.45
+note  Noise sweeping down while it fades. The workhorse -- it plays more than anything
+note  else in the game, so it is kept short and mid-loud.
+
+sound Player hit
+audf  35 3 +8 26
+audc  141 3 -1 14
+amp   0.6
+note  The same idea, three times as long and much louder. Nothing else in the bank runs
+note  this long at this volume, which is what makes it read as yours.
+
+category States
+
+sound Capture beam
+audf  200 3 -6 30
+audc  40 3 0 30
+amp   0.4
+note  Well over a second of slow rise on the 5-bit poly. The signature sound of the game
+note  and the reason its set is remembered -- almost nothing else from 1981 holds a single
+note  gesture this long.
+
+sound Rescue
+audf  120 2 -5 24
+audc  170 2 0 20
+audc  170 2 -1 6
+amp   0.45
+note  The beam's answer: shorter, cleaner, pure tone instead of poly. Same direction, so
+note  the pair reads as question and reply.
+
+category Movement
+
+sound Dive
+audf  50 1 +5 26
+audf  180 1 -6 22
+audc  40 1 0 48
+amp   0.35
+note  Down then up, one continuous gesture -- the shape of something swooping past and
+note  pulling away. Two AUDF steps in a row is all it takes.
+
+sound Formation
+audf  110 2 -4 14
+audc  170 2 0 14
+amp   0.3
+note  A short rise played as each rank arrives. Quiet on purpose: it repeats many times a
+note  wave, and anything louder would exhaust its welcome by level three.
+
+category Pickups
+
+sound Extra life
+audf  80 1 0 4
+audf  60 1 0 4
+audf  40 1 0 10
+audc  170 1 0 18
+amp   0.45
+note  Three flat rising notes. An arpeggio says reward in a way a sweep never does.
+
+category Interface
+
+sound Blip
+audf  45 1 0 3
+audc  164 1 0 3
+amp   0.3
+note  Fourteen milliseconds. A menu sound that outstays that becomes hateful by the tenth
+note  press.

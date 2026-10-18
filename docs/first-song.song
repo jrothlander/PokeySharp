@@ -1,0 +1,87 @@
+# FIRST SONG - the file the tutorial builds, step by step.
+song   FIRST SONG
+key    D MINOR
+rows   16
+beat   4
+
+# ---- the instruments: what a note sounds like, one entry per frame ----
+
+instrument LEAD
+  table      tone
+  volume     11 10 10 9 9 8 8
+  distortion tone
+  vibrato    0 1 1 0 -1 -1
+  delay      10
+  release    2
+
+instrument BASS
+  table      buzz
+  volume     12 11 11 10 10 9
+  distortion buzz
+  release    3
+
+instrument CHORD
+  table      tone
+  volume     6 5 5 4 4 3
+  distortion tone
+  release    2
+
+instrument KICK
+  table      none
+  volume     14 12 9 7 4 2 0
+  distortion tone buzz
+  audf       40 20 27 34 43
+
+instrument SNARE
+  table      none
+  volume     14 11 8 6 4 2 1 0
+  distortion noise
+  audf       12
+
+instrument HAT
+  table      none
+  volume     8 4 1 0
+  distortion noise
+  audf       4
+
+# ---- the channels: four tracks of sixteen rows each ----
+
+channel 1 drums DRUMS
+  note  One channel plays the whole kit: each token names an instrument.
+  kit   K=KICK S=SNARE H=HAT
+  track BEAT  K . H .  S . H .  K . K .  S . H .
+  track FILL  K . H .  S . H .  S . S S  . S S S
+
+channel 2 notes BASS
+  note  Distortion C is the Atari bass. The table has gaps, which is why
+  note  this song is in D minor rather than C.
+  voice BASS
+  track DM    D2 - D2 D3  - D2 - D2  D2 - D2 D3  - D2 A1 -
+  track A     A1 - A1 A2  - A1 - A1  A1 - A1 A2  - A1 E2 -
+
+channel 3 notes LEAD
+  note  The tune. A pure tone, with vibrato once a note is ten frames old.
+  voice LEAD
+  track A1    D5 . . .  A4 . C5 .  D5 . F5 .  E5 . D5 .
+  track A2    C5 . . .  A4 . C5 .  F5 . . .  E5 . C5 .
+
+channel 4 notes CHORD
+  note  Chords without an octave arpeggiate: one note of the triad a frame.
+  voice CHORD
+  track PAD   Dm . . .  . . . .  Dm . . .  . . . .
+  track PADA  Am . . .  . . . .  Am . . .  . . . .
+
+# ---- the order list: which track each channel plays, line by line ----
+
+speed  6
+audctl $00
+
+section INTRO
+line   BEAT   .      .      .
+
+loop                       # the song returns HERE, not to the top
+
+section VERSE
+line   BEAT   DM     A1     PAD
+line   BEAT   A      A2     PADA
+line   FILL   DM     A1     PAD

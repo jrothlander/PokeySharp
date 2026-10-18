@@ -1,0 +1,82 @@
+# Maze chase, 1980 -- evocations, not the originals.
+#
+# The arcade ran a Namco WSG: three channels of 4-bit wavetable, each with its own
+# 32-sample waveform in a PROM. POKEY has no wavetable at all, so nothing here can be a
+# copy -- what carries across is the gesture. Where the original picked a waveform, this
+# picks a distortion; where it stepped a frequency register, this steps a divider.
+#
+# The two things that do carry: everything is short, and everything is a scale fragment
+# rather than a sweep. That is what makes the set read as this game rather than as a
+# shooter.
+
+bank   Maze chase
+clock  1512000
+tick   220
+
+category Movement
+
+sound Waka, low
+audf  90 1 +14 6
+audc  202 1 0 6
+amp   0.32
+note  The eating loop is two alternating blips, played over and over while the stick is
+note  held. Distortion 6 is the 4-bit poly -- short enough to repeat inside one blip, which
+note  gives it a buzz rather than a tone.
+
+sound Waka, high
+audf  60 1 -10 6
+audc  202 1 0 6
+amp   0.32
+note  The other half. Low then high, back and forth, and the pair is the whole sound.
+
+category Pickups
+
+sound Power pellet
+audf  120 2 -4 24
+audc  202 2 0 24
+amp   0.38
+note  The rising sibling of the waka, four times as long. Same distortion so it belongs to
+note  the same family, which is most of why the original's set sounds coherent.
+
+sound Fruit
+audf  100 1 -3 12
+audc  170 1 0 12
+amp   0.35
+note  Pure tone this time, and the only sweet sound in the bank.
+
+sound Eat ghost
+audf  200 1 -8 22
+audc  170 1 0 22
+amp   0.42
+note  A long climb from very low. The original slides up nearly two octaves while the
+note  ghost's eyes retreat, and the length is doing the work rather than the pitch.
+
+category States
+
+sound Siren
+audf  150 3 -6 16
+audc  40 3 0 16
+amp   0.28
+note  The pursuit loop. Distortion 1 is the 5-bit poly -- coarse, but it repeats every 31
+note  steps, so it stays pitched instead of turning into hiss.
+
+sound Death
+audf  30 2 +9 26
+audc  41 2 0 26
+amp   0.5
+note  Down and coarse, which is what every arcade death is. The 5-bit poly keeps it
+note  musical at the bottom of the fall where noise would just be a thud.
+
+sound Extra life
+audf  70 1 -6 10
+audc  170 1 0 10
+amp   0.4
+note  Short, high, rising. A reward is always up.
+
+category Interface
+
+sound Credit
+audf  80 1 0 3
+audc  169 1 0 4
+amp   0.35
+note  The coin. Two hundredths of a second and the most important sound in the cabinet.

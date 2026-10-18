@@ -1,0 +1,49 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    A small formant speech synthesiser: phonemes in, sample buffer out.
+
+    Split out of Pokey/ rather than left beside it. SpeechSource started there on
+    the honest argument that it was pure arithmetic with no UI and no audio API,
+    which is true and is still true. But it has grown a phoneme inventory, a frame
+    generator and a transition model, none of which has anything whatever to do
+    with a sound chip, and the csproj next door already says that when a third
+    thing wants a shared file the answer is to extract it rather than link it
+    again. Same reasoning, applied a level up.
+
+    The split is real, not cosmetic: this project does not reference Pokey and
+    knows nothing about it. It renders to a caller-chosen number of levels, so
+    "4-bit" is the caller's fact, not this library's. That is what makes it
+    testable on its own and what would let it drive anything else later.
+  -->
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <!--
+      The XML docs ship with the package, and they are a large part of what this library
+      is. CS1591 (and CS1573, a partly-documented parameter list) are off because turning
+      them on today means 240 warnings on a build that is otherwise clean, which trains
+      everyone to ignore the list. Documenting the gaps is a pre-1.0 job, not a reason to
+      lose the signal from every other warning.
+    -->
+    <NoWarn>$(NoWarn);CS1591;CS1573</NoWarn>
+    <AssemblyName>Pokey.Speech</AssemblyName>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <IsPackable>true</IsPackable>
+    <PackageId>PokeySharp.Speech</PackageId>
+    <Title>PokeySharp.Speech - a formant speech synthesiser</Title>
+    <Description>A formant speech synthesiser in pure C#, with no dependencies and no reference to the chip: phonemes or English text in, samples out, at a caller-chosen number of levels - so it suits a 4-bit DAC without knowing about one. Includes letter-to-sound rules, prosody, voice profiles and singing.</Description>
+    <PackageTags>speech;synthesis;formant;text-to-speech;retro;audio;atari;8-bit</PackageTags>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+</Project>

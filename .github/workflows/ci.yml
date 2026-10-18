@@ -1,0 +1,63 @@
+name: build
+
+# Windows, because two of the samples are WinForms and one is MonoGame WindowsDX.
+# The libraries and the checks are platform-neutral; if the samples ever move off
+# Windows this can move with them.
+on:
+  push:
+    branches: [ main ]
+    tags: [ 'v*' ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      # The libraries and the checks. The samples are built separately below, so a
+      # MonoGame content-pipeline problem can never look like a library failure.
+      - name: Build the libraries
+        run: |
+          dotnet build src/Pokey/Pokey.csproj -c Release
+          dotnet build src/Pokey.Speech/Pokey.Speech.csproj -c Release
+
+      - name: Run the checks
+        run: dotnet run --project tests/Pokey.SelfTest -c Release
+
+      - name: Build the samples
+        run: |
+          dotnet build samples/PokeyTracker/PokeyTracker.csproj -c Release
+          dotnet build samples/PokeyLabForms/PokeyLabForms.csproj -c Release
+          dotnet build samples/lasers/lasers.csproj -c Release
+          dotnet build samples/voicedump/voicedump.csproj -c Release
+
+      - name: Pack
+        run: dotnet pack src/Pokey/Pokey.csproj src/Pokey.Speech/Pokey.Speech.csproj -c Release -o artifacts
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: packages
+          path: artifacts/*
+
+  # Publishing is its own job so a tag that fails the build publishes nothing.
+  # It needs one secret, NUGET_API_KEY, and runs only on a v* tag.
+  publish:
+    needs: build
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: windows-latest
+    environment: nuget
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: packages
+          path: artifacts
+
+      - name: Push to nuget.org
+        run: dotnet nuget push "artifacts/*.nupkg" --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate

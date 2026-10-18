@@ -1,0 +1,147 @@
+# TOCCATA IN D MINOR - after Bach, the Toccata and Fugue BWV 565 (about 1704).
+# The format is in Demo1/CLAUDE.md, under "Song files". Instruments are tables with
+# one entry per frame; each channel holds named tracks; the lines at the end are the
+# order list. In a track '.' holds and '-' releases. '#' starts a comment.
+#
+# Public domain: Bach died in 1750. The opening is Bach's - the flourish on A, the run
+# down to C sharp and the resolution onto D, played three times, each an octave lower, then
+# the diminished seventh climbing over a low D. It is written from the famous opening, not
+# read off a score.
+#
+# What follows it is new, and marked so: a presto built from the toccata's own figures - a
+# note repeated under a moving line, the way Bach's organ pieces keep a pulse going - over a
+# drum beat, for a boss or a villain's lair. It runs i - iv - V - i, VI - iv - V - i in D
+# minor, the opening flourish comes back as a two-bar break, and the presto loops.
+#
+# What four channels keep. Channel 1 is the drums, silent in the opening. Channel 2 is the
+# organ: the opening across three octaves, then the presto in sixteenths. Channels 3 and 4
+# are a 16-bit organ pedal - a held D in the opening, octave eighths in the presto.
+
+song   TOCCATA IN D MINOR
+key    D MINOR
+
+instrument KICK
+  table      none
+  volume     15 14 13 11 9 7 5 3 1 0
+  distortion tone buzz
+  audf       40 20 27 34 43 52 62 71 80
+  release    2
+
+instrument SNARE
+  table      none
+  volume     14 13 11 9 7 6 5 4 3 2 1 0
+  distortion tone noise
+  audf       50 6 7 8 9 10 11 12 13
+  release    2
+
+instrument HAT
+  table      none
+  volume     7 4 2 1 0
+  distortion noise
+  audf       0
+  release    2
+
+# A crash: noise, falling slowly in level and in pitch.
+instrument CRASH
+  table      none
+  volume     13 12 11 10 9 9 8 8 7 7 6 6 5 5 4 4 3 3 2 2 1 1 0
+  distortion noise
+  audf       0 0 1 1 2 2 3 3 4 4 5 5 6
+  release    2
+
+# The organ in the opening: it speaks and holds.
+instrument ORGAN
+  table      tone
+  volume     10 12 12 12 11 11 11 11 11
+  distortion tone
+  release    2
+
+# The organ in the presto: each sixteenth clear of the next.
+instrument PRESTO
+  table      tone
+  volume     12 11 10 9 9 8 8
+  distortion tone
+  release    2
+
+instrument PEDAL
+  table      wide
+  volume     11 12 12 11 11 11 10
+  distortion tone
+  release    2
+
+instrument PEDAL_8
+  table      wide
+  volume     13 11 9 7 5 3 2 1 0
+  distortion tone
+  release    2
+
+channel 1 drums DRUMS
+  note  Silent through the opening, a crash on its last chord, then a rock beat under the presto.
+  kit   K=KICK S=SNARE H=HAT C=CRASH
+  track ROCK  K . H .  S . H .  K . K .  S . H .
+  track FILL  K . H .  S . H .  S . S S  S S S S
+  track CRASH C . . .  . . . .  . . . .  . . . .
+  track BREAK K . . .  . . . .  S . S .  S S S S
+
+channel 2 notes ORGAN
+  note  The opening: A G A held, then G F E D C# and D - three times, an octave lower each
+  note  time. The presto: a repeated note under a moving line, in sixteenths.
+  voice ORGAN
+  track I1 A5 G5 A5 .  . . . .  . . . .  . . . -
+  track I2 G5 F5 E5 D5  C#5 . . .  . . . .  D5 . . .
+  track I3 A4 G4 A4 .  . . . .  . . . .  . . . -
+  track I4 G4 F4 E4 D4  C#4 . . .  . . . .  D4 . . .
+  track I5 A3 G3 A3 .  . . . .  . . . .  . . . -
+  track I6 G3 F3 E3 D3  C#3 . . .  . . . .  D3 . . .
+  track I7 C#3 E3 G3 Bb3  C#4 E4 G4 Bb4  C#5 E5 G5 Bb5  C#6 . . .
+  track I8 D5 . . .  . . . .  . . . .  - . . .
+  track P1 @PRESTO A4 G4 A4 D5  A4 G4 A4 F4  A4 G4 A4 E4  A4 G4 A4 D4
+  track P2 @PRESTO Bb4 A4 Bb4 D5  Bb4 A4 Bb4 G4  Bb4 A4 Bb4 F4  Bb4 A4 Bb4 D4
+  track P3 @PRESTO A4 G4 A4 C#5  A4 G4 A4 E4  A4 G4 A4 C#4  A4 G4 A4 E4
+  track P4 @PRESTO D5 C#5 D5 A4  F4 A4 D4 F4  A3 D4 F4 A4  D5 . . .
+  track P5 @PRESTO D5 C5 D5 F5  D5 C5 D5 Bb4  D5 C5 D5 F4  D5 C5 D5 Bb4
+  track P6 @PRESTO D5 C5 D5 G5  D5 C5 D5 Bb4  D5 C5 D5 G4  D5 C5 D5 Bb4
+  track P7 @PRESTO C#5 B4 C#5 E5  C#5 B4 C#5 A4  G5 F5 E5 D5  C#5 E5 A4 C#5
+  track P8 @PRESTO D5 A4 F4 A4  D5 A4 F4 A4  D4 F4 A4 D5  F5 E5 D5 C#5
+  track B1 @PRESTO A4 G4 A4 .  . . . .  G4 F4 E4 D4  C#4 . D4 .
+  track B2 @PRESTO A3 G3 A3 .  . . . .  G3 F3 E3 D3  C#3 . D3 .
+
+channel 3 pair LOW BYTE
+  note  The low byte of the pedal. AUDCTL 28 joins channels 3 and 4 on the 1.79 MHz clock.
+
+channel 4 notes PEDAL
+  note  A held low D under the climbing chord and the break; octave eighths in the presto.
+  voice PEDAL
+  track HOLD D2 . . .  . . . .  . . . .  . . . .
+  track LAST D2 . . .  . . . .  . . . .  - . . .
+  track D    @PEDAL_8 D2 . D3 .  D2 . D3 .  D2 . D3 .  D2 . D3 .
+  track G    @PEDAL_8 G1 . G2 .  G1 . G2 .  G1 . G2 .  G1 . G2 .
+  track A    @PEDAL_8 A1 . A2 .  A1 . A2 .  A1 . A2 .  A1 . A2 .
+  track BB   @PEDAL_8 Bb1 . Bb2 .  Bb1 . Bb2 .  Bb1 . Bb2 .  Bb1 . Bb2 .
+
+# The order list: a line is a bar. Drums, organ, low byte, pedal.
+speed  10
+audctl $28
+section OPENING
+line   .       I1      .       .
+line   .       I2      .       .
+line   .       I3      .       .
+line   .       I4      .       .
+line   .       I5      .       .
+line   .       I6      .       .
+line   .       I7      .       HOLD
+line   CRASH   I8      .       LAST
+speed  6
+loop
+section PRESTO
+line   ROCK    P1      .       D
+line   ROCK    P2      .       G
+line   ROCK    P3      .       A
+line   FILL    P4      .       D
+line   ROCK    P5      .       BB
+line   ROCK    P6      .       G
+line   ROCK    P7      .       A
+line   FILL    P8      .       D
+section BREAK
+line   CRASH   B1      .       HOLD
+line   BREAK   B2      .       HOLD

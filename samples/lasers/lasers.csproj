@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    Ten laser sounds, as a worked example of driving the Pokey library from nothing.
+
+    Not in the solution and not referenced by anything that ships. It exists to be read:
+    LaserSounds.cs is the table of integers, Program.cs is every layer of the API applied
+    to it in turn (the chip on its own, StepEnvelope, SoundRender, SoundDesign), and
+    running it writes each voice to a WAV so the numbers can be heard rather than taken
+    on trust.
+
+    Run it with no arguments to render every laser into a "lasers" folder. Program.cs
+    lists the flags it also takes; an XML comment cannot spell them, because it may not
+    contain two dashes in a row.
+  -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <AssemblyName>lasers</AssemblyName>
+    <RootNamespace>Lasers</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Pokey\Pokey.csproj" />
+  </ItemGroup>
+
+</Project>

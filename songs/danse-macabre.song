@@ -1,0 +1,235 @@
+# DANSE MACABRE - Saint-Saens, symphonic poem, Op. 40 (1874).
+# The format is in Demo1/CLAUDE.md, under "Song files". Instruments are tables with
+# one entry per frame; each channel holds named tracks; the lines at the end are the
+# order list. In a track '.' holds and '-' releases. '#' starts a comment.
+#
+# Public domain: Saint-Saens died in 1921. The notes of bars 1 to 65 were read bar by bar off
+# the full score typeset by Luukas Hiltunen (IMSLP 393712, Creative Commons Attribution 4.0 -
+# credited here as it asks), checked against Liszt's piano transcription (Durand, 1877).
+#
+# Death comes to the graveyard at midnight. The harp strikes twelve over the horns' low D;
+# the cellos and basses creep in, a pizzicato note a bar; Death tunes his fiddle - its top
+# string tuned down to E flat, so the open strings clash, A against E flat, the devil's
+# interval. Then the waltz: the flute's staccato tune in G minor over the harp, and the
+# violins taking it up; then Death's own tune on the violin's lowest string, falling G, F, E,
+# E flat, D over plucked strings. It ends on D, and the waltz starts again - the song loops
+# there, past the midnight introduction. Bars 13 to 17, a held string chord at ppp, are left
+# out; the violins' repeat of the waltz is written at the flute's octave, where the pure-tone
+# table is in tune, not an octave up where it is twenty cents out.
+#
+# A row is a sixteenth, a line a bar of 3/4 at 150 quarter notes a minute.
+#
+# What four channels keep. Channel 2 is the tune - the bell of midnight, the fiddle's top
+# string, the flute, the violins, Death's violin. Channel 1 is its second voice: the fiddle's
+# lower string, the harp's chords on beats two and three, the pizzicato under Death's tune.
+# Channels 3 and 4 are a 16-bit bass - the horns' D, the pizzicato walk, the harp's bass.
+
+song   DANSE MACABRE
+key    G MINOR
+rows   12
+beat   4
+
+# Midnight: a bell, struck and left to ring.
+instrument BELL
+  table      tone
+  volume     15 14 13 12 12 11 11 10 10 10 9 9 9 8 8 8 8 7 7 7 7 6 6 6 6 6 5 5 5 5 5 5 4 4 4 4 4 4 3 3 3 3 3 3 3 2 2 2 2 2 2 2 1
+  distortion tone
+  release    1
+
+instrument HORN
+  table      wide
+  volume     2 3 3 4 4 4 5
+  distortion tone
+  release    1
+
+# Death's fiddle: bowed, with a quick vibrato once the note has settled.
+instrument VIOLIN
+  table      tone
+  volume     9 11 12 12 11 11 10 10 10 9
+  distortion tone
+  vibrato    0 1 0 -1
+  delay      10
+  release    2
+
+# The flute's staccato - each note short.
+instrument FLUTE
+  table      tone
+  volume     9 10 9 7 5 4 3 2 1 0
+  distortion tone
+  release    2
+
+instrument FIDDLES
+  table      tone
+  volume     11 12 11 9 7 5 4 3 2 1 0
+  distortion tone
+  release    2
+
+instrument HARP
+  table      tone
+  volume     8 7 5 4 3 2 1 0
+  distortion tone
+  release    2
+
+instrument PIZZ_HI
+  table      tone
+  volume     9 7 5 3 2 1 0
+  distortion tone
+  release    2
+
+instrument PIZZ
+  table      wide
+  volume     12 10 8 6 4 3 2 1 0
+  distortion tone
+  release    2
+
+channel 1 notes SECOND
+  note  The fiddle's lower string, the harp's chords, the pizzicato under Death's tune.
+  voice HARP
+  track A1  @VIOLIN A4 . . .  . . . .  . . . .
+  track A2  @VIOLIN D4 . . .  . . . .  . . . .
+  track A3  @VIOLIN A4 . . .  . . . .  A4 . . .
+  track A4  @VIOLIN D4 . . .  . . . .  D4 . . .
+  track A5  @VIOLIN A4 . A4 .  A4 . . .  D4 . . .
+  track A6  @VIOLIN A4 . . .  D4 . . .  A4 . . .
+  track A7  @VIOLIN D4 . . .  A4 . . .  D4 . . .
+  track A8  @HARP . . . .  Gm . . .  Gm . . .
+  track A9  @HARP . . . .  Fm . . .  Fm . . .
+  track A10 @PIZZ_HI . . . .  G4 . . .  D4 . . .
+  track A11 @PIZZ_HI . . . .  F4 . . .  D4 . . .
+  track A12 @PIZZ_HI . . . .  E4 . . .  Bb3 . . .
+  track A13 @PIZZ_HI . . . .  Eb4 . . .  Bb3 . . .
+  track A14 @PIZZ_HI . . . .  D4 . . .  Bb3 . . .
+  track A15 @PIZZ_HI . . . .  D4 . . .  A3 . . .
+  track A16 @PIZZ_HI . . . .  E4 . . .  C#4 . . .
+  track A17 @PIZZ_HI . . . .  F#4 . . .  D4 . . .
+  track A18 @PIZZ_HI . . . .  A4 . . .  A3 . . .
+  track A19 @PIZZ_HI D4 . . .  A4 . . .  F#4 . . .
+
+channel 2 notes TUNE
+  note  Midnight's bell, the fiddle tuning, the waltz, and Death's violin.
+  voice FLUTE
+  track T1  @BELL D5 . . .  . . . .  . . . .
+  track T2  @VIOLIN Eb5 . . .  . . . .  . . . .
+  track T3  @VIOLIN A4 . . .  . . . .  . . . .
+  track T4  @VIOLIN Eb5 . . .  . . . .  Eb5 . . .
+  track T5  @VIOLIN A4 . . .  . . . .  A4 . . .
+  track T6  @VIOLIN Eb5 . Eb5 .  Eb5 . . .  A4 . . .
+  track T7  @VIOLIN Eb5 . . .  A4 . . .  Eb5 . . .
+  track T8  @VIOLIN A4 . . .  Eb5 . . .  A4 . . .
+  track T9  @FLUTE - . . .  G4 . Bb4 .  G4 . A4 .
+  track T10 @FLUTE Bb4 . . .  A4 . Bb4 .  G4 . Bb4 .
+  track T11 @FLUTE A4 . G4 .  G4 . Bb4 .  G4 . A4 .
+  track T12 @FLUTE Ab4 . - .  Ab4 . C5 .  Ab4 . Bb4 .
+  track T13 @FLUTE C5 . . .  Bb4 . C5 .  Ab4 . C5 .
+  track T14 @FLUTE Bb4 . Ab4 .  Ab4 . C5 .  Bb4 . C5 .
+  track T15 @FLUTE C5 . . .  Ab4 . C5 .  Bb4 . Ab4 .
+  track T16 @FIDDLES G4 . . .  G4 . Bb4 .  G4 . A4 .
+  track T17 @FIDDLES Bb4 . . .  A4 . Bb4 .  G4 . Bb4 .
+  track T18 @FIDDLES A4 . G4 .  G4 . Bb4 .  G4 . A4 .
+  track T19 @FIDDLES Ab4 . - .  Ab4 . C5 .  Ab4 . Bb4 .
+  track T20 @FIDDLES C5 . . .  Bb4 . C5 .  Ab4 . C5 .
+  track T21 @FIDDLES Bb4 . Ab4 .  Ab4 . C5 .  Bb4 . C5 .
+  track T22 @FIDDLES C5 . . .  Ab4 . C5 .  Bb4 . Ab4 .
+  track T23 @FIDDLES G4 . . .  - . . .  . . . .
+  track T24 @VIOLIN G4 . . .  . . . .  G4 . . .
+  track T25 @VIOLIN F4 . . .  . . . .  F4 . . .
+  track T26 @VIOLIN E4 . . .  . . . .  E4 . . .
+  track T27 @VIOLIN Eb4 . . .  . . . .  Eb4 . . .
+  track T28 @VIOLIN D4 . . .  E4 . . .  G4 . . .
+  track T29 @VIOLIN F#4 . . .  E4 . . .  D4 . . .
+  track T30 @VIOLIN F#4 . . .  - . . .  D4 . . .
+  track T31 @VIOLIN D4 . . .  G4 . . .  Bb4 . . .
+  track T32 @VIOLIN A4 . . .  F#4 . . .  D4 . . .
+  track T33 @VIOLIN F#4 . . .  . . . .  E4 . . .
+  track T34 @VIOLIN D4 . . .  - . . .  . . . .
+
+channel 3 pair LOW BYTE
+  note  The low byte of the bass. AUDCTL 28 joins channels 3 and 4 on the 1.79 MHz clock.
+
+channel 4 notes BASS
+  note  The horns' held D, the cellos' walk, the harp's bass on the beat.
+  voice PIZZ
+  track B1  @HORN D4 . . .  . . . .  . . . .
+  track B2  @HORN . . . .  . . . .  . . . .
+  track B3  D3 . . .  . . . .  . . . .
+  track B4  A3 . . .  . . . .  . . . .
+  track B5  C3 . . .  . . . .  . . . .
+  track B6  F#3 . . .  . . . .  . . . .
+  track B7  A2 . . .  . . . .  . . . .
+  track B8  Eb3 . . .  . . . .  . . . .
+  track B9  - . . .  . . . .  D3 . . .
+  track B10 @PIZZ G2 . . .  . . . .  . . . .
+  track B11 @PIZZ F2 . . .  . . . .  . . . .
+  track B12 @PIZZ A2 . . .  . . . .  . . . .
+  track B13 @PIZZ D3 . . .  . . . .  . . . .
+
+# The order list: a line is a bar of 3/4. Chords and second voice, tune, low byte, bass.
+speed  6
+audctl $28
+section MIDNIGHT
+line   .       T1      .       B1
+line   .       T1      .       B2
+line   .       T1      .       B2
+line   .       T1      .       B2
+line   .       T1      .       B2
+line   .       T1      .       B2
+line   .       T1      .       B2
+line   .       T1      .       B2
+line   .       T1      .       B2
+line   .       T1      .       B2
+line   .       T1      .       B2
+line   .       T1      .       B2
+section FOOTSTEPS
+line   .       .       .       B3
+line   .       .       .       B4
+line   .       .       .       B5
+line   .       .       .       B6
+line   .       .       .       B7
+line   .       .       .       B5
+line   .       .       .       B8
+section TUNING
+line   A1      T2      .       B3
+line   A2      T3      .       .
+line   A3      T4      .       .
+line   A4      T5      .       .
+line   A5      T6      .       .
+line   A5      T6      .       .
+line   A6      T7      .       .
+line   A7      T8      .       B9
+loop
+section WALTZ
+line   A8      T9      .       B10
+line   A8      T10     .       B10
+line   A8      T11     .       B10
+line   A8      T10     .       B10
+line   A9      T12     .       B11
+line   A9      T13     .       B11
+line   A9      T14     .       B11
+line   A9      T15     .       B11
+section VIOLINS
+line   A8      T16     .       B10
+line   A8      T17     .       B10
+line   A8      T18     .       B10
+line   A8      T17     .       B10
+line   A9      T19     .       B11
+line   A9      T20     .       B11
+line   A9      T21     .       B11
+line   A9      T22     .       B11
+line   A8      T23     .       B10
+section DEATH'S VIOLIN
+line   A10     T24     .       B10
+line   A11     T25     .       B10
+line   A12     T26     .       B10
+line   A13     T27     .       B10
+line   A14     T28     .       B10
+line   A15     T29     .       B12
+line   A16     T26     .       B12
+line   A17     T30     .       B13
+line   A10     T24     .       B10
+line   A11     T25     .       B10
+line   A12     T26     .       B10
+line   A13     T27     .       B10
+line   A14     T31     .       B10
+line   A17     T32     .       B12
+line   A18     T33     .       B12
+line   A19     T34     .       B13

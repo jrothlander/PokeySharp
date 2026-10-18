@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    Renders the speech synthesiser to a WAV so it can be measured with the same tools
+    a reference recording is measured with.
+
+    Not in the solution and not referenced by anything that ships. It exists because
+    tuning a voice by ear against a memory is the failure mode ARCADE-SOURCE section 9
+    was written to stop: the shot sound got settled by measuring captures, and a voice
+    should be settled the same way. Comparing our output against a reference means
+    putting both through one analysis, which means getting ours onto disk.
+
+    Usage: run it with dotnet, pointing at this directory, and pass
+    out.wav "PHONEMES" [rate] [speed] [pitch] ["melody"] after the argument separator.
+    See Program.cs, which can spell the flags out; an XML comment cannot.
+  -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <AssemblyName>voicedump</AssemblyName>
+    <RootNamespace>VoiceDump</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Pokey.Speech\Pokey.Speech.csproj" />
+  </ItemGroup>
+
+</Project>

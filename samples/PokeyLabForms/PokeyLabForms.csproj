@@ -1,0 +1,74 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    PokeyLab as a Windows Forms application.
+
+    Same chip, same envelopes and same numbers as the MonoGame PokeyLab next
+    door; what changes is the interface. There the pages are keyboard-driven
+    lists and the whole tool is drawn with a vector beam, which suits a project
+    about an arcade cabinet but means every value is reached by walking a caret
+    to it. Here each value is a real control you can click, and all three of the
+    old pages (registers, envelope and poly counters) are on screen at once, so
+    turning a knob and watching the other two react does not cost a keypress.
+
+    Both front ends stay. Neither is a replacement for the other: this one is
+    easier to drive, and the MonoGame one is the one that shares RimWalker's
+    presentation layer and can be checked against the game side by side.
+  -->
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <AssemblyName>PokeyLabForms</AssemblyName>
+    <RootNamespace>PokeyLabForms</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Pokey\Pokey.csproj" />
+    <ProjectReference Include="..\..\src\Pokey.Speech\Pokey.Speech.csproj" />
+  </ItemGroup>
+
+  <!--
+    Sound banks, copied beside the executable exactly as Demo1 takes them. They fill the
+    rest of the envelope panel's Sound list, under the eight voices decoded from
+    Tempest's ROM.
+
+    They live at the repo root because RimWalker and Demo1 read them too; a lab reading
+    its sounds out of a game's folder, or a game out of a lab's, has the dependency
+    backwards either way round.
+
+    Copied and not embedded because the point of the format is that a file can be edited
+    and reopened. Embedding would make the shipped banks the only ones that could never
+    be changed, which is the opposite of what a lab is for.
+  -->
+  <ItemGroup>
+    <None Include="../../banks\*.sound" Link="banks\%(Filename)%(Extension)"
+          CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <!--
+    Linked rather than copied, for the reason PokeyLab.csproj gives at greater
+    length: inside one solution a copy drifts, and a fix to the trigger search
+    should land in both front ends at once.
+
+    ScopeTrace is pure arithmetic over a ring buffer with no MonoGame in it, so
+    it ports by being referenced. It keeps its own PokeyLab namespace because it
+    is PokeyLab's file. If a third consumer ever appears, extract it into Pokey
+    rather than linking it a second time.
+
+    PokeyLab itself is not in this repository - it is the MonoGame front end, which is
+    tied to the game's presentation layer - so ../PokeyLab holds a copy of that one file,
+    kept in step from where it is written.
+
+    One thing does differ here and is noted where it matters: PokeyLab pushes
+    and reads the ring on a single game thread, whereas this app pushes from the
+    audio feeder thread and reads on the UI thread. See ChipSession.Fill.
+  -->
+  <ItemGroup>
+    <Compile Include="..\shared\ScopeTrace.cs" LinkBase="Shared" />
+  </ItemGroup>
+
+</Project>

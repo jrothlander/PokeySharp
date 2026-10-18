@@ -1,0 +1,416 @@
+# MORNING MOOD - Grieg, Peer Gynt Suite No. 1, Op. 46, no. 1 (written 1875, published 1888).
+# The format is in Demo1/CLAUDE.md, under "Song files". Instruments are tables with
+# one entry per frame; each channel holds named tracks; the lines at the end are the
+# order list. In a track '.' holds and '-' releases. '#' starts a comment.
+#
+# Public domain: Grieg died in 1907. All 87 bars were read bar by bar off the
+# full score in Brandon Amaro's 2022 edition (IMSLP 808246), dedicated to the public domain -
+# the same edition as In the Hall of the Mountain King. The grace notes before the tune's
+# second and third bars are left out: at a sixteenth a row there is no room for them.
+# Grieg's slowing at the end is kept, as three steps of speed.
+#
+# The sunrise, as Grieg paints it. The flute plays the tune in E major; the oboe answers an
+# octave down and turns it to G sharp; the flute takes it up in G sharp major; the oboe turns it
+# again, through C sharp minor, to B; flute and oboe toss its last notes back and forth over a
+# held B, louder each time - and at bar 21 the whole orchestra has the tune in E major, forte.
+# It climbs to the sun at bar 30, G sharp major, fortissimo. The cellos sing under the violins'
+# answers; the music slips to F major, and the cellos take the tune's head into D flat; it
+# blazes out in D major at bar 46 and fades. A horn has the tune in F over rippling flutes, and
+# a C augmented chord leads home: at bar 56 the cellos have it in E. Then it is quiet - a
+# clarinet, birds in the flute, the horns swelling on B - and the flute plays the tune once
+# more, as at the start, before the last chord. Then the song goes back to the beginning:
+# morning, again.
+#
+# A row is a sixteenth, a line a bar of 6/8 at 60 dotted quarters a minute - Grieg's
+# Allegretto pastorale.
+#
+# What four channels keep. Channel 1 is the bass, where the bassoons and cellos have it; channel
+# 2 the held chords of the clarinets, horns and strings, one or two a bar. Both are on the
+# pure-tone table in the octave below middle C, where it is within six cents of every note.
+# Channels 3 and 4 are the tune on the 16-bit table: it climbs to F sharp 6, where the 8-bit
+# table is thirty cents out. Soft in the flute, a reedier swell in the oboe, full in the strings.
+#
+# What is left out. Only one line of the orchestra can be the tune, so where Grieg has two -
+# the violins' arpeggios over the cellos' song in bars 34-35 and 42-43 - the bar starts with
+# the violins (an octave down) and ends with the cellos. The flutes' sixteenths under the horn
+# in bars 50-53 are left to the chords, which the chip arpeggiates anyway. The horn, cello and
+# bassoon tunes sound an octave up, clear of the chords. Chords are triads: the diminished
+# seventh in bars 66 and 70 is C sharp minor over a G in the bass, and D flat augmented in bar
+# 49 is a lone A over D flat.
+
+song   MORNING MOOD
+key    E MAJOR
+rows   12
+beat   6
+
+instrument BASS
+  table      tone
+  volume     4 5 6 6 6 6 6 6 5 5 5 5 5 4
+  distortion tone
+  release    2
+
+instrument BASS_F
+  table      tone
+  volume     10 11 11 10 10 9 9 9 8
+  distortion tone
+  release    2
+
+# The held chords: a soft swell, arpeggiated as the chip plays every chord.
+instrument PAD
+  table      tone
+  volume     2 3 4 4 5 5 5 5 5 4
+  distortion tone
+  release    1
+
+instrument PAD_F
+  table      tone
+  volume     7 8 9 9 9 8 8 8 7
+  distortion tone
+  release    1
+
+# The flute: breathed in, and a slow vibrato once the note has settled.
+instrument FLUTE
+  table      wide
+  volume     6 8 9 10 10 9 9 9 8 8
+  distortion tone
+  vibrato    0 2 3 2 0 -2 -3 -2
+  delay      14
+  release    2
+
+# The oboe: a quicker, reedier swell.
+instrument OBOE
+  table      wide
+  volume     8 10 11 10 10 9 9 9 9 8
+  distortion tone
+  vibrato    0 2 3 2 0 -2 -3 -2
+  delay      10
+  release    2
+
+# The strings in bar 21: the whole orchestra, forte.
+instrument STRINGS
+  table      wide
+  volume     12 13 14 13 13 12 12 12 11
+  distortion tone
+  vibrato    0 3 4 3 0 -3 -4 -3
+  delay      8
+  release    2
+
+# The strings, piano: dying away, or tranquillo.
+instrument STRINGS_P
+  table      wide
+  volume     6 7 8 8 7 7 7 7 6
+  distortion tone
+  vibrato    0 2 3 2 0 -2 -3 -2
+  delay      8
+  release    2
+
+# The cellos: warm and singing, a slow swell.
+instrument CELLO
+  table      wide
+  volume     5 7 8 9 9 9 8 8 8 8
+  distortion tone
+  vibrato    0 2 3 2 0 -2 -3 -2
+  delay      12
+  release    3
+
+# The horn: round, no vibrato.
+instrument HORN
+  table      wide
+  volume     4 6 7 8 8 8 8 8 7
+  distortion tone
+  release    3
+
+# The clarinet: plain and soft.
+instrument CLARINET
+  table      wide
+  volume     6 7 8 8 8 7 7 7 7
+  distortion tone
+  release    2
+
+channel 1 notes BASS
+  note  The bass, held a bar or half a bar: E, and G sharp, B and the rest as the key moves.
+  voice BASS
+  track BE     E3 . . . . .  . . . . . .
+  track BECSm  E3 . . . . .  C#3 . . . . .
+  track BGS    G#3 . . . . .  . . . . . .
+  track BGSFm  G#3 . . . . .  F3 . . . . .
+  track BGSCSm G#3 . . . . .  C#3 . . . . .
+  track BFSB   F#3 . . . . .  B3 . . . . .
+  track BB     B3 . . . . .  . . . . . .
+  track BFE    @BASS_F E3 . . . . .  E3 . . . . .
+  track BFEA   @BASS_F E3 . . . . .  A3 . . . . .
+  track BFFSmE @BASS_F F#3 . . . . .  E3 . . . . .
+  track L1     @BASS_F F#3 . . . . .  F#3 . . . . .
+  track L2     @BASS_F G#3 . . . . .  G#3 . . . . .
+  track L3     @BASS_F A3 . . . . .  A3 . . . . .
+  track L4     @BASS_F G#3 . . . . .  . . . . . .
+  track L5     @BASS_F G#3 . . . . .  . . . . - .
+  track L6     A3 . . . . .  . . . . . .
+  track L7     @BASS_F G#3 . . . . .  A3 . . . . .
+  track L8     G#3 . . . . .  . . . . . .
+  track L9     @BASS_F G#3 . . . . .  C3 . . . . .
+  track L10    @BASS_F F3 . . . . .  . . . . . .
+  track L11    @BASS_F F3 . . . . .  . . . . - .
+  track L12    Bb3 . . . . .  . . . . . .
+  track L13    @BASS_F F3 . . . . .  Gb3 . . . . .
+  track L14    F3 . . . . .  . . . . . .
+  track L15    @BASS_F F3 . . . . .  E3 . . . . .
+  track L16    @BASS_F D3 . . . . .  . . . . . .
+  track L17    D3 . . . . .  . . . . - .
+  track L18    Db3 . . . . .  . . . . . .
+  track L19    C3 . . . . .  . . . . . .
+  track L20    C3 . . . . .  A3 . . . . .
+  track L21    C3 . - . . .  . . . . . .
+  track L22    B3 . . . . .  . . . . . .
+  track L23    B3 . . . . .  G#3 . . . . .
+  track L24    G#3 . . . . .  B3 . . . . .
+  track L25    G#3 . . . . .  . . . . - .
+  track L26    B3 . . . . .  C#4 . . . . .
+  track L27    B3 . . . . .  A3 . . . . .
+  track L28    G#3 . . . . .  G3 . . . . .
+  track L29    F#3 . . . . .  . . . . - .
+  track L30    E3 . . . . .  . . . . . .
+  track L31    F#3 . . . . .  . . . . . .
+  track L32    E3 . . . . .  F#3 . . . . .
+  track L33    B3 . - . . .  . . . . . .
+  track L34    B3 . . . . .  B3 . . . . .
+  track L35    . . . . . .  . . . . . .
+  track L36    . . . . - .  . . . . . .
+
+channel 2 notes CHORDS
+  note  The held harmony: E, C# minor, G#, E# minor (written Fm), B, A, F# minor - then F, D flat and D on the way home.
+  voice PAD
+  track HE     E . . . . .  . . . . . .
+  track HECSm  E . . . . .  C#m . . . . .
+  track HGS    G# . . . . .  . . . . . .
+  track HGSFm  G# . . . . .  Fm . . . . .
+  track HGSCSm G# . . . . .  C#m . . . . .
+  track HFSB   F# . . . . .  B . . . . .
+  track HB     B . . . . .  . . . . . .
+  track HFE    @PAD_F E . . . . .  . . . . . .
+  track HFEA   @PAD_F E . . . . .  A . . . . .
+  track HFFSmE @PAD_F F#m . . . . .  E . . . . .
+  track P1     @PAD_F A . . . . .  . . . . . .
+  track P2     @PAD_F A . . . . .  B . . . . .
+  track P3     @PAD_F G#m . . . . .  E . . . . .
+  track P4     @PAD_F A . . . . .  F#m . . . . .
+  track P5     @PAD_F G# . . . . .  . . . . . .
+  track P6     A . . . . .  . . . . . .
+  track P7     A . . . . .  F#m . . . . .
+  track P8     @PAD_F G# . . . . .  A . . . . .
+  track P9     G# . . . . .  . . . . . .
+  track P10    @PAD_F G# . . . . .  C . . . . .
+  track P11    @PAD_F F . . . . .  . . . . . .
+  track P12    Bbm . . . . .  Ebm . . . . .
+  track P13    @PAD_F F . . . . .  Gb . . . . .
+  track P14    F . . . . .  . . . . . .
+  track P15    @PAD_F F . . . . .  A . . . . .
+  track P16    @PAD_F D . . . . .  . . . . . .
+  track P17    D . . . . .  . . . . . .
+  track P18    A3 . . . . .  . . . . . .
+  track P19    F . . . . .  Dm . . . . .
+  track P20    F . - . . .  . . . . . .
+  track P21    E . . . . .  . . . . . .
+  track P22    E . . . . .  C#m . . . . .
+  track P23    C#m . . . . .  E . . . . .
+  track P24    C#m . . . . .  . . . . . .
+  track P25    E . . . . .  A . . . . .
+  track P26    B . . . . .  . . . . . .
+  track P27    E . . . . .  B . . . . .
+  track P28    B . . . . .  B . . . . .
+  track P29    . . . . . .  . . . . . .
+  track P30    . . . . - .  . . . . . .
+
+channel 3 pair LOW BYTE
+  note  The low byte of the tune. AUDCTL 28 joins channels 3 and 4 on the 1.79 MHz clock.
+
+channel 4 notes TUNE
+  note  B G# F# E F# G# - flute, oboe, the strings; cellos, a horn, a clarinet, and the flute again.
+  voice FLUTE
+  track F1  B5 . G#5 . F#5 .  E5 . F#5 . G#5 .
+  track F2  B5 . G#5 . F#5 .  E5 . F#5 G#5 F#5 G#5
+  track F3  B5 . G#5 . B5 .  C#6 . G#5 . C#6 .
+  track F4  B5 . G#5 . F#5 .  E5 . . . - .
+  track O1  @OBOE B4 . G#4 . F#4 .  E4 . F#4 . G#4 .
+  track O2  @OBOE B4 . G#4 . F#4 .  E4 . F#4 G#4 F#4 G#4
+  track O3  @OBOE B4 . G#4 . B4 .  C#5 . G#4 . C#5 .
+  track O4  @OBOE D#5 . B#4 . A#4 .  G#4 . . . . .
+  track G1  D#6 . B#5 . A#5 .  G#5 . A#5 . B#5 .
+  track G2  D#6 . B#5 . A#5 .  G#5 . A#5 B#5 A#5 B#5
+  track G3  D#6 . B#5 . D#6 .  E#6 . B#5 . E#6 .
+  track G4  D#6 . B#5 . A#5 .  G#5 . . . - .
+  track H1  @OBOE D#5 . B#4 . A#4 .  G#4 . A#4 . B#4 .
+  track H2  @OBOE D#5 . B#4 . A#4 .  G#4 . A#4 B#4 A#4 B#4
+  track H3  @OBOE D#5 . B#4 . D#5 .  E5 . C#5 . E5 .
+  track H4  @OBOE F#5 . D#5 . C#5 .  B4 . . . . .
+  track B1  F#6 . D#6 . C#6 .  B5 . C#6 D#6 C#6 D#6
+  track B2  @OBOE F#5 . D#5 . C#5 .  B4 . C#5 D#5 C#5 D#5
+  track B3  F#6 . D#6 . B5 .  F#5 . D#5 . B4 .
+  track S1  @STRINGS B5 . G#5 . F#5 .  E5 . F#5 . G#5 .
+  track S2  @STRINGS B5 . G#5 . F#5 .  E5 . F#5 G#5 F#5 G#5
+  track S3  @STRINGS B5 . G#5 . B5 .  C#6 . G#5 . C#6 .
+  track S4  @STRINGS C#6 . A5 . G#5 .  - . . . . .
+  track M1  @STRINGS C#6 . A5 . G#5 .  F#5 . G#5 . A5 .
+  track M2  @STRINGS C#6 . A5 . G#5 .  F#5 . G#5 A5 G#5 A5
+  track M3  @STRINGS C#6 . A5 . C#6 .  D#6 . A5 . D#6 .
+  track M4  @STRINGS D#6 . B5 . D#6 .  E6 . B5 . E6 .
+  track M5  @STRINGS E6 . C#6 . E6 .  F#6 . C#6 . F#6 .
+  track M6  @STRINGS G#6 D#6 B#5 G#5 B#5 D#6  D#6 B#5 G#5 D#5 G#5 B#5
+  track M7  @STRINGS_P B#5 G#5 D#5 B#4 D#5 G#5  G#5 D#5 B#4 G#4 B#4 D#5
+  track M8  @CELLO G#4 . . . . .  F#4 . . . . .
+  track M9  @CELLO E4 . . . . .  F#4 . . . . .
+  track M10 @STRINGS G#5 D#5 B#4 G#4 B#4 D#5  E4 . . . F#4 .
+  track M11 @STRINGS_P B#4 G#4 D#4 G#4 B#4 D#5  D#5 B#4 G#4 B#4 D#5 G#5
+  track M12 @STRINGS G#5 D#5 B#4 D#5 G#5 B#5  C6 G5 E5 G5 C6 E6
+  track M13 @STRINGS F6 C6 A5 F5 A5 C6  C6 A5 F5 C5 F5 A5
+  track M14 @STRINGS_P A5 F5 C5 A4 C5 F5  F5 C5 A4 F4 A4 C5
+  track M15 @CELLO F4 . . . . .  Eb4 . . . . .
+  track M16 @CELLO Db4 . . . . .  Eb4 . . . . .
+  track M17 @STRINGS F5 C5 A4 F4 A4 C5  Db4 . . . Eb4 .
+  track M18 @STRINGS_P A4 F4 C4 F4 A4 C5  C5 A4 F4 A4 C5 F5
+  track M19 @STRINGS F5 C5 A4 C5 F5 A5  A5 E5 C#5 E5 A5 C#6
+  track M20 @STRINGS D6 A5 F#5 D5 F#5 A5  D6 A5 F#5 D5 F#5 A5
+  track M21 @STRINGS_P D6 A5 F#5 D5 F#5 A5  D6 A5 F#5 D5 F#5 A5
+  track M22 @STRINGS_P Db6 A5 F5 Db5 F5 A5  Db6 A5 F5 Db5 F5 A5
+  track M23 @HORN C5 . A4 . G4 .  F4 . G4 . A4 .
+  track M24 @HORN C5 . A4 . G4 .  F4 . G4 A4 G4 A4
+  track M25 @HORN C5 . A4 . C5 .  D5 . A4 . D5 .
+  track M26 @HORN C5 . . . . .  . . . . . .
+  track M27 @FLUTE C6 A5 F5 C5 F5 A5  C6 A5 F5 C5 F5 A5
+  track M28 @FLUTE C6 G#5 E5 C5 E5 G#5  C6 G#5 E5 C5 E5 G#5
+  track M29 @CELLO B4 . G#4 . F#4 .  E4 . F#4 . G#4 .
+  track M30 @CELLO B4 . G#4 . F#4 .  E4 . F#4 G#4 F#4 G#4
+  track M31 @CELLO B4 . G#4 . B4 .  C#5 . G#4 . C#5 .
+  track M32 @CELLO B4 . . . . .  . . . . - .
+  track M33 @CELLO C#5 . G#4 . C#5 .  B4 . . . - .
+  track M34 @HORN C#5 . . . . .  . . . . . .
+  track M35 @HORN G#4 . C#5 . . .  B4 . - . . .
+  track M36 @STRINGS_P B4 . G#4 . F#4 .  E4 . F#4 . G#4 .
+  track M37 @STRINGS_P B4 . G#4 . F#4 .  E4 . F#4 G#4 F#4 G#4
+  track M38 @CLARINET B4 . E4 . B4 .  C#5 . A#4 . C#5 .
+  track M39 @CLARINET B4 . . . . .  . . . . . .
+  track M40 @FLUTE B5 A#5 - . . .  B5 A#5 - . . .
+  track M41 @HORN D#5 . . . . .  . . . . . .
+  track M42 @HORN D#5 . . . . .  D#5 . . . . .
+  track M43 @FLUTE B5 . G#5 . F#5 .  E5 . F#5 . G#5 .
+  track M44 @FLUTE B5 . G#5 . F#5 .  E5 . F#5 G#5 F#5 G#5
+  track M45 @OBOE B4 . G#4 . F#4 .  E4 . F#4 . G#4 .
+  track M46 @OBOE B4 . G#4 . F#4 .  E4 . F#4 G#4 F#4 G#4
+  track M47 @OBOE B4 . . . . .  . . . . - .
+  track M48 @OBOE G#4 . . . . .  . . . . - .
+  track M49 @STRINGS_P E5 . . . . .  . . . . . .
+  track M50 . . . . . .  . . . . . .
+  track M51 . . . . - .  . . . . . .
+
+# The order list: a line is a bar of 6/8. Bass, harmony, low byte, tune.
+speed  10
+audctl $28
+loop
+section FLUTE
+line   BE      HE      .       F1
+line   BE      HE      .       F2
+line   BECSm   HECSm   .       F3
+line   BE      HE      .       F4
+section OBOE
+line   BE      HE      .       O1
+line   BE      HE      .       O2
+line   BECSm   HECSm   .       O3
+line   BGS     HGS     .       O4
+section FLUTE IN G SHARP
+line   BGS     HGS     .       G1
+line   BGS     HGS     .       G2
+line   BGSFm   HGSFm   .       G3
+line   BGS     HGS     .       G4
+section OBOE TO B
+line   BGS     HGS     .       H1
+line   BGS     HGS     .       H2
+line   BGSCSm  HGSCSm  .       H3
+line   BFSB    HFSB    .       H4
+section RISING
+line   BB      HB      .       B1
+line   BB      HB      .       B2
+line   BB      HB      .       B3
+line   BB      HB      .       B3
+section SUNRISE
+line   BFE     HFE     .       S1
+line   BFE     HFE     .       S2
+line   BFEA    HFEA    .       S3
+line   BFFSmE  HFFSmE  .       S4
+line   L1      P1      .       M1
+line   L1      P1      .       M2
+line   L1      P2      .       M3
+line   L2      P3      .       M4
+line   L3      P4      .       M5
+section THE SUN
+line   L4      P5      .       M6
+line   L5      P5      .       M7
+section CELLOS
+line   L6      P6      .       M8
+line   L6      P7      .       M9
+line   L7      P8      .       M10
+line   L7      P8      .       M10
+line   L8      P9      .       M11
+line   L9      P10     .       M12
+section F MAJOR
+line   L10     P11     .       M13
+line   L11     P11     .       M14
+section D FLAT
+line   L12     P12     .       M15
+line   L12     P12     .       M16
+line   L13     P13     .       M17
+line   L13     P13     .       M17
+line   L14     P14     .       M18
+line   L15     P15     .       M19
+section D MAJOR
+line   L16     P16     .       M20
+line   L16     P16     .       M20
+line   L17     P17     .       M21
+line   L18     P18     .       M22
+section HORN IN F
+line   L19     P14     .       M23
+line   L19     P14     .       M24
+line   L20     P19     .       M25
+line   L19     P14     .       M26
+line   L21     P14     .       M27
+line   .       P20     .       M28
+section HOME
+line   L22     P21     .       M29
+line   L22     P21     .       M30
+line   L23     P22     .       M31
+line   L22     P21     .       M32
+line   L24     P23     .       M33
+line   L24     P23     .       M33
+line   L25     P24     .       M34
+line   .       .       .       M35
+section TRANQUILLO
+line   L26     P25     .       M36
+line   L27     P25     .       M37
+section BIRDS
+line   L28     P22     .       M38
+line   L29     P26     .       M39
+line   L30     P21     .       M40
+line   L30     P21     .       M40
+line   L28     P22     .       M38
+line   L29     P26     .       M39
+line   L30     P21     .       M40
+line   L31     P26     .       M39
+line   L32     P27     .       M40
+line   L32     P27     .       M40
+line   .       .       .       .
+section HORNS
+line   L33     P26     .       M41
+speed  11
+line   L34     P28     .       M42
+section FLUTE AGAIN
+speed  12
+line   L30     P22     .       M43
+line   L30     P22     .       M44
+line   L30     P22     .       M45
+line   L30     P22     .       M46
+line   L22     P21     .       M47
+speed  13
+line   L8      P24     .       M48
+section LAST CHORD
+line   L30     P21     .       M49
+line   L35     P29     .       M50
+line   L36     P30     .       M51

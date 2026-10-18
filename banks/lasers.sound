@@ -1,0 +1,75 @@
+# Ten laser shots. Rendered by tools/lasers.
+bank   Lasers
+clock  1512000
+tick   220
+
+category Lasers
+
+sound Classic zap
+audf  6 1 +6 16
+audc  169 16 0 1
+amp   0.45
+note  A pure tone falling most of four octaves in 73ms at a volume that never moves. The shortest description of a laser there is, and the one to modify first: a bigger AUDF delta drops it further, a bigger Outer holds it longer.
+
+sound Rapid pew
+audf  10 1 +9 10
+audc  168 10 0 1
+amp   0.40
+note  The same gesture in 45ms. Short enough to fire ten a second without the shots treading on each other, which is what a repeating weapon actually needs -- the design here is duration, not timbre.
+
+sound Heavy blaster
+audf  40 1 +7 26
+audc  43 2 -1 12
+amp   0.55
+note  Starts well below the zap, on the 5-bit poly, and fades as it falls. Weight comes from starting low and taking 118ms about it; the poly repeats every 31 clocks, so the bottom of the sweep stays musical instead of hissing.
+
+sound Charged beam
+audf  120 1 -8 14
+audf  16 1 +1 20
+audc  170 14 0 1
+audc  170 2 -1 11
+amp   0.50
+note  Two AUDF steps: a fast climb, then a slow settle back down while the volume fades out under it. The wind-up is what sells it as something charged rather than merely fired, and it costs one extra row in each chain.
+
+sound Buzz cannon
+audf  12 1 +10 18
+audc  201 18 0 1
+amp   0.50
+note  The classic zap's sweep put through the 4-bit poly. That counter repeats every 15 clocks, so it has a pitch of its own underneath the sweep -- two pitches moving at once, which is the cheapest way to sound electrical.
+
+sound Pulse rifle
+audf  20 1 +2 18
+audc  170 3 0 1
+audc  160 3 0 1
+audc  170 3 0 1
+audc  160 3 0 1
+audc  170 3 0 1
+audc  160 3 0 1
+amp   0.45
+note  Three shots in 82ms, and the pitch chain knows nothing about it: AUDF falls smoothly the whole way while AUDC gates the volume on and off. The two chains run independently, so rhythm is AUDC's job and pitch is AUDF's.
+
+sound Ion beam
+audf  30 2 +5 30
+audc  140 5 -1 12
+amp   0.55
+note  273ms of true noise sweeping down and fading -- the 17-bit poly, which does not repeat inside the life of the sound. Long and unpitched reads as a beam being held rather than a shot being fired.
+
+sound Rasp
+audf  18 1 +6 30
+audc  163 1 -8 30
+amp   0.45
+wrap
+note  Its AUDC delta of -8 flips the volume nibble's top bit every tick and wraps rather than clamping, so the level alternates between 3 and 11 at 110Hz -- that buzz *is* the sound, and it is a wrap being used on purpose. The arcade shooters of 1981 used exactly this trick.
+
+sound Ricochet
+audf  90 1 -6 13
+audf  18 1 +9 14
+audc  169 27 0 1
+amp   0.45
+note  Up then down, 123ms, volume flat throughout. An inverted V in pitch is what a shot glancing off something sounds like, and it needs no envelope work at all -- the whole shape is in the divider.
+
+sound Siege cannon
+audf  60 2 +9 22
+audc  75 4 -1 11
+amp   0.60
+note  The bottom of the set: both short polys at once, falling for 200ms and fading. Inner 2 rather than 1 is what buys the length without twice the steps -- a step lasts Inner x Outer ticks.

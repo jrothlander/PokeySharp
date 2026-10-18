@@ -1,0 +1,71 @@
+# B MAJOR SCALE - a scale to hear, play along with, and read. Made by PokeyTracker's
+# scale songs (File > New scale song), by rule: every note follows from the scale's steps.
+# Whole, whole, half, whole, whole, whole, half: the bright scale most tunes are built on.
+# Going up:   B3 C#4 D#4 E4 F#4 G#4 A#4 B4
+# The format is in Demo1/CLAUDE.md, under "Song files".
+
+song   B MAJOR SCALE
+key    B MAJOR
+
+# A soft piano-like voice on the 16-bit table: every note within two cents of true.
+instrument PIANO
+  table      wide
+  volume     14 13 12 11 10 10 9 9 8 8 7 7 7 6
+  distortion tone
+  release    3
+
+instrument HOME_NOTE
+  table      wide
+  volume     7 7 6
+  distortion tone
+  release    2
+
+channel 1 pair LOW BYTE
+  note  The low byte of channel 2's 16-bit divider. AUDCTL 78 joins 1 and 2, and 3 and 4.
+
+channel 2 notes HOME
+  note  The home note, held low under the scale when the drone is on - every note of the
+  note  scale is heard against it, which is how a scale's character is learned. The lines
+  note  play it where they name HOME; put . there to leave it out.
+  voice HOME_NOTE
+  track HOME B1 . . .  . . . .  . . . .  . . . .
+
+channel 3 pair LOW BYTE
+  note  The low byte of channel 4's 16-bit divider.
+
+channel 4 notes SCALE
+  note  B Major Scale: one octave up and down in quarter notes, two in eighths,
+  note  and the home chord as an arpeggio.
+  voice PIANO
+  track O1 B3 . . .  C#4 . . .  D#4 . . .  E4 . . .
+  track O2 F#4 . . .  G#4 . . .  A#4 . . .  B4 . . .
+  track O3 A#4 . . .  G#4 . . .  F#4 . . .  E4 . . .
+  track O4 D#4 . . .  C#4 . . .  B3 . . .  . . . .
+  track T1 B3 . C#4 .  D#4 . E4 .  F#4 . G#4 .  A#4 . B4 .
+  track T2 C#5 . D#5 .  E5 . F#5 .  G#5 . A#5 .  B5 . A#5 .
+  track T3 G#5 . F#5 .  E5 . D#5 .  C#5 . B4 .  A#4 . G#4 .
+  track T4 F#4 . E4 .  D#4 . C#4 .  B3 . . .  . . . .
+  track A1 B3 . . .  D#4 . . .  F#4 . . .  B4 . . .
+  track A2 D#5 . . .  F#5 . . .  B5 . . .  F#5 . . .
+  track A3 D#5 . . .  B4 . . .  F#4 . . .  D#4 . . .
+  track A4 B3 . . .  . . . .  . . . .  . . . .
+
+# The order list: the scale's sections, then the song ends.
+audctl $78
+speed  11
+section ONE OCTAVE
+line   .  .     .  O1
+line   .  .     .  O2
+line   .  .     .  O3
+line   .  .     .  O4
+section TWO OCTAVES
+line   .  .     .  T1
+line   .  .     .  T2
+line   .  .     .  T3
+line   .  .     .  T4
+section ARPEGGIO
+line   .  .     .  A1
+line   .  .     .  A2
+line   .  .     .  A3
+line   .  .     .  A4
+end

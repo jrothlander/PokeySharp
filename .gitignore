@@ -1,0 +1,22 @@
+# Build output
+bin/
+obj/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# MonoGame content build
+Demo1/Content/bin/
+Demo1/Content/obj/
+
+# Audio and files written while trying things out
+*.wav
+*.mp3
+*.m4a
+
+# Packages built locally
+artifacts/
+*.nupkg
+*.snupkg

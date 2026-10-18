@@ -1,0 +1,74 @@
+# CHROMATIC SCALE FROM C - a scale to hear, play along with, and read. Made by PokeyTracker's
+# scale songs (File > New scale song), by rule: every note follows from the scale's steps.
+# Every key, black and white, in half steps - written as the harmonic chromatic scale is.
+# Going up:   C4 Db4 D4 Eb4 E4 F4 F#4 G4 Ab4 A4 Bb4 B4 C5
+# The format is in Demo1/CLAUDE.md, under "Song files".
+
+song   CHROMATIC SCALE FROM C
+key    C MAJOR
+
+# A soft piano-like voice on the 16-bit table: every note within two cents of true.
+instrument PIANO
+  table      wide
+  volume     14 13 12 11 10 10 9 9 8 8 7 7 7 6
+  distortion tone
+  release    3
+
+instrument HOME_NOTE
+  table      wide
+  volume     7 7 6
+  distortion tone
+  release    2
+
+channel 1 pair LOW BYTE
+  note  The low byte of channel 2's 16-bit divider. AUDCTL 78 joins 1 and 2, and 3 and 4.
+
+channel 2 notes HOME
+  note  The home note, held low under the scale when the drone is on - every note of the
+  note  scale is heard against it, which is how a scale's character is learned. The lines
+  note  play it where they name HOME; put . there to leave it out.
+  voice HOME_NOTE
+  track HOME C2 . . .  . . . .  . . . .  . . . .
+
+channel 3 pair LOW BYTE
+  note  The low byte of channel 4's 16-bit divider.
+
+channel 4 notes SCALE
+  note  Chromatic Scale From C: one octave up and down in quarter notes, two in eighths,
+  note  and the home chord as an arpeggio.
+  voice PIANO
+  track O1 C4 . . .  Db4 . . .  D4 . . .  Eb4 . . .
+  track O2 E4 . . .  F4 . . .  F#4 . . .  G4 . . .
+  track O3 Ab4 . . .  A4 . . .  Bb4 . . .  B4 . . .
+  track O4 C5 . . .  B4 . . .  Bb4 . . .  A4 . . .
+  track O5 Ab4 . . .  G4 . . .  F#4 . . .  F4 . . .
+  track O6 E4 . . .  Eb4 . . .  D4 . . .  Db4 . . .
+  track O7 C4 . . .  . . . .  . . . .  . . . .
+  track T1 C4 . Db4 .  D4 . Eb4 .  E4 . F4 .  F#4 . G4 .
+  track T2 Ab4 . A4 .  Bb4 . B4 .  C5 . Db5 .  D5 . Eb5 .
+  track T3 E5 . F5 .  F#5 . G5 .  Ab5 . A5 .  Bb5 . B5 .
+  track T4 C6 . B5 .  Bb5 . A5 .  Ab5 . G5 .  F#5 . F5 .
+  track T5 E5 . Eb5 .  D5 . Db5 .  C5 . B4 .  Bb4 . A4 .
+  track T6 Ab4 . G4 .  F#4 . F4 .  E4 . Eb4 .  D4 . Db4 .
+  track T7 C4 . . .  . . . .  . . . .  . . . .
+
+# The order list: the scale's sections, then the song ends.
+audctl $78
+speed  11
+section ONE OCTAVE
+line   .  .     .  O1
+line   .  .     .  O2
+line   .  .     .  O3
+line   .  .     .  O4
+line   .  .     .  O5
+line   .  .     .  O6
+line   .  .     .  O7
+section TWO OCTAVES
+line   .  .     .  T1
+line   .  .     .  T2
+line   .  .     .  T3
+line   .  .     .  T4
+line   .  .     .  T5
+line   .  .     .  T6
+line   .  .     .  T7
+end

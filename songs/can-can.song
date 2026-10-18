@@ -1,0 +1,134 @@
+# CAN-CAN - Offenbach, the Galop infernal from Orphee aux enfers (1858).
+# The format is in Demo1/CLAUDE.md, under "Song files". Instruments are tables with
+# one entry per frame; each channel holds named tracks; the lines at the end are the
+# order list. In a track '.' holds and '-' releases. '#' starts a comment.
+#
+# Offenbach died in 1880, so the music is public domain. This arrangement is new: the
+# galop's famous sixteen-bar tune, written from the melody everyone knows rather than read
+# off a score, set for the chip as a dance band would play it.
+#
+# A row is a sixteenth and a line is a bar of 2/4, at 150 beats a minute. The band vamps
+# for four bars, then the tune goes round twice - a flute first, then the brass with the
+# bass leaping in octaves - and the song loops back to the tune.
+#
+# What four channels keep. Channel 1 is the "pah" of the oom-pah: a short chord on every
+# off-beat. Channel 2 is the tune, an octave below where the orchestra has it, because the
+# pure-tone table is within ten cents of true from C4 to C5 and twenty cents out above it.
+# Channels 3 and 4 are one 16-bit bass, the "oom", on the beat - root and fifth.
+
+song   CAN-CAN
+key    C MAJOR
+rows   8
+beat   4
+
+# The off-beat chord: struck and gone, so the tune stands clear of it.
+instrument STAB
+  table      tone
+  volume     10 9 7 5 3 2 1 0
+  distortion tone
+  release    2
+
+# The first time round: a flute, soft at the front of each note.
+instrument FLUTE
+  table      tone
+  volume     8 10 11 11 10 10 9 9 9 8
+  distortion tone
+  release    2
+
+# The second time: the brass, louder and held.
+instrument BRASS
+  table      tone
+  volume     11 13 14 14 13 13 12 12 12 11
+  distortion tone
+  release    2
+
+instrument BASS
+  table      wide
+  volume     12 11 10 8 6 4 2 1 0
+  distortion tone
+  release    2
+
+channel 1 notes CHORDS
+  note  The "pah": a C or G chord on the off-beats, arpeggiated as the chip plays every chord.
+  voice STAB
+  track CC . . C .  . . C .
+  track GG . . G .  . . G .
+  track CG . . C .  . . G .
+
+channel 2 notes TUNE
+  note  The galop: C, D F E D, G G, G A E F, D D... A row is a sixteenth. The T tracks
+  note  are the flute, the U tracks the same notes on the brass.
+  voice FLUTE
+  track T1 C4 . . .  . . . .
+  track T2 D4 . F4 .  E4 . D4 .
+  track T3 G4 . . -  G4 . . -
+  track T4 G4 . A4 .  E4 . F4 .
+  track T5 D4 . . -  D4 . . -
+  track T7 C4 . C5 .  B4 . A4 .
+  track T8 G4 . F4 .  E4 . D4 .
+  track TE C4 . G4 .  D4 . E4 .
+  track TF C4 . . -  . . . .
+  track U1 @BRASS C4 . . .  . . . .
+  track U2 @BRASS D4 . F4 .  E4 . D4 .
+  track U3 @BRASS G4 . . -  G4 . . -
+  track U4 @BRASS G4 . A4 .  E4 . F4 .
+  track U5 @BRASS D4 . . -  D4 . . -
+  track U7 @BRASS C4 . C5 .  B4 . A4 .
+  track U8 @BRASS G4 . F4 .  E4 . D4 .
+  track UE @BRASS C4 . G4 .  D4 . E4 .
+  track UF @BRASS C4 . . -  . . . .
+
+channel 3 pair LOW BYTE
+  note  The low byte of the bass. AUDCTL 28 joins channels 3 and 4 on the 1.79 MHz clock.
+
+channel 4 notes BASS
+  note  The "oom": root on the beat, fifth on the second; in octaves the second time.
+  voice BASS
+  track BC  C3 . . .  G2 . . .
+  track BG  G2 . . .  D3 . . .
+  track BCL C2 . C3 .  G1 . G2 .
+  track BGL G1 . G2 .  D2 . D3 .
+
+# The order list: a line is a bar of 2/4. Chords, tune, low byte, bass.
+speed  6
+audctl $28
+section VAMP
+line   CC      .       .       BC
+line   GG      .       .       BG
+line   CC      .       .       BC
+line   GG      .       .       BG
+loop
+section FLUTE
+line   CC      T1      .       BC
+line   GG      T2      .       BG
+line   CC      T3      .       BC
+line   CG      T4      .       BC
+line   GG      T5      .       BG
+line   GG      T2      .       BG
+line   CC      T7      .       BC
+line   GG      T8      .       BG
+line   CC      T1      .       BC
+line   GG      T2      .       BG
+line   CC      T3      .       BC
+line   CG      T4      .       BC
+line   GG      T5      .       BG
+line   GG      T2      .       BG
+line   CG      TE      .       BC
+line   CC      TF      .       BC
+section BRASS
+line   CC      U1      .       BCL
+line   GG      U2      .       BGL
+line   CC      U3      .       BCL
+line   CG      U4      .       BCL
+line   GG      U5      .       BGL
+line   GG      U2      .       BGL
+line   CC      U7      .       BCL
+line   GG      U8      .       BGL
+line   CC      U1      .       BCL
+line   GG      U2      .       BGL
+line   CC      U3      .       BCL
+line   CG      U4      .       BCL
+line   GG      U5      .       BGL
+line   GG      U2      .       BGL
+line   CG      UE      .       BCL
+line   CC      UF      .       BCL

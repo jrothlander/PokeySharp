@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    The emulation checks, headless. They render real audio and count what came out,
+    rather than asserting against the emulator's own idea of what it should have done.
+
+    Lifted from the laboratory's self-test switch, minus the checks about its pages, which
+    are about a user interface rather than about the chip.
+  -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <AssemblyName>Pokey.SelfTest</AssemblyName>
+    <RootNamespace>Pokey.SelfTest</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Pokey\Pokey.csproj" />
+    <ProjectReference Include="..\..\src\Pokey.Speech\Pokey.Speech.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- The scope's ring buffer is checked here and drawn by the samples; one copy. -->
+    <Compile Include="..\..\samples\shared\ScopeTrace.cs" Link="Shared\ScopeTrace.cs" />
+  </ItemGroup>
+
+</Project>

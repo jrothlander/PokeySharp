@@ -1,0 +1,52 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    The POKEY emulation core: pure C#, no UI, no audio API, no dependencies.
+
+    Kept free of all of that so it can be driven by anything, and several things
+    already do: the two PokeyLab front ends, the headless self-test, RimWalker
+    itself, which references this project and renders every sound effect through
+    it in Core/Sfx.cs, and Demo1, PokeyTracker and tools/soundexport, which play
+    songs through the music driver in Music/ (namespace Pokey.Music).
+
+    This comment used to say RimWalker "currently approximates this chip by hand
+    and could retire that approximation by referencing this instead". That was
+    true once and stopped being true when Sfx.cs was rewired, and the stale
+    sentence went on to mislead a later reader into repeating it in the docs.
+    See Pokey/CLAUDE.md for who drives this and how they differ.
+  -->
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <!--
+      The XML docs ship with the package, and they are a large part of what this library
+      is. CS1591 (and CS1573, a partly-documented parameter list) are off because turning
+      them on today means 240 warnings on a build that is otherwise clean, which trains
+      everyone to ignore the list. Documenting the gaps is a pre-1.0 job, not a reason to
+      lose the signal from every other warning.
+    -->
+    <NoWarn>$(NoWarn);CS1591;CS1573</NoWarn>
+  </PropertyGroup>
+
+  <!--
+    The package. The assembly stays "Pokey" because that is the namespace and what every
+    "using" already says; the package is "PokeySharp" because that is what someone
+    searching nuget.org for a C# POKEY types.
+  -->
+  <PropertyGroup>
+    <IsPackable>true</IsPackable>
+    <PackageId>PokeySharp</PackageId>
+    <Title>PokeySharp - Atari POKEY audio emulation</Title>
+    <Description>A cycle-level emulation of the POKEY (C012294) audio section in pure C#, with no dependencies: four channels, the 4/5/17-bit poly counters, AUDCTL joining and clock selection, high-pass filters and volume-only mode, rendered through a box filter and a DC blocker. Includes a sound-design layer, step envelopes and a frame-based music driver that plays a text song format.</Description>
+    <PackageTags>atari;pokey;chiptune;emulation;audio;synthesis;8-bit;retro;sound;music</PackageTags>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+</Project>

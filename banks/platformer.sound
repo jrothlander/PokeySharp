@@ -1,0 +1,98 @@
+# Console platformer, 1985 -- evocations, not the originals.
+#
+# The originals run on an NES APU: two pulse channels with four selectable duty cycles, a
+# triangle, a noise channel and a hardware sweep unit. POKEY has none of that. It has one
+# square (distortion 5), several polynomial textures, and an envelope that rewrites
+# registers on a timer.
+#
+# So two things differ audibly no matter how these are tuned. There is no duty cycle here,
+# which is where the original's reedy quality comes from; and AUDF is 8-bit against the
+# NES's 11, so the top of a fast rise is coarse -- at AUDF 35 one step is 21Hz, against
+# 1.4Hz down at 140.
+#
+# What does carry across for free: a constant AUDF delta gives a hyperbolic pitch curve, so
+# the rise accelerates on its own -- which is close to what the NES sweep unit does by
+# decreasing the period geometrically.
+
+bank   Platformer
+clock  1512000
+tick   220
+
+category Movement
+
+sound Jump
+audf  140 1 -5 22
+audf  35 1 0 22
+audc  170 1 0 26
+audc  170 2 -1 10
+amp   0.45
+note  Two octaves up in a fifth of a second, then a fade. The rise accelerates on its own
+note  because AUDF is a divider, which is what makes a constant delta the right shape here
+note  rather than a compromise.
+
+sound Jump, big
+audf  170 1 -6 24
+audf  32 1 0 20
+audc  170 1 0 28
+audc  170 2 -1 10
+amp   0.48
+note  The same gesture starting lower and travelling further. Size in a platformer is
+note  almost always pitch.
+
+sound Stomp
+audf  60 1 +22 8
+audc  138 1 -1 8
+amp   0.5
+note  Noise falling fast. Everything about a stomp is in the first fiftieth of a second.
+
+category Pickups
+
+sound Coin
+audf  50 1 0 4
+audf  33 1 0 14
+audc  170 1 0 18
+amp   0.42
+note  Two flat notes, the second a fifth above and much longer. The most copied sound
+note  effect ever written, and it is two numbers.
+
+sound Power up
+audf  150 1 -4 30
+audc  170 1 0 24
+audc  170 2 -1 8
+amp   0.42
+note  A long climb. Where the coin is two notes, this is one continuous rise -- which is
+note  how a two-note flourish and a transformation end up feeling different.
+
+sound One up
+audf  90 1 0 5
+audf  70 1 0 5
+audf  55 1 0 5
+audf  45 1 0 12
+audc  170 1 0 27
+amp   0.45
+note  Four rising notes held flat. An arpeggio rather than a sweep, which is what makes it
+note  read as a fanfare instead of an effect.
+
+category States
+
+sound Brick break
+audf  40 1 +18 10
+audc  138 1 -1 10
+amp   0.45
+note  The 17-bit poly is proper noise, and a short burst of it is every breaking thing in
+note  every game.
+
+sound Pipe
+audf  40 1 +10 20
+audc  73 1 0 20
+amp   0.4
+note  Distortion 2 -- the 5- and 4-bit polys together, the roughest pitched texture the
+note  chip has. Descending, because you are going down.
+
+sound Death
+audf  60 1 -8 6
+audf  30 1 +7 30
+audc  170 1 0 36
+amp   0.5
+note  Up sharply, then a long fall. The little rise first is what makes it a lurch rather
+note  than a slide, and it is the whole character of the sound.

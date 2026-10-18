@@ -1,0 +1,41 @@
+<Project>
+
+  <!--
+    Settings every project in the repository shares.
+
+    Packaging lives here rather than in the two library projects because the parts that
+    must not disagree - version, licence, repository - are exactly the parts worth having
+    in one place. What a package *is* (its id, title and description) stays with the
+    project it describes.
+
+    Nothing is packable by default. The samples are applications; marking them so would
+    mean remembering to opt each one out, and forgetting would publish one.
+  -->
+  <PropertyGroup>
+    <Version>0.1.0</Version>
+    <Authors>J. Rothlander</Authors>
+    <Copyright>Copyright (c) 2026 J. Rothlander</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/jrothlander/PokeySharp</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/jrothlander/PokeySharp</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <!--
+    Source Link, so a stack trace into the library lands on the line that threw. The .NET
+    8 SDK brings the GitHub provider itself; these two switches are all it needs.
+  -->
+  <PropertyGroup>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+  </PropertyGroup>
+
+  <!-- A build on CI is deterministic; a build on a desk does not need to be. -->
+  <PropertyGroup Condition="'$(ContinuousIntegrationBuild)' == '' AND '$(GITHUB_ACTIONS)' == 'true'">
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+  </PropertyGroup>
+
+</Project>

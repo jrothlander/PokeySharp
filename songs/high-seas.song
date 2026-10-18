@@ -1,0 +1,140 @@
+# HIGH SEAS - a sea-shanty jig, and the song that counts in six instead of four.
+# The format is in Demo1/CLAUDE.md, under "Song files". Instruments are tables with
+# one entry per frame; each channel holds named tracks of 12 rows; the lines at the
+# end are the order list. In a track '.' holds and '-' releases. '#' starts a comment.
+#
+# An original tune in an old idiom: the jig, in 6/8 - two beats a bar, three eighth
+# notes a beat. Every other song here is 4/4 in sixteenths, sixteen rows a line. This
+# one says 'rows 12' and 'beat 3': a row is an eighth note, a line is two bars, and the
+# tracker page lights every third row instead of every fourth.
+#
+# The pirate sound is the idiom, not any one tune: a minor key, a fiddle running in
+# eighths, a squeezebox pumping on the off-beats, an oom-pah bass and a stomp and a clap
+# on deck. A minor because the bass lives on the buzz table, and A, D, E, F and G# all
+# land within 11 cents on it. G misses by 19, so there is no G chord - the harmony is
+# A minor, D minor, E and F - and C misses by 31, so F's bass rocks between octaves
+# rather than out to its fifth.
+
+song   HIGH SEAS
+key    A MINOR
+rows   12
+beat   3
+
+# The kick and snare Guardian uses: a falling thump on the buzz table, and a crack of
+# tone into noise. With AUDCTL at $00 the snare is plain 17-bit hiss.
+instrument KICK
+  table      none
+  volume     15 14 13 11 9 7 5 3 1 0
+  distortion tone buzz
+  audf       40 20 27 34 43 52 62 71 80
+  release    2
+
+instrument SNARE
+  table      none
+  volume     13 12 10 8 6 5 4 3 2 1 0
+  distortion tone noise
+  audf       50 6 7 8 9 10 11 12 13
+  release    2
+
+# The bass: plucked, and gone before the next beat, so the oom-pah is separate notes.
+instrument OOM
+  table      buzz
+  volume     11 10 8 7 6 5 4 3
+  distortion buzz
+  release    3
+
+# The fiddle: bowed in rather than struck - a level under full on the first frame - and
+# vibrato only on a note held past eight frames, so the running eighths stay clean and
+# the long notes sing.
+instrument FIDDLE
+  table      tone
+  volume     10 12 12 11 11 10 10 10 9
+  distortion tone
+  vibrato    0 1 1 0 -1 -1
+  delay      8
+  release    2
+
+# The squeezebox: each chord an arpeggio, pumped - in and out inside one eighth note, so
+# two in a row are two pushes of the bellows rather than one held chord.
+instrument SQUEEZE
+  table      tone
+  volume     8 8 7 6 5 4 2 1 0
+  distortion tone
+  release    2
+
+channel 1 drums DECK
+  note  A stomp on the first beat of the bar and a clap on the second - 6/8's two
+  note  beats, three rows apart. The second stomp track adds the pickups a crew stamping
+  note  in time would, and the roll runs the last bar of the turnaround into the top.
+  kit   K=KICK S=SNARE
+  track INTRO  K . .  . . .  K . .  . . .
+  track STOMP  K . .  S . .  K . .  S . .
+  track STOMP2 K . .  S . .  K . K  S . S
+  track ROLL   K . .  S . .  S S S  S S S
+
+channel 2 notes BASS
+  note  Oom-pah in six: the root on the first beat, the fifth on the second. F has no
+  note  usable fifth - C is 31 cents out on distortion C - so its bars rock between F1
+  note  and F2, and the E bars swing to the third, G#, instead of out to B.
+  voice OOM
+  track AM  A1 . .  E2 . .  A1 . .  E2 . .
+  track AE  A1 . .  E2 . .  E2 . .  G#1 . .
+  track DE  D2 . .  A1 . .  E2 . .  G#1 . .
+  track DEA D2 . .  E2 . .  A1 . E2  A1 . .
+  track FF  F1 . .  F2 . .  F1 . .  F2 . .
+  track DD  D2 . .  A1 . .  D2 . .  A1 . .
+  track EE  E2 . .  G#1 . .  E2 . .  G#1 . .
+
+channel 3 notes FIDDLE
+  note  The tune. The jig is quarter-and-eighth against runs of three: a leap up the
+  note  chord and a run back down. The shanty answers in long calls, a dotted quarter
+  note  each, with the vibrato arriving on them, and a run to finish each bar.
+  voice FIDDLE
+  track PICK  . . .  . . .  . . .  D5 C5 B4
+  track A1    E5 . C5  A4 . C5  E5 D5 C5  B4 . A4
+  track A2    D5 . A4  F4 . A4  G#4 A4 B4  E4 . .
+  track A3    E5 . C5  A4 . C5  E5 F5 E5  D5 C5 B4
+  track A4    F5 . D5  B4 . G#4  A4 . E4  A4 . .
+  track B1    A5 . .  F5 . .  C5 D5 E5  F5 . C5
+  track B2    E5 . .  C5 . .  A4 B4 C5  E5 . .
+  track B3    F5 . .  D5 . .  A4 . D5  F5 E5 D5
+  track B4    E5 . .  B4 . .  G#4 A4 B4  D5 C5 B4
+  track TURN  A4 . .  - . .  E4 G#4 B4  D5 C5 B4
+
+channel 4 notes SQUEEZEBOX
+  note  The off-beats: the second and third eighth of every beat, the bass taking the
+  note  first. That pattern - bass, chord, chord - is what makes six-eight lilt.
+  voice SQUEEZE
+  track CAM  . Am Am  . Am Am  . Am Am  . Am Am
+  track CAE  . Am Am  . Am Am  . E E  . E E
+  track CDE  . Dm Dm  . Dm Dm  . E E  . E E
+  track CDEA . Dm Dm  . E E  . Am Am  . Am Am
+  track CF   . F F  . F F  . F F  . F F
+  track CDM  . Dm Dm  . Dm Dm  . Dm Dm  . Dm Dm
+  track CE   . E E  . E E  . E E  . E E
+
+# The order list: one line per two bars, a track per channel, '.' for none.
+# Deck, bass, fiddle, squeezebox.
+section CAST OFF
+speed  11
+audctl $00
+line   INTRO  AM     .      CAM
+line   INTRO  AE     PICK   CAE
+loop
+section JIG
+line   STOMP  AM     A1     CAM
+line   STOMP  DE     A2     CDE
+line   STOMP  AM     A3     CAM
+line   STOMP  DEA    A4     CDEA
+section SHANTY
+line   STOMP  FF     B1     CF
+line   STOMP  AM     B2     CAM
+line   STOMP  DD     B3     CDM
+line   STOMP  EE     B4     CE
+section JIG
+line   STOMP2 AM     A1     CAM
+line   STOMP2 DE     A2     CDE
+line   STOMP2 AM     A3     CAM
+line   STOMP2 DEA    A4     CDEA
+section TURNAROUND
+line   ROLL   AE     TURN   CAE

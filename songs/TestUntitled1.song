@@ -1,0 +1,83 @@
+# UNTITLED
+# A starting point made by PokeyTracker's piano patterns (File > New song from a pattern),
+# by rule: every note is the pattern's numbers counted up the key's scale from each chord.
+# Pattern: 1-5-8-9-10, up and back. The pop and film piano left hand: root, fifth, octave,
+# then the ninth and tenth, and back down.
+# Chords: I - IV - V - I - the three-chord song - in G DORIAN, Gm C Dm Gm. A line a chord,
+# round 2 times, looping.
+# The format is in Demo1/CLAUDE.md, under "Song files".
+
+song   UNTITLED
+key    G DORIAN
+
+# A piano: struck, falling away, and holding softly - on the 16-bit table, where every note
+# of the pattern, C3 to Bb4, is within two cents of true.
+instrument PIANO
+  table      wide
+  volume     13 12 11 10 10 9 9 8 8 7 7 6 6 5 5 5 4 4 4 3
+  distortion tone
+  release    3
+
+#channel 1 pair LOW BYTE
+#  note  The low byte of channel 2's 16-bit divider. AUDCTL 78 joins 1 and 2, and 3 and 4.
+
+# A click of tone, then the buzz table's divider climbing 20 to 80 - a pitch falling from
+# 200 Hz to 50, as close to a thump as one channel gets. The 9-bit mode does not touch
+# it: distortion C runs on the 4-bit counter.
+instrument KICK
+  table      none
+  volume     15 14 13 11 9 7 5 3 1 0
+  distortion tone buzz
+  audf       40 20 27 34 43 52 62 71 80
+  release    2
+
+# Noise at divider 0: hiss on the 17-bit counter, an 876 Hz whine on the 9-bit one.
+instrument HAT
+  table      none
+  volume     7 4 2 1 0
+  distortion noise
+  audf       0
+  release    2
+
+channel 1 drums DRUMS
+  note  Empty, a track a line: a second voice, a counter-melody, or drums on another kit.
+  kit   k=KICK h=HAT
+  track D1 k . h .  h . h .  k . k .  h . h .
+  track D2 k . h .  h . h .  k . k .  h . h .
+  track D3 k . h .  h . h .  k . k .  h . h .
+  track D4 k . h .  h . h .  k . k .  h . h .
+  track D5 k . h .  h . h .  k . k .  h . h .
+  track D6 k . h .  h . h .  k . k .  h . h .
+  track D7 k . h .  h . h .  k . k .  h . h .
+  track D8 k . h .  h . h .  k . k .  h . h .
+
+channel 2 notes RING
+  note  Every second note of the pattern, ringing on while channel 4 plays the next.
+  voice PIANO
+  track RGm   . . D4 .  . . A4 .  . . A4 .  . . D4 .
+  track RC    . . G3 .  . . D4 .  . . D4 .  . . G3 .
+  track RDm   . . A3 .  . . E4 .  . . E4 .  . . A3 .
+
+channel 3 pair LOW BYTE
+  note  The low byte of channel 4's 16-bit divider.
+
+channel 4 notes PATTERN
+  note  1-5-8-9-10, up and back, on each chord.
+  voice PIANO
+  track PGm   G3 . . .  G4 . . .  Bb4 . . .  G4 . . .
+  track PC    B2 . . .  C4 . . .  E4 . . .  C4 . . .
+  track PDm   D3 . . .  D4 . . .  F4 . . .  D4 . . .
+
+# The order list: a line a chord.
+audctl $28
+speed  7
+loop
+section UNTITLED
+line   D1    RGm   .     PGm
+line   D2    RC    .     PC
+line   D3    RDm   .     PDm
+line   D4    RGm   .     PGm
+line   D6    RGm   .     PGm
+line   D5    RC    .     PC
+line   D7    RDm   .     PDm
+line   D8    RGm   .     PGm

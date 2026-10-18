@@ -1,0 +1,71 @@
+# G MIXOLYDIAN SCALE - a scale to hear, play along with, and read. Made by PokeyTracker's
+# scale songs (File > New scale song), by rule: every note follows from the scale's steps.
+# Major with a flat seventh - the white notes from G. Rock and blues.
+# Going up:   G3 A3 B3 C4 D4 E4 F4 G4
+# The format is in Demo1/CLAUDE.md, under "Song files".
+
+song   G MIXOLYDIAN SCALE
+key    G MIXOLYDIAN
+
+# A soft piano-like voice on the 16-bit table: every note within two cents of true.
+instrument PIANO
+  table      wide
+  volume     14 13 12 11 10 10 9 9 8 8 7 7 7 6
+  distortion tone
+  release    3
+
+instrument HOME_NOTE
+  table      wide
+  volume     7 7 6
+  distortion tone
+  release    2
+
+channel 1 pair LOW BYTE
+  note  The low byte of channel 2's 16-bit divider. AUDCTL 78 joins 1 and 2, and 3 and 4.
+
+channel 2 notes HOME
+  note  The home note, held low under the scale when the drone is on - every note of the
+  note  scale is heard against it, which is how a scale's character is learned. The lines
+  note  play it where they name HOME; put . there to leave it out.
+  voice HOME_NOTE
+  track HOME G1 . . .  . . . .  . . . .  . . . .
+
+channel 3 pair LOW BYTE
+  note  The low byte of channel 4's 16-bit divider.
+
+channel 4 notes SCALE
+  note  G Mixolydian Scale: one octave up and down in quarter notes, two in eighths,
+  note  and the home chord as an arpeggio.
+  voice PIANO
+  track O1 G3 . . .  A3 . . .  B3 . . .  C4 . . .
+  track O2 D4 . . .  E4 . . .  F4 . . .  G4 . . .
+  track O3 F4 . . .  E4 . . .  D4 . . .  C4 . . .
+  track O4 B3 . . .  A3 . . .  G3 . . .  . . . .
+  track T1 G3 . A3 .  B3 . C4 .  D4 . E4 .  F4 . G4 .
+  track T2 A4 . B4 .  C5 . D5 .  E5 . F5 .  G5 . F5 .
+  track T3 E5 . D5 .  C5 . B4 .  A4 . G4 .  F4 . E4 .
+  track T4 D4 . C4 .  B3 . A3 .  G3 . . .  . . . .
+  track A1 G3 . . .  B3 . . .  D4 . . .  G4 . . .
+  track A2 B4 . . .  D5 . . .  G5 . . .  D5 . . .
+  track A3 B4 . . .  G4 . . .  D4 . . .  B3 . . .
+  track A4 G3 . . .  . . . .  . . . .  . . . .
+
+# The order list: the scale's sections, then the song ends.
+audctl $78
+speed  11
+section ONE OCTAVE
+line   .  .     .  O1
+line   .  .     .  O2
+line   .  .     .  O3
+line   .  .     .  O4
+section TWO OCTAVES
+line   .  .     .  T1
+line   .  .     .  T2
+line   .  .     .  T3
+line   .  .     .  T4
+section ARPEGGIO
+line   .  .     .  A1
+line   .  .     .  A2
+line   .  .     .  A3
+line   .  .     .  A4
+end

@@ -1,0 +1,74 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <RollForward>Major</RollForward>
+    <PublishReadyToRun>false</PublishReadyToRun>
+    <TieredCompilation>false</TieredCompilation>
+    <UseWindowsForms>true</UseWindowsForms>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>Icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="MonoGame.Framework.WindowsDX" Version="3.8.*" />
+    <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.*" />
+  </ItemGroup>
+  <ItemGroup>
+    <!--
+      Sound banks, copied beside the executable rather than embedded. The whole point of
+      the format is that you can edit one and reopen it, which needs a real file on disk;
+      embedding them would make the shipped four the only four that could not be changed.
+
+      They live at the repo root rather than in this project because they are the library's
+      sample content rather than the demo's own - a game reading its sounds out of a demo's
+      folder would have the dependency backwards.
+    -->
+    <None Include="../../banks\*.sound" Link="banks\%(Filename)%(Extension)"
+          CopyToOutputDirectory="PreserveNewest" />
+    <!--
+      Song files, for the same reasons and from the same kind of place: songs/ at the repo
+      root, beside banks/, where tools/soundexport reads them too.
+    -->
+    <None Include="../../songs\*.song" Link="songs\%(Filename)%(Extension)"
+          CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Pokey\Pokey.csproj" />
+    <!--
+      Speech does not reference Pokey and knows nothing about it - it renders to a
+      caller-chosen number of levels, so "4-bit" is this demo's fact rather than the
+      synthesiser's. That separation is what lets the voice page play the same sentence
+      through a POKEY's nibble and through clean 16-bit by changing one argument.
+    -->
+    <ProjectReference Include="..\..\src\Pokey.Speech\Pokey.Speech.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <!--
+      Linked, not copied, and not a project reference either.
+
+      The demo needs to draw text, and the repo's rule is that no project ships asset
+      files - so a SpriteFont is out and the strokes have to come from code. These two
+      files are the whole of a vector text renderer written for a game of mine, and depend
+      on nothing but MonoGame, which is what makes borrowing them this cheaply possible.
+      They are in samples/shared because the laboratory's scope trace is there for the same
+      reason: shared by samples, part of neither.
+
+      Linking rather than copying means a fix to the font reaches the demo, and the demo
+      cannot quietly fork it.
+
+      That game's BeamFont adapter is deliberately NOT among them. It presents the font as
+      an IFontRenderer, and that interface has no stroke-thickness parameter - so every
+      call would take the renderer's default weight, which is tuned for the game's large
+      HUD text and turns a twelve-pixel list row into a blur. The demo calls VectorFont
+      directly and picks a weight per size; see Game1.Weight.
+    -->
+    <Compile Include="..\shared\VectorRenderer.cs" Link="Text\VectorRenderer.cs" />
+    <Compile Include="..\shared\VectorFont.cs" Link="Text\VectorFont.cs" />
+  </ItemGroup>
+  <Target Name="RestoreDotnetTools" BeforeTargets="CollectPackageReferences">
+    <Message Text="Restoring dotnet tools (this might take a while depending on your internet speed and should only happen upon building your project for the first time, or after upgrading MonoGame, or clearing your nuget cache)" Importance="High" />
+    <Exec Command="dotnet tool restore" />
+  </Target>
+</Project>
