@@ -2,7 +2,8 @@
 # Game over: slow held 16-bit piano chords falling in G minor, no drums. Plays once.
 # DRIFT, a chill suite for one game: TITLE, CAFE, FIELD, RAIN, NIGHT, VICTORY, GAME OVER and
 # CREDITS. All in B flat major or its relative G minor, laid-back, on one set of
-# instruments. The title is New song's Chill style with its defaults, in B flat.
+# instruments. The title is New song's Chill style with its defaults, in B flat. The bass
+# throughout is SOFTBASS, a pure tone, in place of the buzz.
 #
 # A starting point made by PokeyTracker's New song window, by rule: each section's beat, bass
 # and accompaniment worked out from the key, the chords and the band chosen. The tune is yours.
@@ -19,12 +20,13 @@ instrument LEAD
   distortion tone
   release    2
 
-# Distortion C, for a bass. Its table skips notes - see which in the tracker's colours.
-instrument BASS
-  table      buzz
-  volume     12 11 10 9 8
-  distortion buzz
-  release    3
+# A soft, round bass: the pure tone, plucked and fading - no buzz, one channel, every note
+# in tune from C3 up.
+instrument SOFTBASS
+  table      tone
+  volume     12 11 10 9 9 8 8 7 7 6 6 5 5 4
+  distortion tone
+  release    2
 
 # A piano: struck, falling away, and holding softly - 16-bit, so every note is within two cents.
 instrument PIANO
@@ -39,10 +41,10 @@ channel 1 notes LEAD
 
 channel 2 notes BASS
   note  Bass: roots, on the chords' roots.
-  voice BASS
-  track INTRO G2 . . .  . . . .  G2 . . .  . . . .
-  track INTRO2 F2 . . .  . . . .  D2 . . .  . . . .
-  track END    G2 . . .  . . . .  . . . .  . . . .
+  voice SOFTBASS
+  track INTRO G3 . . .  . . . .  G3 . . .  . . . .
+  track INTRO2 F3 . . .  . . . .  D3 . . .  . . . .
+  track END    G3 . . .  . . . .  . . . .  . . . .
 
 channel 3 pair LOW BYTE
   note  The low byte of channel 4's 16-bit divider.

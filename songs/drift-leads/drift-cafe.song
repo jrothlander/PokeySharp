@@ -5,7 +5,8 @@
 # bass; the chorus turns to the 50s progression.
 # DRIFT, a chill suite for one game: TITLE, CAFE, FIELD, RAIN, NIGHT, VICTORY, GAME OVER and
 # CREDITS. All in B flat major or its relative G minor, laid-back, on one set of
-# instruments. The title is New song's Chill style with its defaults, in B flat.
+# instruments. The title is New song's Chill style with its defaults, in B flat. The bass
+# throughout is SOFTBASS, a pure tone, in place of the buzz.
 #
 # A starting point made by PokeyTracker's New song window, by rule: each section's beat, bass
 # and accompaniment worked out from the key, the chords and the band chosen. The tune is yours.
@@ -15,12 +16,13 @@
 song   DRIFT CAFE
 key    B FLAT MAJOR
 
-# Distortion C, for a bass. Its table skips notes - see which in the tracker's colours.
-instrument BASS
-  table      buzz
-  volume     12 11 10 9 8
-  distortion buzz
-  release    3
+# A soft, round bass: the pure tone, plucked and fading - no buzz, one channel, every note
+# in tune from C3 up.
+instrument SOFTBASS
+  table      tone
+  volume     12 11 10 9 9 8 8 7 7 6 6 5 5 4
+  distortion tone
+  release    2
 
 # A plain square wave, for a tune.
 instrument LEAD
@@ -75,19 +77,19 @@ channel 1 drums DRUMS
 
 channel 2 notes BASS
   note  Bass: root and fifth, on the chords' roots.
-  voice BASS
-  track INTRO C1 . . .  . . . .  Eb1 . . .  . . . .
-  track INTRO2 F2 . . .  . . . .  D2 . . .  . . . .
-  track A      C1 . . .  G1 . . .  C1 . . .  Eb1 . . .
-  track A2     F1 . . .  C1 . . .  F1 . . .  A1 . . .
-  track A3     Bb1 . . .  F2 . . .  Bb1 . . .  F2 . . .
-  track A4     Bb1 . . .  G1 . . .  F1 . . .  D1 . . .
-  track B      Bb1 . F2 .  Bb1 . F2 .  Bb1 . F2 .  Bb1 . A1 .
-  track B2     G2 . D3 .  G2 . D3 .  G2 . D3 .  G2 . F2 .
-  track B3     Eb1 . Bb1 .  Eb1 . Bb1 .  Eb1 . Bb1 .  Eb1 . Bb1 .
-  track B4     F1 . C1 .  F1 . C1 .  F1 . C1 .  F1 . A1 .
-  track BRIDGE C1 . . .  . . . .  . . . .  . . . .
-  track BRIDGE2 F2 . . .  . . . .  . . . .  . . . .
+  voice SOFTBASS
+  track INTRO C3 . . .  . . . .  Eb3 . . .  . . . .
+  track INTRO2 F3 . . .  . . . .  D3 . . .  . . . .
+  track A      C3 . . .  G3 . . .  C3 . . .  Eb3 . . .
+  track A2     F3 . . .  C4 . . .  F3 . . .  A3 . . .
+  track A3     Bb3 . . .  F4 . . .  Bb3 . . .  F4 . . .
+  track A4     Bb3 . . .  G3 . . .  F3 . . .  D3 . . .
+  track B      Bb3 . F4 .  Bb3 . F4 .  Bb3 . F4 .  Bb3 . A3 .
+  track B2     G3 . D4 .  G3 . D4 .  G3 . D4 .  G3 . F3 .
+  track B3     Eb3 . Bb3 .  Eb3 . Bb3 .  Eb3 . Bb3 .  Eb3 . Bb3 .
+  track B4     F3 . C4 .  F3 . C4 .  F3 . C4 .  F3 . A3 .
+  track BRIDGE C3 . . .  . . . .  . . . .  . . . .
+  track BRIDGE2 F3 . . .  . . . .  . . . .  . . . .
 
 channel 3 notes LEAD
   note  An example lead melody, written by Claude - not Greg's. The tracks are named M + the section's chord track.
