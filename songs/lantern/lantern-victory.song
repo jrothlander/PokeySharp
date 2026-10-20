@@ -1,0 +1,93 @@
+# LANTERN VICTORY
+# A small victory: a short jingle, IV - V - I, chip chords and a last hit. Plays once.
+# LANTERN, a ballad suite for one game: TITLE, VILLAGE, JOURNEY, MEMORY, NIGHT, VICTORY,
+# GAME OVER and CREDITS. All in C major or its relative A minor, piano-led, on one set of
+# instruments. The title is New song's Ballad style with its defaults.
+#
+# A starting point made by PokeyTracker's New song window, by rule: each section's beat, bass
+# and accompaniment worked out from the key, the chords and the band chosen. The tune is yours.
+# Chords: IV V I I:  F G C C.
+# The format is in Demo1/CLAUDE.md, under "Song files".
+
+song   LANTERN VICTORY
+key    C MAJOR
+
+# Distortion C, for a bass. Its table skips notes - see which in the tracker's colours.
+instrument BASS
+  table      buzz
+  volume     12 11 10 9 8
+  distortion buzz
+  release    3
+
+# A plain square wave, for a tune.
+instrument LEAD
+  table      tone
+  volume     12 11 10 10 9
+  distortion tone
+  release    2
+
+# Soft keys for an accompaniment: struck, then falling away.
+instrument KEYS
+  table      tone
+  volume     11 10 9 8 8 7 7 6 6 5 5 4
+  distortion tone
+  release    3
+
+# Four drums: a falling thump, a burst of noise, and a short and a long hiss. Each is a
+# table of registers a frame at a time, with no note table, so a key only says which drum.
+instrument KICK
+  table      none
+  volume     15 13 10 7 4 2 0
+  distortion buzz
+  audf       40 55 70 85 100 115 130
+
+instrument SNARE
+  table      none
+  volume     13 11 9 7 5 4 3 2 1 0
+  distortion tone noise
+  audf       50 8 9 10 11 12 13
+
+instrument HAT
+  table      none
+  volume     8 5 3 1 0
+  distortion noise
+  audf       2
+
+instrument OPEN
+  table      none
+  volume     8 7 6 5 4 3 2 2 1 1 0
+  distortion noise
+  audf       1
+
+channel 1 drums DRUMS
+  kit   K=KICK S=SNARE H=HAT O=OPEN
+  track INTRO K . H .  H . H .  S . H .  H . H .
+  track INTRO2 K . H .  S . H .  K . S .  S S S S
+  track END    O . . .  . . . .  . . . .  . . . .
+
+channel 2 notes BASS
+  note  Bass: root and fifth, on the chords' roots.
+  voice BASS
+  track INTRO F1 . . .  . . . .  C1 . . .  . . . .
+  track INTRO2 G2 . . .  . . . .  D3 . . .  . . . .
+  track END    C1 . . .  . . . .  . . . .  . . . .
+
+channel 3 notes LEAD
+  note  Empty: the tune is yours.
+  voice LEAD
+
+channel 4 notes CHORDS
+  note  The chords, in each section's own rhythm.
+  voice KEYS
+  track INTRO F . . .  F . . .  F . . .  F . . .
+  track INTRO2 G . . .  G . . .  G . . .  G . . .
+  track END    C . . .  . . . .  . . . .  . . . .
+
+# The order list: a section at a time.
+speed  6
+section INTRO
+line   INTRO  INTRO  .  INTRO
+line   INTRO2  INTRO2  .  INTRO2
+section END
+line   END  END  .  END
+end

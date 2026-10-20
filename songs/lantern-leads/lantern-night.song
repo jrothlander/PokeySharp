@@ -1,0 +1,98 @@
+# LANTERN NIGHT
+# THIS COPY HAS A LEAD MELODY ON CHANNEL 1, WRITTEN BY CLAUDE AS AN EXAMPLE of what could go
+# there. It is not Greg's writing. The accompaniment is the same as in songs/lantern/.
+# Night and danger: A minor, the open fifth on the 16-bit piano, descending; the chorus
+# holds its chords.
+# LANTERN, a ballad suite for one game: TITLE, VILLAGE, JOURNEY, MEMORY, NIGHT, VICTORY,
+# GAME OVER and CREDITS. All in C major or its relative A minor, piano-led, on one set of
+# instruments. The title is New song's Ballad style with its defaults.
+#
+# A starting point made by PokeyTracker's New song window, by rule: each section's beat, bass
+# and accompaniment worked out from the key, the chords and the band chosen. The tune is yours.
+# Chords: i VII VI v:  Am G F Em; in B, i iv v i:  Am Dm Em Am.
+# The format is in Demo1/CLAUDE.md, under "Song files".
+
+song   LANTERN NIGHT
+key    A MINOR
+
+# A plain square wave, for a tune.
+instrument LEAD
+  table      tone
+  volume     12 11 10 10 9
+  distortion tone
+  release    2
+
+# Distortion C, for a bass. Its table skips notes - see which in the tracker's colours.
+instrument BASS
+  table      buzz
+  volume     12 11 10 9 8
+  distortion buzz
+  release    3
+
+# A piano: struck, falling away, and holding softly - 16-bit, so every note is within two cents.
+instrument PIANO
+  table      wide
+  volume     13 12 11 10 10 9 9 8 8 7 7 6 6 5 5 5 4 4 4 3
+  distortion tone
+  release    3
+
+channel 1 notes LEAD
+  note  An example lead melody, written by Claude - not Greg's. The tracks are named M + the section's chord track.
+  voice LEAD
+  track MA A4 . . .  . . . .  C5 . . .  B4 . A4 .
+  track MA2 G4 . . .  . . . .  B4 . . .  A4 . G4 .
+  track MA3 F4 . . .  . . . .  A4 . . .  G4 . F4 .
+  track MA4 E4 . . .  . . . .  . . . .  . . - .
+  track MB  E5 . . .  . . . .  D5 . . .  C5 . . .
+  track MB2 F5 . . .  . . . .  E5 . . .  D5 . . .
+  track MB3 B4 . . .  . . . .  G4 . . .  E4 . . .
+  track MB4 A4 . . .  . . . .  B4 . . .  . . - .
+
+channel 2 notes BASS
+  note  Bass: roots, on the chords' roots.
+  voice BASS
+  track INTRO A1 . . .  . . . .  A1 . . .  . . . .
+  track INTRO2 G2 . . .  . . . .  E2 . . .  . . . .
+  track A      A1 . . .  A1 . . .  A1 . . .  A1 . . .
+  track A2     G2 . . .  G2 . . .  G2 . . .  G2 . . .
+  track A3     F2 . . .  F2 . . .  F2 . . .  F2 . . .
+  track A4     E2 . . .  E2 . . .  E2 . . .  G2 . . .
+  track B      A1 . A1 .  A1 . A1 .  A1 . A1 .  A1 . C1 .
+  track B2     D2 . D2 .  D2 . D2 .  D2 . D2 .  D2 . D2 .
+  track B3     E2 . E2 .  E2 . E2 .  E2 . E2 .  E2 . G2 .
+  track B4     A1 . A1 .  A1 . F1 .  E1 . E1 .  E1 . G1 .
+
+channel 3 pair LOW BYTE
+  note  The low byte of channel 4's 16-bit divider.
+
+channel 4 notes PATTERN
+  note  1-5-8, the open fifth and octave, on each chord.
+  voice PIANO
+  track INTRO A3 . E4 .  A4 . E4 .  A3 . E4 .  A4 . E4 .
+  track INTRO2 G3 . D4 .  G4 . D4 .  E3 . B3 .  E4 . B3 .
+  track A      A3 . E4 .  A4 . E4 .  A3 . E4 .  A4 . E4 .
+  track A2     G3 . D4 .  G4 . D4 .  G3 . D4 .  G4 . D4 .
+  track A3     F3 . C4 .  F4 . C4 .  F3 . C4 .  F4 . C4 .
+  track A4     E3 . B3 .  E4 . B3 .  E3 . B3 .  E4 . B3 .
+  track B      Am . . .  . . . .  . . . .  . . . .
+  track B2     Dm . . .  . . . .  . . . .  . . . .
+  track B3     Em . . .  . . . .  . . . .  . . . .
+  track B4     Am . . .  . . . .  Em . . .  . . . .
+
+# The order list: a section at a time.
+audctl $28
+speed  10
+section INTRO
+line   .  INTRO  .  INTRO
+line   .  INTRO2  .  INTRO2
+section A
+loop
+line   MA A  .  A
+line   MA2  A2  .  A2
+line   MA3  A3  .  A3
+line   MA4  A4  .  A4
+section B
+line   MB B  .  B
+line   MB2  B2  .  B2
+line   MB3  B3  .  B3
+line   MB4  B4  .  B4
