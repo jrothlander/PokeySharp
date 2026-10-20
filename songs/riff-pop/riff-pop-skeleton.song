@@ -92,6 +92,20 @@ channel 2 notes BASS
 channel 3 notes LEAD
   note  Empty: the tune is yours.
   voice LEAD
+  track RIFF  . . . .  . . . .  . . . .  . . . .
+  track RIFF2 . . . .  . . . .  . . . .  . . . .
+  track A     . . . .  . . . .  . . . .  . . . .
+  track A2    . . . .  . . . .  . . . .  . . . .
+  track A3    . . . .  . . . .  . . . .  . . . .
+  track A4    . . . .  . . . .  . . . .  . . . .
+  track PRE   . . . .  . . . .  . . . .  . . . .
+  track PRE2  . . . .  . . . .  . . . .  . . . .
+  track B     . . . .  . . . .  . . . .  . . . .
+  track B2    . . . .  . . . .  . . . .  . . . .
+  track B3    . . . .  . . . .  . . . .  . . . .
+  track B4    . . . .  . . . .  . . . .  . . . .
+  track BREAK . . . .  . . . .  . . . .  . . . .
+  track BREAK2 . . . .  . . . .  . . . .  . . . .
 
 channel 4 notes CHORDS
   note  Arpeggio, going up, on each chord.
@@ -114,43 +128,43 @@ channel 4 notes CHORDS
 # The order list: a section at a time.
 speed  5
 section RIFF
-line   RIFF  RIFF  .  RIFF
-line   RIFF2  RIFF2  .  RIFF2
+line   RIFF  RIFF  RIFF  RIFF
+line   RIFF2  RIFF2  RIFF2  RIFF2
 section A
 loop
-line   A  A  .  A
-line   A  A2  .  A2
-line   A  A3  .  A3
-line   A2  A4  .  A4
+line   A  A  A  A
+line   A  A2  A2 A2
+line   A  A3  A3 A3
+line   A2  A4  A4 A4
 section PRE
-line   PRE  PRE  .  PRE
-line   PRE2  PRE2  .  PRE2
+line   PRE  PRE  PRE  PRE
+line   PRE2  PRE2  PRE2  PRE2
 section B
-line   B  B  .  B
-line   B  B2  .  B2
-line   B  B3  .  B3
-line   B2  B4  .  B4
+line   B  B  B  B
+line   B  B2  B2 B2
+line   B  B3  B3 B3
+line   B2  B4  B4 B4
 section RIFF
-line   RIFF  RIFF  .  RIFF
-line   RIFF2  RIFF2  .  RIFF2
+line   RIFF  RIFF  RIFF  RIFF
+line   RIFF2  RIFF2  RIFF2  RIFF2
 section A
-line   A  A  .  A
-line   A  A2  .  A2
-line   A  A3  .  A3
-line   A2  A4  .  A4
+line   A  A  A  A
+line   A  A2  A2 A2
+line   A  A3  A3 A3
+line   A2  A4  A4 A4
 section PRE
-line   PRE  PRE  .  PRE
-line   PRE2  PRE2  .  PRE2
+line   PRE  PRE  PRE  PRE
+line   PRE2  PRE2  PRE2  PRE2
 section B
-line   B  B  .  B
-line   B  B2  .  B2
-line   B  B3  .  B3
-line   B2  B4  .  B4
+line   B  B  B  B
+line   B  B2  B2 B2
+line   B  B3  B3 B3
+line   B2  B4  B4 B4
 section BREAK
-line   BREAK  .  .  BREAK
-line   BREAK  .  .  BREAK2
+line   BREAK  .  BREAK  BREAK
+line   BREAK  .  BREAK2  BREAK2
 section B
-line   B  B  .  B
-line   B  B2  .  B2
-line   B  B3  .  B3
-line   B2  B4  .  B4
+line   B  B  B  B
+line   B  B2  B2 B2
+line   B  B3  B3 B3
+line   B2  B4  B4 B4
