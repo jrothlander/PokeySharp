@@ -70,7 +70,7 @@ channel 2 notes BASS
   note  Bass: root and fifth, on the chords' roots.
   voice BASS
   track INTRO D1 . . .  . . . .  A1 . . .  . . . .
-  track INTRO2 E2 . . .  . . . .  B2 . . .  . . . .
+  track INTRO2 E2 . . .  . . . .  E2 . . .  . . . .
   track END    A1 . . .  . . . .  . . . .  . . . .
 
 channel 3 notes LEAD
