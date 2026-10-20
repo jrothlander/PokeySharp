@@ -1,0 +1,149 @@
+# OVERDRIVE STAGE
+# THIS COPY HAS A LEAD MELODY ON CHANNEL 3, WRITTEN BY CLAUDE AS AN EXAMPLE of what could go
+# there. It is not Greg's writing. The accompaniment is the same as in songs/overdrive/.
+# The main level: New song's Action style with its defaults, moved from C minor to F# minor
+# - where the buzz bass keeps its octaves (95% of them, against 38% in C minor).
+# OVERDRIVE, a suite for one game: TITLE, STAGE, BOSS, CALM, DUNGEON, VICTORY, GAME OVER and
+# CREDITS. All in F# minor or its relative A major, on one set of instruments, so the cues
+# sound like one game. The stage's chords, i - VI - III - VII, open the title too.
+#
+# A starting point made by PokeyTracker's New song window, by rule: each section's beat, bass
+# and accompaniment worked out from the key, the chords and the band chosen. The tune is yours.
+# Style: Action - driving, in a minor key.
+# Chords: i VI III VII:  F#m D A E; in B, i VII VI VII:  F#m E D E.
+# The format is in Demo1/CLAUDE.md, under "Song files".
+
+song   OVERDRIVE STAGE
+key    F# MINOR
+
+# Distortion C, for a bass. Its table skips notes - see which in the tracker's colours.
+instrument BASS
+  table      buzz
+  volume     12 11 10 9 8
+  distortion buzz
+  release    3
+
+# A plain square wave, for a tune.
+instrument LEAD
+  table      tone
+  volume     12 11 10 10 9
+  distortion tone
+  release    2
+
+# Soft keys for an accompaniment: struck, then falling away.
+instrument KEYS
+  table      tone
+  volume     11 10 9 8 8 7 7 6 6 5 5 4
+  distortion tone
+  release    3
+
+# Four drums: a falling thump, a burst of noise, and a short and a long hiss. Each is a
+# table of registers a frame at a time, with no note table, so a key only says which drum.
+instrument KICK
+  table      none
+  volume     15 13 10 7 4 2 0
+  distortion buzz
+  audf       40 55 70 85 100 115 130
+
+instrument SNARE
+  table      none
+  volume     13 11 9 7 5 4 3 2 1 0
+  distortion tone noise
+  audf       50 8 9 10 11 12 13
+
+instrument HAT
+  table      none
+  volume     8 5 3 1 0
+  distortion noise
+  audf       2
+
+instrument OPEN
+  table      none
+  volume     8 7 6 5 4 3 2 2 1 1 0
+  distortion noise
+  audf       1
+
+channel 1 drums DRUMS
+  kit   K=KICK S=SNARE H=HAT O=OPEN
+  track INTRO K . H .  S . H .  K . K .  S . H .
+  track INTRO2 K . H .  S . H .  K . S .  S S S S
+  track A      K . H .  S . H .  K . K .  S . H .
+  track A2     K . H .  S . H .  K . S .  S S S S
+  track B      K . O .  K . O .  K . O .  K . O .
+  track B2     S . S .  S . S .  S S S S  S S S S
+  track BREAK  H H H H  H H H H  H H H H  H H H H
+  track BUILD  K . H .  S . H .  K . K .  S . H .
+  track BUILD2 S . S .  S . S .  S S S S  S S S S
+
+channel 2 notes BASS
+  note  Bass: octaves, on the chords' roots.
+  voice BASS
+  track INTRO F#1 . . .  . . . .  E1 . . .  . . . .
+  track INTRO2 D1 . . .  . . . .  C#1 . . .  . . . .
+  track A      F#1 . . .  F#2 . . .  F#1 . . .  E1 . . .
+  track A2     D2 . . .  D3 . . .  D2 . . .  B1 . . .
+  track A3     A1 . . .  A1 . . .  A1 . . .  F#1 . . .
+  track A4     E1 . . .  D1 . . .  C#1 . . .  E1 . . .
+  track B      F#1 . F#2 .  F#1 . F#2 .  F#1 . F#2 .  F#1 . F#2 .
+  track B2     E1 . E2 .  E1 . E2 .  E1 . E2 .  E1 . E2 .
+  track B3     D1 . D2 .  D1 . D2 .  D1 . D2 .  D1 . D2 .
+  track B4     E1 . E2 .  E1 . D1 .  C#1 . C#2 .  C#1 . E1 .
+  track BUILD  F#1 . F#2 .  F#1 . F#2 .  F#1 . F#2 .  F#1 . E1 .
+  track BUILD2 D1 . D2 .  D1 . D2 .  C#1 . C#2 .  C#1 . E1 .
+
+channel 3 notes LEAD
+  note  An example lead melody, written by Claude - not Greg's. The tracks are named M + the section's chord track.
+  voice LEAD
+  track MA F#4 . A4 .  C#5 . . A4  . . C#5 .  B4 . A4 .
+  track MA2 A4 . . .  F#4 . . D4  . . F#4 .  A4 . . .
+  track MA3 C#5 . E5 .  C#5 . . A4  . . C#5 .  E5 . . .
+  track MA4 B4 . . .  G#4 . E4 .  G#4 . . .  - . . .
+  track MB  C#5 . . .  C#5 . D5 .  C#5 . A4 .  F#4 . . .
+  track MB2 B4 . . .  B4 . C#5 .  B4 . G#4 .  E4 . . .
+  track MB3 A4 . . .  A4 . B4 .  A4 . F#4 .  D4 . . .
+  track MB4 E4 . G#4 .  B4 . . .  C#5 . . .  . . - .
+  track MBREAK F#4 . . .  . . . .  A4 . . .  . . . .
+  track MBREAK2 A4 . . .  . . . .  G#4 . . .  . . . .
+  track MBUILD  C#5 . C#5 .  C#5 . C#5 .  C#5 . C#5 .  C#5 C#5 C#5 C#5
+  track MBUILD2 D5 . D5 .  D5 . D5 .  C#5 . C#5 .  C#5 C#5 C#5 C#5
+
+channel 4 notes CHORDS
+  note  Arpeggio, going up, on each chord.
+  voice KEYS
+  track INTRO F#4 . A4 .  C#5 . F#5 .  F#4 . A4 .  C#5 . F#5 .
+  track INTRO2 F#4 . A4 .  D5 . F#5 .  E4 . G#4 .  C#5 . E5 .
+  track A      F#4 . A4 .  C#5 . F#5 .  F#4 . A4 .  C#5 . F#5 .
+  track A2     F#4 . A4 .  D5 . F#5 .  F#4 . A4 .  D5 . F#5 .
+  track A3     E4 . A4 .  C#5 . E5 .  E4 . A4 .  C#5 . E5 .
+  track A4     E4 . G#4 .  B4 . E5 .  E4 . G#4 .  C#5 . E5 .
+  track B      F#4 . A4 .  C#5 . A4 .  F#4 . A4 .  C#5 . A4 .
+  track B2     E4 . G#4 .  B4 . G#4 .  E4 . G#4 .  B4 . G#4 .
+  track B3     D4 . F#4 .  A4 . F#4 .  D4 . F#4 .  A4 . F#4 .
+  track B4     E4 . G#4 .  B4 . G#4 .  E4 . G#4 .  C#5 . G#4 .
+  track BREAK  F#4 . A4 .  C#5 . F#5 .  F#4 . A4 .  C#5 . F#5 .
+  track BREAK2 F#4 . A4 .  D5 . F#5 .  E4 . G#4 .  C#5 . E5 .
+  track BUILD  F#4 . A4 .  C#5 . F#5 .  F#4 . A4 .  C#5 . F#5 .
+  track BUILD2 F#4 . A4 .  D5 . F#5 .  E4 . G#4 .  C#5 . E5 .
+
+# The order list: a section at a time.
+speed  5
+section INTRO
+line   INTRO  INTRO  .  INTRO
+line   INTRO2  INTRO2  .  INTRO2
+section A
+loop
+line   A  A  MA A
+line   A  A2  MA2  A2
+line   A  A3  MA3  A3
+line   A2  A4  MA4  A4
+section B
+line   B  B  MB B
+line   B  B2  MB2  B2
+line   B  B3  MB3  B3
+line   B2  B4  MB4  B4
+section BREAK
+line   BREAK  .  MBREAK  BREAK
+line   BREAK  .  MBREAK2  BREAK2
+section BUILD
+line   BUILD  BUILD  MBUILD  BUILD
+line   BUILD2  BUILD2  MBUILD2  BUILD2

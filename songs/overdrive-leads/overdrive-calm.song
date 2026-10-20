@@ -1,0 +1,145 @@
+# OVERDRIVE CALM
+# THIS COPY HAS A LEAD MELODY ON CHANNEL 3, WRITTEN BY CLAUDE AS AN EXAMPLE of what could go
+# there. It is not Greg's writing. The accompaniment is the same as in songs/overdrive/.
+# The map, hub or shop: the relative major, an Alberti bass on soft keys over long roots and
+# a half-time beat; the chorus takes the Royal Road.
+# OVERDRIVE, a suite for one game: TITLE, STAGE, BOSS, CALM, DUNGEON, VICTORY, GAME OVER and
+# CREDITS. All in F# minor or its relative A major, on one set of instruments, so the cues
+# sound like one game. The stage's chords, i - VI - III - VII, open the title too.
+#
+# A starting point made by PokeyTracker's New song window, by rule: each section's beat, bass
+# and accompaniment worked out from the key, the chords and the band chosen. The tune is yours.
+# Chords: I V vi IV:  A E F#m D; in B, IV V iii vi:  D E C#m F#m.
+# The format is in Demo1/CLAUDE.md, under "Song files".
+
+song   OVERDRIVE CALM
+key    A MAJOR
+
+# Distortion C, for a bass. Its table skips notes - see which in the tracker's colours.
+instrument BASS
+  table      buzz
+  volume     12 11 10 9 8
+  distortion buzz
+  release    3
+
+# A plain square wave, for a tune.
+instrument LEAD
+  table      tone
+  volume     12 11 10 10 9
+  distortion tone
+  release    2
+
+# Soft keys for an accompaniment: struck, then falling away.
+instrument KEYS
+  table      tone
+  volume     11 10 9 8 8 7 7 6 6 5 5 4
+  distortion tone
+  release    3
+
+# Four drums: a falling thump, a burst of noise, and a short and a long hiss. Each is a
+# table of registers a frame at a time, with no note table, so a key only says which drum.
+instrument KICK
+  table      none
+  volume     15 13 10 7 4 2 0
+  distortion buzz
+  audf       40 55 70 85 100 115 130
+
+instrument SNARE
+  table      none
+  volume     13 11 9 7 5 4 3 2 1 0
+  distortion tone noise
+  audf       50 8 9 10 11 12 13
+
+instrument HAT
+  table      none
+  volume     8 5 3 1 0
+  distortion noise
+  audf       2
+
+instrument OPEN
+  table      none
+  volume     8 7 6 5 4 3 2 2 1 1 0
+  distortion noise
+  audf       1
+
+channel 1 drums DRUMS
+  kit   K=KICK S=SNARE H=HAT O=OPEN
+  track INTRO K . H .  H . H .  S . H .  H . H .
+  track INTRO2 K . H .  S . H .  K . S .  S S S S
+  track A      K . H .  H . H .  S . H .  H . H .
+  track A2     K . H .  S . H .  K . S .  S S S S
+  track B      K . . .  S . . .  K . . .  S . . .
+  track B2     S . S .  S . S .  S S S S  S S S S
+  track BRIDGE K . H .  H . H .  S . H .  H . H .
+  track BRIDGE2 K . H .  S . H .  S . S S  S S S S
+
+channel 2 notes BASS
+  note  Bass: roots, on the chords' roots.
+  voice BASS
+  track INTRO A1 . . .  . . . .  F#1 . . .  . . . .
+  track INTRO2 E2 . . .  . . . .  G#2 . . .  . . . .
+  track A      A1 . . .  A1 . . .  A1 . . .  F#1 . . .
+  track A2     E2 . . .  E2 . . .  E2 . . .  E2 . . .
+  track A3     F#2 . . .  F#2 . . .  F#2 . . .  E2 . . .
+  track A4     D2 . . .  D2 . . .  E2 . . .  G#2 . . .
+  track B      D1 . A1 .  D1 . A1 .  D1 . A1 .  D1 . A1 .
+  track B2     E2 . B2 .  E2 . B2 .  E2 . B2 .  E2 . D2 .
+  track B3     C#2 . G#2 .  C#2 . G#2 .  C#2 . G#2 .  C#2 . E2 .
+  track B4     F#2 . C#3 .  F#2 . C#3 .  E2 . B2 .  E2 . B2 .
+  track BRIDGE A1 . . .  . . . .  . . . .  . . . .
+  track BRIDGE2 E2 . . .  . . . .  . . . .  . . . .
+
+channel 3 notes LEAD
+  note  An example lead melody, written by Claude - not Greg's. The tracks are named M + the section's chord track.
+  voice LEAD
+  track MA E5 . . .  C#5 . . .  A4 . B4 .  C#5 . . .
+  track MA2 B4 . . .  . . . .  G#4 . . .  E4 . . .
+  track MA3 A4 . . .  F#4 . . .  A4 . B4 .  C#5 . . .
+  track MA4 D5 . . .  C#5 . . .  B4 . . .  . . - .
+  track MB  F#5 . . .  E5 . . .  D5 . . .  A4 . . .
+  track MB2 E5 . . .  D5 . . .  B4 . . .  G#4 . . .
+  track MB3 E5 . . .  C#5 . . .  G#4 . . .  C#5 . . .
+  track MB4 A4 . . .  . . F#4 .  G#4 . . .  . . - .
+  track MBRIDGE C#5 . . .  . . . .  . . . .  . . . .
+  track MBRIDGE2 B4 . . .  . . . .  G#4 . . .  . . - .
+
+channel 4 notes PATTERN
+  note  Alberti bass (1 5 3 5), on each chord.
+  voice KEYS
+  track INTRO A3 E4 C#4 E4  A3 E4 C#4 E4  A3 E4 C#4 E4  A3 E4 C#4 E4
+  track INTRO2 E3 B3 G#3 B3  E3 B3 G#3 B3  E3 B3 G#3 B3  E3 B3 G#3 B3
+  track A      A3 E4 C#4 E4  A3 E4 C#4 E4  A3 E4 C#4 E4  A3 E4 C#4 E4
+  track A2     E3 B3 G#3 B3  E3 B3 G#3 B3  E3 B3 G#3 B3  E3 B3 G#3 B3
+  track A3     F#3 C#4 A3 C#4  F#3 C#4 A3 C#4  F#3 C#4 A3 C#4  F#3 C#4 A3 C#4
+  track A4     D3 A3 F#3 A3  D3 A3 F#3 A3  E3 B3 G#3 B3  E3 B3 G#3 B3
+  track B      D3 . F#3 .  A3 . D4 .  F#4 . D4 .  A3 . F#3 .
+  track B2     E3 . G#3 .  B3 . E4 .  G#4 . E4 .  B3 . G#3 .
+  track B3     C#4 . E4 .  G#4 . C#5 .  E5 . C#5 .  G#4 . E4 .
+  track B4     F#3 . A3 .  C#4 . F#4 .  G#4 . E4 .  B3 . G#3 .
+  track BRIDGE A3 E4 C#4 E4  A3 E4 C#4 E4  A3 E4 C#4 E4  A3 E4 C#4 E4
+  track BRIDGE2 E3 B3 G#3 B3  E3 B3 G#3 B3  E3 B3 G#3 B3  E3 B3 G#3 B3
+
+# The order list: a section at a time.
+speed  9
+section INTRO
+line   INTRO  INTRO  .  INTRO
+line   INTRO2  INTRO2  .  INTRO2
+section A
+loop
+line   A  A  MA A
+line   A  A2  MA2  A2
+line   A  A3  MA3  A3
+line   A2  A4  MA4  A4
+section B
+line   B  B  MB B
+line   B  B2  MB2  B2
+line   B  B3  MB3  B3
+line   B2  B4  MB4  B4
+section A
+line   A  A  MA A
+line   A  A2  MA2  A2
+line   A  A3  MA3  A3
+line   A2  A4  MA4  A4
+section BRIDGE
+line   BRIDGE  BRIDGE  MBRIDGE  BRIDGE
+line   BRIDGE2  BRIDGE2  MBRIDGE2  BRIDGE2
