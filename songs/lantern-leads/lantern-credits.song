@@ -77,15 +77,15 @@ channel 1 drums DRUMS
 channel 2 notes BASS
   note  Bass: roots, on the chords' roots.
   voice BASS
-  track INTRO C1 . .  . . .  B1 . .  . . .
+  track INTRO C1 . .  . . .  G1 . .  . . .
   track INTRO2 A1 . .  . . .  G1 . .  . . .
-  track A      C1 . .  C1 . .  C1 . .  B1 . .
+  track A      C1 . .  C1 . .  C1 . .  G1 . .
   track A2     A1 . .  A1 . .  A1 . .  G1 . .
   track A3     F2 . .  F2 . .  F2 . .  F2 . .
-  track A4     G2 . .  G2 . .  G2 . .  B2 . .
+  track A4     G2 . .  G2 . .  G2 . .  D3 . .
   track B      A1 . A1  . A1 .  A1 . A1  . C1 .
   track B2     D2 . D2  . D2 .  D2 . D2  . F2 .
-  track B3     G2 . G2  . G2 .  G2 . G2  . B2 .
+  track B3     G2 . G2  . G2 .  G2 . G2  . D3 .
   track B4     C1 . C1  . A1 .  G2 . G2  . G2 .
   track END    C1 . .  . . .  . . .  . . .
 
