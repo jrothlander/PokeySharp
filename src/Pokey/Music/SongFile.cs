@@ -209,13 +209,22 @@ public static class SongFile
                     tune.Ends = true;
                     break;
 
+                // A line, or one switched off with "skip" - kept in the order list, jumped over
+                // when played. A track named with "~" in front is switched off on that line:
+                // kept, and silent. See Tune.Line(string[], bool, bool[]).
                 case "line":
+                case "skip":
                     CloseChannel();
                     if (tokens.Count - 1 > PokeyChip.Channels) { Problem($"A LINE HAS {PokeyChip.Channels} TRACKS AT MOST"); break; }
                     var tracks = new string[PokeyChip.Channels];
+                    var off = new bool[PokeyChip.Channels];
                     for (int c = 1; c < tokens.Count; c++)
-                        tracks[c - 1] = tokens[c].Text == "." ? null : tokens[c].Text;
-                    tune.Line(tracks);
+                    {
+                        string name = tokens[c].Text;
+                        if (name.Length > 1 && name[0] == '~') { off[c - 1] = true; name = name.Substring(1); }
+                        tracks[c - 1] = name == "." ? null : name;
+                    }
+                    tune.Line(tracks, skip: tokens[0].Text.Equals("skip", StringComparison.OrdinalIgnoreCase), off);
                     break;
 
                 default:
@@ -610,8 +619,9 @@ public static class SongFile
             if (tune.AudctlAt(l) != audctl) Line($"audctl ${(audctl = tune.AudctlAt(l)):X2}");
             first = false;
 
-            var tracks = Enumerable.Range(0, tune.Parts.Length).Select(c => tune.TrackAt(c, l) ?? ".");
-            Line($"line   {string.Join(' ', tracks.Select(t => t.PadRight(6))).TrimEnd()}");
+            var tracks = Enumerable.Range(0, tune.Parts.Length)
+                                   .Select(c => tune.TrackAt(c, l) is string t ? (tune.IsOff(c, l) ? "~" + t : t) : ".");
+            Line($"{(tune.Plays(l) ? "line" : "skip")}   {string.Join(' ', tracks.Select(t => t.PadRight(6))).TrimEnd()}");
         }
 
         if (tune.Ends) Line("end");

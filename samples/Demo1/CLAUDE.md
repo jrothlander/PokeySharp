@@ -299,6 +299,8 @@ speed  7                          # frames a row, for the lines that follow
 audctl $00                        # decimal, $hex or 0xhex, for the lines that follow
 section SOLO                      # a name for the lines that follow; bare to clear it
 line   INTRO DM . .               # the order list: a track per channel, '.' for none
+skip   INTRO DM . .               # a line switched off: kept, jumped over when played
+line   INTRO ~DM . .              # '~': that channel switched off on this line, its track kept
 loop                              # the song returns to the next line after its last
 end                               # or: play once and stop - a jingle; no loop then
 ```

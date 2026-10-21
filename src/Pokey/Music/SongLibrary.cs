@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Pokey;
 
 namespace Pokey.Music;
@@ -390,7 +391,7 @@ public sealed class Tune
     }
 
     /// <summary>One line of the order list, with the settings in force when it was added.</summary>
-    private readonly record struct OrderLine(string[] Tracks, int FramesPerRow, int Audctl, string Section);
+    private readonly record struct OrderLine(string[] Tracks, int FramesPerRow, int Audctl, string Section, bool Skip = false, bool[] Off = null);
 
     private readonly List<OrderLine> _order = new();
     private readonly List<string> _problems = new();
@@ -413,7 +414,7 @@ public sealed class Tune
     /// number of them.
     ///
     /// <b>Settable mid-song, like a tracker's speed command</b> — a line keeps whatever was
-    /// in force when it was added, so changing this between <see cref="Line"/> calls is a
+    /// in force when it was added, so changing this between <see cref="Line(string[])"/> calls is a
     /// tempo change at that point in the song.
     /// </summary>
     public int FramesPerRow { get; set; }
@@ -560,14 +561,27 @@ public sealed class Tune
 
     /// <summary>One line of the order list: a track name per channel, or null for
     /// silence. It takes the tempo, AUDCTL and section in force now.</summary>
-    public Tune Line(params string[] tracks)
+    public Tune Line(params string[] tracks) => Line(tracks, skip: false, off: null);
+
+    /// <summary>
+    /// One line of the order list that may be switched off, whole or a channel at a time -
+    /// what a song file says with <c>skip</c> in place of <c>line</c>, and <c>~</c> before a
+    /// track name.
+    ///
+    /// <b>Switched off, not removed.</b> A skipped line stays in the order list - an editor
+    /// counts it, shows it, and can switch it back on - and the driver jumps over it, as the
+    /// exports do through <see cref="Heard"/>. A channel switched off keeps its track, so the
+    /// notes can still be seen and edited, and is silent on that line. It is how an
+    /// arrangement is tried: a section out, an instrument out, and back again, losing nothing.
+    /// </summary>
+    public Tune Line(string[] tracks, bool skip, bool[] off)
     {
         for (int c = 0; c < tracks.Length && c < Parts.Length; c++)
         {
             if (tracks[c] != null && !Parts[c].Tracks.ContainsKey(tracks[c]))
                 _problems.Add($"LINE {_order.Count + 1}: {Parts[c].Role} HAS NO TRACK {tracks[c]}");
         }
-        _order.Add(new OrderLine(tracks, FramesPerRow, Audctl, Section));
+        _order.Add(new OrderLine(tracks, FramesPerRow, Audctl, Section, skip, off != null && off.Any(o => o) ? off : null));
         return this;
     }
 
@@ -575,6 +589,60 @@ public sealed class Tune
     {
         var tracks = _order[line].Tracks;
         return channel < tracks.Length ? tracks[channel] : null;
+    }
+
+    /// <summary>Whether a line is played - false for one switched off with <c>skip</c>.</summary>
+    public bool Plays(int line) => !_order[line].Skip;
+
+    /// <summary>Whether a channel is switched off on a line (<c>~</c> before its track).</summary>
+    public bool IsOff(int channel, int line)
+    {
+        var off = _order[line].Off;
+        return off != null && channel < off.Length && off[channel];
+    }
+
+    /// <summary>The first line from <paramref name="line"/> on that plays, or -1.</summary>
+    public int NextPlaying(int line)
+    {
+        for (int l = Math.Max(0, line); l < _order.Count; l++) if (!_order[l].Skip) return l;
+        return -1;
+    }
+
+    /// <summary>What a channel sounds like on one row: <see cref="CellAt"/>, but silent where
+    /// the channel is switched off on that line. What the driver plays; an editor showing the
+    /// track uses <see cref="CellAt"/>.</summary>
+    public Cell HeardAt(int channel, int line, int row)
+        => IsOff(channel, line) ? (row == 0 ? Cell.Off : Cell.Empty) : CellAt(channel, line, row);
+
+    /// <summary>
+    /// The song as it is heard: the lines that play, in order, with every switched-off
+    /// channel silent and the loop on the first line that plays from the loop line on. Itself
+    /// when nothing is switched off. What an export writes, so that a file of the song says
+    /// what the speaker said; the parts are shared, not copied.
+    /// </summary>
+    public Tune Heard()
+    {
+        if (_order.All(o => !o.Skip && o.Off == null)) return this;
+
+        var heard = new Tune(Name, Key, FramesPerRow)
+        {
+            Source = Source, Ends = Ends, Audctl = Audctl, Section = Section,
+            RowsPerLine = RowsPerLine, RowsPerBeat = RowsPerBeat, Instruments = Instruments,
+        };
+        for (int c = 0; c < Parts.Length; c++) heard.Parts[c] = Parts[c];
+        heard._problems.AddRange(_problems);
+
+        int loop = -1;
+        for (int l = 0; l < _order.Count; l++)
+        {
+            var o = _order[l];
+            if (o.Skip) continue;
+            if (loop < 0 && l >= LoopLine) loop = heard._order.Count;
+            var tracks = o.Tracks.Select((t, c) => IsOff(c, l) ? null : t).ToArray();
+            heard._order.Add(new OrderLine(tracks, o.FramesPerRow, o.Audctl, o.Section, false, null));
+        }
+        heard.LoopLine = loop < 0 ? 0 : loop;
+        return heard;
     }
 
     /// <summary>What a channel does on one row. A silent line is a note-off on its first

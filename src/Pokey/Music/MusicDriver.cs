@@ -283,9 +283,32 @@ public sealed class MusicDriver
 
         var tune = _playing;
 
+        // A line switched off ("skip") is jumped over, however it was reached - stepping on,
+        // looping, a seek, or an edit switching off the line being played: on to the next line
+        // that plays, round to the loop if the rest are off, and to the end of a song that
+        // ends - or of one with nothing left to play at all.
+        if (!_ended && tune.Lines > 0 && !tune.Plays(_line))
+        {
+            int next = tune.NextPlaying(_line);
+            if (next < 0 && !tune.Ends) next = tune.NextPlaying(tune.LoopLine);
+            if (next < 0 && !tune.Ends) next = tune.NextPlaying(0);
+            if (next < 0)
+            {
+                _ended = true;
+                _row = tune.RowsPerLine - 1;
+                foreach (var channel in _channels) channel.Released = true;
+            }
+            else
+            {
+                _line = next;
+                _row = _frameInRow = 0;
+            }
+        }
+
         if (_frameInRow == 0 && !_ended)
         {
-            for (int c = 0; c < Channels; c++) Trigger(_channels[c], tune.CellAt(c, _line, _row));
+            // HeardAt: a channel switched off on this line is silent.
+            for (int c = 0; c < Channels; c++) Trigger(_channels[c], tune.HeardAt(c, _line, _row));
         }
 
         var frame = _history[_historyNext];

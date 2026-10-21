@@ -103,6 +103,7 @@ public static class MidiFile
     public static byte[] Write(Tune tune, Options options = null)
     {
         options ??= new Options();
+        tune = tune.Heard();   // lines and channels switched off are not in the file
         if (tune.Lines == 0) throw new ArgumentException("The song has no lines to play.", nameof(tune));
 
         int rows = tune.RowsPerLine, perBeat = Math.Max(1, tune.RowsPerBeat);

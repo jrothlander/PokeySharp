@@ -108,6 +108,7 @@ public sealed class SongExport
     public static SongExport Render(Tune tune, Action<double> progress = null, CancellationToken cancel = default,
                                     bool loop = true, bool full = false)
     {
+        tune = tune.Heard();   // lines and channels switched off are not in the files
         if (tune.Lines == 0) throw new ArgumentException("The song has no lines to play.", nameof(tune));
 
         if (tune.Ends) return new SongExport { Once = RenderToEnd(tune, progress, cancel) };
@@ -163,6 +164,7 @@ public sealed class SongExport
     /// has been rendered.</summary>
     public static (double Intro, double Loop) Seconds(Tune tune)
     {
+        tune = tune.Heard();
         double intro = 0, loop = 0;
         for (int line = 0; line < tune.Lines; line++)
         {

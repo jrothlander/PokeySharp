@@ -211,11 +211,18 @@ line   FILL   DM     A1     PAD
 | Instruction | Takes | What it does |
 |---|---|---|
 | `line` | up to 4 track names | One line of the song: a track per channel, `.` for a channel that rests. |
+| `skip` | the same as `line` | A line switched **off**: kept in the song, jumped over when it plays and left out of exports. Change it back to `line` to switch it on. |
 | `speed` | 1–60 | Frames per row — the tempo. Applies to the lines that follow it. Default 6. |
 | `audctl` | a byte: `40`, `$28` or `0x28` | The chip's control register, for the lines that follow. |
 | `section` | the rest of the line | A name for the lines that follow, shown in the tracker. Bare `section` clears it. |
 | `loop` | — | The song returns to the **next** line. |
 | `end` | — | Play once and stop. |
+
+**Switching parts off.** To try an arrangement without deleting anything, write `skip` in
+place of `line` for a line to leave out, or put `~` in front of a track name - `line   BEAT
+DM     ~A1    DM` - to silence that channel on that line while keeping its track. PokeyTracker
+does both from the order list's right-click menu (**Switch off or on**), a line, a section or
+a channel at a time, and shows what is off struck through.
 
 `speed`, `audctl` and `section` are placed *between* lines exactly where they take effect,
 which is why they sit in this region rather than in the header.
