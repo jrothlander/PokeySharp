@@ -4,8 +4,10 @@
 # Every track is Rim Patrol's own except HATS and PRE2. Its intro was already a
 # drums-and-bass groove; its whole A phrase (four bars) is the riff; phrase B is the verse;
 # phrase C the chorus. The pre-chorus resolves the verse's last chord (A) to Dm with the
-# riff's first bar, then builds back to A with PRE2 - A4 ending on G5, the seventh, which
-# steps down into the chorus's F5 over Bb: V to VI, the deceptive move that lifts it.
+# riff's first bar, then answers it over A with PRE2 - the same shape (a held note, a drop,
+# a climb) a half step lower, a sequence, ending on G5, the seventh, which steps down into
+# the chorus's F5 over Bb: V to VI, the deceptive move that lifts it. A held C#5 there once
+# sounded like the riff stopping short.
 # It began on F once, the third chord of the loop, and sounded like the middle of
 # something - after A the ear wants Dm. PRE2 and HATS are the only new tracks.
 # The original is songs/rim-patrol.song, unchanged.
@@ -113,7 +115,7 @@ channel 3 notes LEAD
   track C2 A5 . . .  . . . .  G5 . F5 .  E5 . C5 .
   track C3 E5 . . .  C#5 . . .  A4 . C#5 .  E5 . . .
   track C4 D5 . . .  . . . .  . . . .  - . . .
-  track PRE2 C#5 . . .  . . . .  E5 . . .  G5 . . .
+  track PRE2 C#5 . . .  A4 . C#5 .  E5 . . .  G5 . . .
 
 channel 4 notes CHORDS
   note  One channel cannot play three notes, so it plays each for one frame in turn. Sixty
