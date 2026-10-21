@@ -1,9 +1,11 @@
 # RIM PATROL - a song for Demo1's song page and tools/soundexport.
 # RIM PATROL, RIFF-POP - Rim Patrol rearranged into the pop-with-a-riff form, as an experiment:
 # groove, riff, verse, pre-chorus, chorus, riff, verse, pre-chorus, chorus, break, chorus.
-# Every track is Rim Patrol's own except HATS (the break's beat). Its intro was already a
-# drums-and-bass groove; the first two bars of its A phrase serve as the riff; phrase B is the
-# verse; A's last two bars, ending on the A chord, the pre-chorus; phrase C the chorus.
+# Every track is Rim Patrol's own except HATS, PRE1 and PRE2. Its intro was already a
+# drums-and-bass groove; its whole A phrase (four bars) is the riff; phrase B is the verse;
+# phrase C the chorus. The pre-chorus is A's last two bars made to flow: PRE1 runs up from
+# the root (F4 A4 C5) instead of starting mid-run, and PRE2 ends on G5, the A chord's
+# seventh, stepping down into the chorus's F5. PRE1 and PRE2 are new; so is HATS.
 # The original is songs/rim-patrol.song, unchanged.
 #
 # The format is in Demo1/CLAUDE.md, under "Song files". Instruments are tables with
@@ -109,6 +111,8 @@ channel 3 notes LEAD
   track C2 A5 . . .  . . . .  G5 . F5 .  E5 . C5 .
   track C3 E5 . . .  C#5 . . .  A4 . C#5 .  E5 . . .
   track C4 D5 . . .  . . . .  . . . .  - . . .
+  track PRE1 F4 . A4 .  C5 . A4 .  C5 . F5 .  E5 . C5 .
+  track PRE2 C#5 . . .  . . . .  E5 . . .  G5 . . .
 
 channel 4 notes CHORDS
   note  One channel cannot play three notes, so it plays each for one frame in turn. Sixty
@@ -128,7 +132,9 @@ line   INTRO  DM     .      .
 line   INTRO  BB     .      .
 section RIFF
 line   DRIVE  DM     A1     DM
-line   FILL   BB     A2     BB
+line   DRIVE  BB     A2     BB
+line   DRIVE  F      A3     F
+line   FILL   A      A4     A
 section VERSE
 loop
 line   BEAT   DM     B1     DM
@@ -136,8 +142,8 @@ line   BEAT   BB     B2     BB
 line   BEAT   F      B3     F
 line   FILL   A      B4     A
 section PRE
-line   DRIVE  F      A3     F
-line   FILL   A      A4     A
+line   DRIVE  F      PRE1   F
+line   FILL   A      PRE2   A
 section CHORUS
 line   DRIVE  BB     C1     BB
 line   DRIVE  F      C2     F
@@ -145,15 +151,17 @@ line   DRIVE  A      C3     A
 line   FILL   DM     C4     DM
 section RIFF
 line   DRIVE  DM     A1     DM
-line   FILL   BB     A2     BB
+line   DRIVE  BB     A2     BB
+line   DRIVE  F      A3     F
+line   FILL   A      A4     A
 section VERSE
 line   BEAT   DM     B1     DM
 line   BEAT   BB     B2     BB
 line   BEAT   F      B3     F
 line   FILL   A      B4     A
 section PRE
-line   DRIVE  F      A3     F
-line   FILL   A      A4     A
+line   DRIVE  F      PRE1   F
+line   FILL   A      PRE2   A
 section CHORUS
 line   DRIVE  BB     C1     BB
 line   DRIVE  F      C2     F
