@@ -1,0 +1,204 @@
+# POWER BALLAD SOLO SKELETON
+# A skeleton in a common early-1990s power-ballad form: a soft intro, a hushed first verse with
+# no drums, the band arriving in the second, the chorus, verse and chorus again, a bridge, an
+# instrumental SOLO, then the chorus twice to finish - no pre-chorus. Key, chords and tempo are
+# this skeleton's own (C major, I - IV - vi - V, chorus vi - IV - I - V, slow), not any song's.
+# Channel 3 is empty: your verse in A, your chorus in B, and in SOLO a lead line of your own in
+# place of the melody. Each plays wherever its section comes back.
+#
+# A starting point made by PokeyTracker's New song window, by rule: each section's beat, bass
+# and accompaniment worked out from the key, the chords and the band chosen. The tune is yours.
+# Chords: I IV vi V:  C F Am G; in B, vi IV I V:  Am F C G.
+# The format is in Demo1/CLAUDE.md, under "Song files".
+
+song   POWER BALLAD SOLO SKELETON
+key    C MAJOR
+
+# A soft, round bass: the pure tone, plucked and fading - no buzz, one channel, every note
+# in tune from C3 up.
+instrument SOFTBASS
+  table      tone
+  volume     12 11 10 9 9 8 8 7 7 6 6 5 5 4
+  distortion tone
+  release    2
+
+# A plain square wave, for a tune.
+instrument LEAD
+  table      tone
+  volume     12 11 10 10 9
+  distortion tone
+  release    2
+
+# Soft keys for an accompaniment: struck, then falling away.
+instrument KEYS
+  table      tone
+  volume     11 10 9 8 8 7 7 6 6 5 5 4
+  distortion tone
+  release    3
+
+# Four drums: a falling thump, a burst of noise, and a short and a long hiss. Each is a
+# table of registers a frame at a time, with no note table, so a key only says which drum.
+instrument KICK
+  table      none
+  volume     15 13 10 7 4 2 0
+  distortion buzz
+  audf       40 55 70 85 100 115 130
+
+instrument SNARE
+  table      none
+  volume     13 11 9 7 5 4 3 2 1 0
+  distortion tone noise
+  audf       50 8 9 10 11 12 13
+
+instrument HAT
+  table      none
+  volume     8 5 3 1 0
+  distortion noise
+  audf       2
+
+instrument OPEN
+  table      none
+  volume     8 7 6 5 4 3 2 2 1 1 0
+  distortion noise
+  audf       1
+
+channel 1 drums DRUMS
+  kit   K=KICK S=SNARE H=HAT O=OPEN
+  track INTRO K . H .  H . H .  S . H .  H . H .
+  track INTRO2 K . H .  S . H .  K . S .  S S S S
+  track A      K . H .  S . H .  K . K .  S . H .
+  track A2     K . H .  S . H .  K . S .  S S S S
+  track B      K . O .  K . O .  K . O .  K . O .
+  track B2     S . S .  S . S .  S S S S  S S S S
+  track BRIDGE K . H .  H . H .  S . H .  H . H .
+  track BRIDGE2 K . H .  S . H .  S . S S  S S S S
+  track SOLO    K . H .  S . H .  K . K .  S . H .
+  track SOLO2   S . S .  S . S .  S S S S  S S S S
+  track END     O . . .  . . . .  . . . .  . . . .
+
+channel 2 notes BASS
+  note  Each section's own bass line, on the chords' roots.
+  voice SOFTBASS
+  track INTRO C3 . . .  . . . .  E3 . . .  . . . .
+  track INTRO2 F3 . . .  . . . .  G3 . . .  . . . .
+  track QUIET  C3 . . .  . . . .  . . . .  . . . .
+  track QUIET2 F3 . . .  . . . .  . . . .  . . . .
+  track QUIET3 A3 . . .  . . . .  . . . .  . . . .
+  track QUIET4 G3 . . .  . . . .  . . . .  . . . .
+  track A      C3 . . .  G3 . . .  C3 . . .  E3 . . .
+  track A2     F3 . . .  C4 . . .  F3 . . .  G3 . . .
+  track A3     A3 . . .  E4 . . .  A3 . . .  E4 . . .
+  track A4     G3 . . .  D4 . . .  G3 . . .  B3 . . .
+  track B      A3 . A4 .  A3 . A4 .  A3 . A4 .  A3 . G3 .
+  track B2     F3 . F4 .  F3 . F4 .  F3 . F4 .  F3 . D3 .
+  track B3     C4 . C5 .  C4 . C5 .  C4 . C5 .  C4 . A3 .
+  track B4     G3 . G4 .  G3 . G4 .  G3 . G4 .  G3 . G4 .
+  track BRIDGE C3 . . .  . . . .  . . . .  . . . .
+  track BRIDGE2 F3 . . .  . . . .  . . . .  . . . .
+  track SOLO    C3 . C4 .  C3 . C4 .  C3 . C4 .  C3 . E3 .
+  track SOLO2   F3 . F4 .  F3 . F4 .  F3 . F4 .  F3 . G3 .
+  track SOLO3   A3 . A4 .  A3 . A4 .  A3 . A4 .  A3 . A4 .
+  track SOLO4   G3 . G4 .  G3 . G4 .  G3 . G4 .  G3 . B3 .
+  track END     C3 . . .  . . . .  . . . .  . . . .
+
+channel 3 notes LEAD
+  note  Empty: the tune is yours.
+  voice LEAD
+  track INTRO . . . .  . . . .  . . . .  . . . .
+  track INTRO2 . . . .  . . . .  . . . .  . . . .
+  track QUIET  . . . .  . . . .  . . . .  . . . .
+  track QUIET2 . . . .  . . . .  . . . .  . . . .
+  track QUIET3 . . . .  . . . .  . . . .  . . . .
+  track QUIET4 . . . .  . . . .  . . . .  . . . .
+  track A      . . . .  . . . .  . . . .  . . . .
+  track A2     . . . .  . . . .  . . . .  . . . .
+  track A3     . . . .  . . . .  . . . .  . . . .
+  track A4     . . . .  . . . .  . . . .  . . . .
+  track B      . . . .  . . . .  . . . .  . . . .
+  track B2     . . . .  . . . .  . . . .  . . . .
+  track B3     . . . .  . . . .  . . . .  . . . .
+  track B4     . . . .  . . . .  . . . .  . . . .
+  track BRIDGE . . . .  . . . .  . . . .  . . . .
+  track BRIDGE2 . . . .  . . . .  . . . .  . . . .
+  track SOLO    . . . .  . . . .  . . . .  . . . .
+  track SOLO2   . . . .  . . . .  . . . .  . . . .
+  track SOLO3   . . . .  . . . .  . . . .  . . . .
+  track SOLO4   . . . .  . . . .  . . . .  . . . .
+  track END     . . . .  . . . .  . . . .  . . . .
+
+channel 4 notes PATTERN
+  note  Broken chord, up and back, on each chord.
+  voice KEYS
+  track INTRO C4 . E4 .  G4 . C5 .  E5 . C5 .  G4 . E4 .
+  track INTRO2 F3 . A3 .  C4 . F4 .  B4 . G4 .  D4 . B3 .
+  track QUIET  C4 . E4 .  G4 . C5 .  E5 . C5 .  G4 . E4 .
+  track QUIET2 F3 . A3 .  C4 . F4 .  A4 . F4 .  C4 . A3 .
+  track QUIET3 A3 . C4 .  E4 . A4 .  C5 . A4 .  E4 . C4 .
+  track QUIET4 G3 . B3 .  D4 . G4 .  B4 . G4 .  D4 . B3 .
+  track A      C4 . E4 .  G4 . C5 .  E5 . C5 .  G4 . E4 .
+  track A2     F3 . A3 .  C4 . F4 .  A4 . F4 .  C4 . A3 .
+  track A3     A3 . C4 .  E4 . A4 .  C5 . A4 .  E4 . C4 .
+  track A4     G3 . B3 .  D4 . G4 .  B4 . G4 .  D4 . B3 .
+  track B      A3 . E4 .  A4 . B4 .  C5 . B4 .  A4 . E4 .
+  track B2     F3 . C4 .  F4 . G4 .  A4 . G4 .  F4 . C4 .
+  track B3     C4 . G4 .  C5 . D5 .  E5 . D5 .  C5 . G4 .
+  track B4     G3 . D4 .  G4 . A4 .  B4 . A4 .  G4 . D4 .
+  track BRIDGE C4 . E4 .  G4 . C5 .  E5 . C5 .  G4 . E4 .
+  track BRIDGE2 F3 . A3 .  C4 . F4 .  B4 . G4 .  D4 . B3 .
+  track SOLO    C4 . E4 .  G4 . C5 .  E5 . C5 .  G4 . E4 .
+  track SOLO2   F3 . A3 .  C4 . F4 .  A4 . F4 .  C4 . A3 .
+  track SOLO3   A3 . C4 .  E4 . A4 .  C5 . A4 .  E4 . C4 .
+  track SOLO4   G3 . B3 .  D4 . G4 .  B4 . G4 .  D4 . B3 .
+  track END     C4 . . .  . . . .  . . . .  . . . .
+
+# The order list: a section at a time.
+speed  13
+section INTRO
+line   INTRO  INTRO  INTRO  INTRO
+line   INTRO2  INTRO2  INTRO2  INTRO2
+section QUIET
+line   .  QUIET  QUIET  QUIET
+line   .  QUIET2  QUIET2  QUIET2
+line   .  QUIET3  QUIET3  QUIET3
+line   .  QUIET4  QUIET4  QUIET4
+section A
+line   A  A  A  A
+line   A  A2  A2 A2
+line   A  A3  A3 A3
+line   A2  A4  A4 A4
+section B
+line   B  B  B  B
+line   B  B2  B2 B2
+line   B  B3  B3 B3
+line   B2  B4  B4 B4
+section A
+line   A  A  A  A
+line   A  A2  A2 A2
+line   A  A3  A3 A3
+line   A2  A4  A4 A4
+section B
+line   B  B  B  B
+line   B  B2  B2 B2
+line   B  B3  B3 B3
+line   B2  B4  B4 B4
+section BRIDGE
+line   BRIDGE  BRIDGE  BRIDGE  BRIDGE
+line   BRIDGE2  BRIDGE2  BRIDGE2  BRIDGE2
+section SOLO
+line   SOLO  SOLO  SOLO  SOLO
+line   SOLO  SOLO2  SOLO2  SOLO2
+line   SOLO  SOLO3  SOLO3  SOLO3
+line   SOLO2  SOLO4  SOLO4  SOLO4
+section B
+line   B  B  B  B
+line   B  B2  B2 B2
+line   B  B3  B3 B3
+line   B2  B4  B4 B4
+section B
+line   B  B  B  B
+line   B  B2  B2 B2
+line   B  B3  B3 B3
+line   B2  B4  B4 B4
+section END
+line   END  END  END  END
+end
