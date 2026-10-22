@@ -1,20 +1,21 @@
 # ANTHEM SKELETON
 # A skeleton in a common musical-theatre anthem form: a quiet verse with no drums, a second
 # verse, a pre-chorus building, a chorus bursting out; the quiet verse again, the pre-chorus,
-# the chorus; a bridge and a build to the peak; the last choruses a whole step higher (C to D);
-# an ending. Its story is told in the chords: the verses start on the minor chord (vi - IV - I
-# - V) and sound held back, the chorus starts on the home chord (I - V - vi - IV) and opens up.
-# Key, chords and tempo are this skeleton's own, not any song's; nothing of any song's music is
+# the chorus; a bridge and a build to the peak; the last choruses a whole step higher (A flat
+# to B flat); an ending. Its story is told in the chords: the verses start on the minor chord
+# (vi - IV - I - V: F minor) and sound held back, the chorus on the home chord (I - V - vi - IV:
+# A flat) and opens up. In A flat major, the key the original is in; the chords are generic.
+# Chords and tempo are this skeleton's own, not any song's; nothing of any song's music is
 # here. Channel 3 is empty: keep the verse low and close, climb in the pre-chorus, and let the
 # chorus melody reach its highest notes - then the lifted choruses take it higher still.
 #
 # A starting point made by PokeyTracker's New song window, by rule: each section's beat, bass
 # and accompaniment worked out from the key, the chords and the band chosen. The tune is yours.
-# Chords: vi IV I V:  Am F C G; in B, I V vi IV:  C G Am F.
+# Chords: vi IV I V:  Fm Db Ab Eb; in B, I V vi IV:  Ab Eb Fm Db.
 # The format is in Demo1/CLAUDE.md, under "Song files".
 
 song   ANTHEM SKELETON
-key    C MAJOR
+key    A FLAT MAJOR
 
 # A soft, round bass: the pure tone, plucked and fading - no buzz, one channel, every note
 # in tune from C3 up.
@@ -83,29 +84,29 @@ channel 1 drums DRUMS
 channel 2 notes BASS
   note  Each section's own bass line, on the chords' roots.
   voice SOFTBASS
-  track QUIET A3 . . .  . . . .  . . . .  . . . .
-  track QUIET2 F3 . . .  . . . .  . . . .  . . . .
-  track QUIET3 C3 . . .  . . . .  . . . .  . . . .
-  track QUIET4 G3 . . .  . . . .  . . . .  . . . .
-  track A      A3 . . .  E4 . . .  A3 . . .  G3 . . .
-  track A2     F3 . . .  C4 . . .  F3 . . .  D3 . . .
-  track A3     C4 . . .  G4 . . .  C4 . . .  A3 . . .
-  track A4     G3 . . .  D4 . . .  G3 . . .  D4 . . .
-  track PRE    A3 . A4 .  A3 . A4 .  A3 . A4 .  A3 . G3 .
-  track PRE2   F3 . F4 .  F3 . F4 .  G3 . G4 .  G3 . G4 .
-  track B      C4 . C5 .  C4 . C5 .  C4 . C5 .  C4 . A3 .
-  track B2     G3 . G4 .  G3 . G4 .  G3 . G4 .  G3 . G4 .
-  track B3     A3 . A4 .  A3 . A4 .  A3 . A4 .  A3 . G3 .
-  track B4     F3 . F4 .  F3 . F4 .  G3 . G4 .  G3 . B3 .
-  track BRIDGE A3 . . .  . . . .  . . . .  . . . .
-  track BRIDGE2 F3 . . .  . . . .  . . . .  . . . .
-  track BUILD   A3 . A4 .  A3 . A4 .  A3 . A4 .  A3 . G3 .
-  track BUILD2  F3 . F4 .  F3 . F4 .  G3 . G4 .  G3 . G4 .
-  track LIFT    D3 . D4 .  D3 . D4 .  D3 . D4 .  D3 . B2 .
-  track LIFT2   A3 . A4 .  A3 . A4 .  A3 . A4 .  A3 . A4 .
-  track LIFT3   B3 . B4 .  B3 . B4 .  B3 . B4 .  B3 . A3 .
-  track LIFT4   G3 . G4 .  G3 . G4 .  A3 . A4 .  A3 . C#4 .
-  track ENDUP   D3 . . .  . . . .  . . . .  . . . .
+  track QUIET F3 . . .  . . . .  . . . .  . . . .
+  track QUIET2 Db3 . . .  . . . .  . . . .  . . . .
+  track QUIET3 Ab3 . . .  . . . .  . . . .  . . . .
+  track QUIET4 Eb3 . . .  . . . .  . . . .  . . . .
+  track A      F3 . . .  C4 . . .  F3 . . .  Eb3 . . .
+  track A2     Db4 . . .  Ab4 . . .  Db4 . . .  Bb3 . . .
+  track A3     Ab3 . . .  Eb4 . . .  Ab3 . . .  F3 . . .
+  track A4     Eb3 . . .  Bb3 . . .  Eb3 . . .  Bb3 . . .
+  track PRE    F3 . F4 .  F3 . F4 .  F3 . F4 .  F3 . Eb3 .
+  track PRE2   Db3 . Db4 .  Db3 . Db4 .  Eb3 . Eb4 .  Eb3 . Eb4 .
+  track B      Ab3 . Ab4 .  Ab3 . Ab4 .  Ab3 . Ab4 .  Ab3 . F3 .
+  track B2     Eb3 . Eb4 .  Eb3 . Eb4 .  Eb3 . Eb4 .  Eb3 . Eb4 .
+  track B3     F3 . F4 .  F3 . F4 .  F3 . F4 .  F3 . Eb3 .
+  track B4     Db3 . Db4 .  Db3 . Db4 .  Eb3 . Eb4 .  Eb3 . G3 .
+  track BRIDGE F3 . . .  . . . .  . . . .  . . . .
+  track BRIDGE2 Db3 . . .  . . . .  . . . .  . . . .
+  track BUILD   F3 . F4 .  F3 . F4 .  F3 . F4 .  F3 . Eb3 .
+  track BUILD2  Db3 . Db4 .  Db3 . Db4 .  Eb3 . Eb4 .  Eb3 . Eb4 .
+  track LIFT    Bb3 . Bb4 .  Bb3 . Bb4 .  Bb3 . Bb4 .  Bb3 . G3 .
+  track LIFT2   F3 . F4 .  F3 . F4 .  F3 . F4 .  F3 . F4 .
+  track LIFT3   G3 . G4 .  G3 . G4 .  G3 . G4 .  G3 . F3 .
+  track LIFT4   Eb3 . Eb4 .  Eb3 . Eb4 .  F3 . F4 .  F3 . A3 .
+  track ENDUP   Bb3 . . .  . . . .  . . . .  . . . .
 
 channel 3 notes LEAD
   note  Empty: the tune is yours.
@@ -137,29 +138,29 @@ channel 3 notes LEAD
 channel 4 notes PATTERN
   note  Broken chord, up and back, on each chord.
   voice KEYS
-  track QUIET A3 . C4 .  E4 . A4 .  C5 . A4 .  E4 . C4 .
-  track QUIET2 F3 . A3 .  C4 . F4 .  A4 . F4 .  C4 . A3 .
-  track QUIET3 C4 . E4 .  G4 . C5 .  E5 . C5 .  G4 . E4 .
-  track QUIET4 G3 . B3 .  D4 . G4 .  B4 . G4 .  D4 . B3 .
-  track A      A3 . C4 .  E4 . A4 .  C5 . A4 .  E4 . C4 .
-  track A2     F3 . A3 .  C4 . F4 .  A4 . F4 .  C4 . A3 .
-  track A3     C4 . E4 .  G4 . C5 .  E5 . C5 .  G4 . E4 .
-  track A4     G3 . B3 .  D4 . G4 .  B4 . G4 .  D4 . B3 .
-  track PRE    A3 . C4 .  E4 . A4 .  C5 . A4 .  E4 . C4 .
-  track PRE2   F3 . A3 .  C4 . F4 .  B4 . G4 .  D4 . B3 .
-  track B      C . . .  C . . .  C . . .  C . . .
-  track B2     G . . .  G . . .  G . . .  G . . .
-  track B3     Am . . .  Am . . .  Am . . .  Am . . .
-  track B4     F . . .  F . . .  G . . .  G . . .
-  track BRIDGE A3 . C4 .  E4 . A4 .  C5 . A4 .  E4 . C4 .
-  track BRIDGE2 F3 . A3 .  C4 . F4 .  B4 . G4 .  D4 . B3 .
-  track BUILD   A3 . C4 .  E4 . A4 .  C5 . A4 .  E4 . C4 .
-  track BUILD2  F3 . A3 .  C4 . F4 .  B4 . G4 .  D4 . B3 .
-  track LIFT    D . . .  D . . .  D . . .  D . . .
-  track LIFT2   A . . .  A . . .  A . . .  A . . .
-  track LIFT3   Bm . . .  Bm . . .  Bm . . .  Bm . . .
-  track LIFT4   G . . .  G . . .  A . . .  A . . .
-  track ENDUP   D4 . . .  . . . .  . . . .  . . . .
+  track QUIET F3 . Ab3 .  C4 . F4 .  Ab4 . F4 .  C4 . Ab3 .
+  track QUIET2 Db3 . F3 .  Ab3 . Db4 .  F4 . Db4 .  Ab3 . F3 .
+  track QUIET3 Ab3 . C4 .  Eb4 . Ab4 .  C5 . Ab4 .  Eb4 . C4 .
+  track QUIET4 Eb3 . G3 .  Bb3 . Eb4 .  G4 . Eb4 .  Bb3 . G3 .
+  track A      F3 . Ab3 .  C4 . F4 .  Ab4 . F4 .  C4 . Ab3 .
+  track A2     Db3 . F3 .  Ab3 . Db4 .  F4 . Db4 .  Ab3 . F3 .
+  track A3     Ab3 . C4 .  Eb4 . Ab4 .  C5 . Ab4 .  Eb4 . C4 .
+  track A4     Eb3 . G3 .  Bb3 . Eb4 .  G4 . Eb4 .  Bb3 . G3 .
+  track PRE    F3 . Ab3 .  C4 . F4 .  Ab4 . F4 .  C4 . Ab3 .
+  track PRE2   Db3 . F3 .  Ab3 . Db4 .  G4 . Eb4 .  Bb3 . G3 .
+  track B      Ab . . .  Ab . . .  Ab . . .  Ab . . .
+  track B2     Eb . . .  Eb . . .  Eb . . .  Eb . . .
+  track B3     Fm . . .  Fm . . .  Fm . . .  Fm . . .
+  track B4     Db . . .  Db . . .  Eb . . .  Eb . . .
+  track BRIDGE F3 . Ab3 .  C4 . F4 .  Ab4 . F4 .  C4 . Ab3 .
+  track BRIDGE2 Db3 . F3 .  Ab3 . Db4 .  G4 . Eb4 .  Bb3 . G3 .
+  track BUILD   F3 . Ab3 .  C4 . F4 .  Ab4 . F4 .  C4 . Ab3 .
+  track BUILD2  Db3 . F3 .  Ab3 . Db4 .  G4 . Eb4 .  Bb3 . G3 .
+  track LIFT    Bb . . .  Bb . . .  Bb . . .  Bb . . .
+  track LIFT2   F . . .  F . . .  F . . .  F . . .
+  track LIFT3   Gm . . .  Gm . . .  Gm . . .  Gm . . .
+  track LIFT4   Eb . . .  Eb . . .  F . . .  F . . .
+  track ENDUP   Bb3 . . .  . . . .  . . . .  . . . .
 
 # The order list: a section at a time.
 speed  7
