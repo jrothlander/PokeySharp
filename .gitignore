@@ -20,3 +20,6 @@ Demo1/Content/obj/
 artifacts/
 *.nupkg
 *.snupkg
+
+# Piano SoundFonts: large, and each under its own licence - see soundfonts/README.md
+soundfonts/*.sf2

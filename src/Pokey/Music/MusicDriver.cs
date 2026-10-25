@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Pokey;
 
 namespace Pokey.Music;
@@ -94,6 +95,19 @@ public sealed class MusicDriver
 
         /// <summary>The instrument each channel is playing, or null.</summary>
         public readonly Instrument[] Instrument = new Instrument[Channels];
+
+        /// <summary>
+        /// The notes each channel is holding down on this frame - all of a chord, not the one
+        /// note of the arpeggio <see cref="Note"/> shows - and empty once a note is released,
+        /// has faded to nothing, is a drum, or is muted. With <see cref="Struck"/>, what another
+        /// voice needs to play the song's notes as a keyboard would: which keys are down, and
+        /// when each was pressed.
+        /// </summary>
+        public readonly int[][] Held = new int[Channels][];
+
+        /// <summary>Whether a note started on this channel this frame - a key pressed, even
+        /// the same key again.</summary>
+        public readonly bool[] Struck = new bool[Channels];
     }
 
     private readonly PokeyChip _chip = new() { BaseClockHz = PokeyClocks.Atari800NtscHz };
@@ -121,6 +135,12 @@ public sealed class MusicDriver
     /// <summary>A muted channel still runs — the driver keeps its place — but is written
     /// with volume zero, which is all muting ever was on this chip.</summary>
     public bool[] Muted { get; } = new bool[Channels];
+
+    /// <summary>A channel the chip leaves silent while it is still played: its notes are read,
+    /// stepped and reported in each frame's <see cref="Frame.Held"/> as usual, for another
+    /// voice - a sampled piano - to sound them instead. Unlike <see cref="Muted"/>, the
+    /// notes still count as played.</summary>
+    public bool[] Voiceless { get; } = new bool[Channels];
 
     /// <summary>
     /// Reads the row it is on once, then stays there: the notes play on by their own
@@ -389,6 +409,8 @@ public sealed class MusicDriver
         frame.Divider[c] = -1;
         frame.Note[c] = -1;
         frame.Instrument[c] = null;
+        frame.Held[c] = Array.Empty<int>();
+        frame.Struck[c] = false;
     }
 
     private static void Trigger(Channel channel, Cell cell)
@@ -427,11 +449,13 @@ public sealed class MusicDriver
 
         var instrument = channel.Instrument;
         int audf = 0, audc = 0, note = -1;
+        bool struck = false;
         bool wide = instrument?.Table?.Is16Bit == true;
 
         if (instrument != null)
         {
             int age = channel.Age++;
+            struck = age == 0 && !channel.Released;
 
             // A released note fades from wherever it had got to, rather than jumping to the
             // instrument's own tail: a note-off halfway through an attack should not get
@@ -455,7 +479,7 @@ public sealed class MusicDriver
                     audf += instrument.Vibrato[(age - instrument.VibratoDelay) % instrument.Vibrato.Length];
             }
 
-            int volume = Muted[c] ? 0 : channel.Volume;
+            int volume = Muted[c] || Voiceless[c] ? 0 : channel.Volume;
             audc = Instrument.At(instrument.Distortion, age) | volume;
             if (channel.Volume == 0) note = -1;
         }
@@ -480,10 +504,27 @@ public sealed class MusicDriver
         frame.Audc[c] = audc;
         frame.Note[c] = note;
         frame.Instrument[c] = channel.Volume > 0 ? instrument : null;
+
+        bool holding = instrument != null && instrument.Audf == null && !channel.Released && channel.Volume > 0 && !Muted[c];
+        frame.Held[c] = holding ? channel.Notes : Array.Empty<int>();
+        frame.Struck[c] = struck && holding;
     }
 
     /// <summary>The frame that was being played at <paramref name="sample"/>: the newest
     /// one that had started by then. Null before anything has been rendered.</summary>
+    /// <summary>The frames that started at or after <paramref name="sample"/>, oldest first,
+    /// into <paramref name="into"/> - for a voice following the driver block by block. The
+    /// frames are the driver's own and are reused: read them before rendering again.</summary>
+    public void FramesFrom(long sample, List<Frame> into)
+    {
+        into.Clear();
+        for (int i = _historyCount; i >= 1; i--)
+        {
+            var frame = _history[(_historyNext - i + _history.Length) % _history.Length];
+            if (frame.StartSample >= sample) into.Add(frame);
+        }
+    }
+
     public Frame At(long sample)
     {
         for (int i = 1; i <= _historyCount; i++)
