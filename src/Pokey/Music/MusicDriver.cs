@@ -105,8 +105,9 @@ public sealed class MusicDriver
         /// </summary>
         public readonly int[][] Held = new int[Channels][];
 
-        /// <summary>Whether a note started on this channel this frame - a key pressed, even
-        /// the same key again.</summary>
+        /// <summary>Whether a note or a drum started on this channel this frame - a key pressed,
+        /// even the same key again, or a drum hit, whose instrument is <see cref="Instrument"/>.
+        /// False on a muted channel.</summary>
         public readonly bool[] Struck = new bool[Channels];
     }
 
@@ -507,7 +508,7 @@ public sealed class MusicDriver
 
         bool holding = instrument != null && instrument.Audf == null && !channel.Released && channel.Volume > 0 && !Muted[c];
         frame.Held[c] = holding ? channel.Notes : Array.Empty<int>();
-        frame.Struck[c] = struck && holding;
+        frame.Struck[c] = struck && !Muted[c];
     }
 
     /// <summary>The frame that was being played at <paramref name="sample"/>: the newest
