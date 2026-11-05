@@ -1,0 +1,168 @@
+# MODERN COUNTRY SKELETON
+# A modern-country skeleton: the shape of a mid-2020s country chart-topper - a laid-back 4/4
+# groove at 112 BPM in D flat major, a story told in the verses over a two-chord sway (ii - I:
+# Ebm Db), and a chorus that lifts on IV - I - ii - V (Gb Db Ebm Ab). Straight-eighth drums, a
+# root-and-fifth bass, the guitar's part on keys: broken chords in the verses, chords on every
+# beat in the choruses. Intro, verse, chorus, verse, chorus, bridge, the chorus twice, an ending.
+# The bridge climbs IV - V - vi - V (Gb Ab Bbm Ab) before the last choruses.
+# The chords follow a published harmonic analysis, as triads; no melody, lyric or riff of any
+# song is here. Channel 3 is empty for your tune: a conversational verse, a chorus that rises.
+#
+# A starting point made by PokeyTracker's New song window, by rule: each section's beat, bass
+# and accompaniment worked out from the key, the chords and the band chosen. The tune is yours.
+# Chords: ii I ii I:  Ebm Db Ebm Db; in B, IV I ii V:  Gb Db Ebm Ab.
+# The format is in Demo1/CLAUDE.md, under "Song files".
+
+song   MODERN COUNTRY SKELETON
+key    D FLAT MAJOR
+
+# A soft, round bass: the pure tone, plucked and fading - no buzz, one channel, every note
+# in tune from C3 up.
+instrument SOFTBASS
+  table      tone
+  volume     12 11 10 9 9 8 8 7 7 6 6 5 5 4
+  distortion tone
+  release    2
+
+# A plain square wave, for a tune.
+instrument LEAD
+  table      tone
+  volume     12 11 10 10 9
+  distortion tone
+  release    2
+
+# Soft keys for an accompaniment: struck, then falling away.
+instrument KEYS
+  table      tone
+  volume     11 10 9 8 8 7 7 6 6 5 5 4
+  distortion tone
+  release    3
+
+# Four drums: a falling thump, a burst of noise, and a short and a long hiss. Each is a
+# table of registers a frame at a time, with no note table, so a key only says which drum.
+instrument KICK
+  table      none
+  volume     15 13 10 7 4 2 0
+  distortion buzz
+  audf       40 55 70 85 100 115 130
+
+instrument SNARE
+  table      none
+  volume     13 11 9 7 5 4 3 2 1 0
+  distortion tone noise
+  audf       50 8 9 10 11 12 13
+
+instrument HAT
+  table      none
+  volume     8 5 3 1 0
+  distortion noise
+  audf       2
+
+instrument OPEN
+  table      none
+  volume     8 7 6 5 4 3 2 2 1 1 0
+  distortion noise
+  audf       1
+
+channel 1 drums DRUMS
+  kit   K=KICK S=SNARE H=HAT O=OPEN
+  track INTRO K . H .  S . H .  K . H .  S . H .
+  track INTRO2 K . H .  S . H .  K . S .  S S S S
+  track A      K . H .  S . H .  K . H .  S . H .
+  track A2     K . H .  S . H .  K . S .  S S S S
+  track B      K . H .  S . H .  K . H .  S . H .
+  track B2     S . S .  S . S .  S S S S  S S S S
+  track BRIDGE K . H .  S . H .  K . H .  S . H .
+  track BRIDGE2 K . H .  S . H .  S . S S  S S S S
+  track END     O . . .  . . . .  . . . .  . . . .
+
+channel 2 notes BASS
+  note  Bass: root and fifth, on the chords' roots.
+  voice SOFTBASS
+  track INTRO Eb3 . . .  . . . .  Bb3 . . .  . . . .
+  track INTRO2 Db3 . . .  . . . .  Ab3 . . .  . . . .
+  track A      Eb3 . . .  Bb3 . . .  Eb3 . . .  Bb3 . . .
+  track A2     Db3 . . .  Ab3 . . .  Db3 . . .  Ab3 . . .
+  track A3     Db4 . . .  Bb3 . . .  Ab4 . . .  F4 . . .
+  track B      Gb3 . Db4 .  Gb3 . Db4 .  Gb3 . Db4 .  Gb3 . Eb3 .
+  track B2     Db3 . Ab3 .  Db3 . Ab3 .  Db3 . Ab3 .  Db3 . Ab3 .
+  track B3     Eb3 . Bb3 .  Eb3 . Bb3 .  Eb3 . Bb3 .  Eb3 . Gb3 .
+  track B4     Ab3 . Eb4 .  Ab3 . Eb4 .  Ab3 . Eb4 .  Ab3 . Eb4 .
+  track BRIDGE  Gb3 . . .  Db4 . . .  Ab3 . . .  Eb4 . . .
+  track BRIDGE2 Bb3 . . .  F4 . . .  Ab3 . . .  Eb4 . . .
+  track END     Db3 . . .  . . . .  . . . .  . . . .
+
+channel 3 notes LEAD
+  note  Empty: the tune is yours.
+  voice LEAD
+  track INTRO . . . .  . . . .  . . . .  . . . .
+  track INTRO2 . . . .  . . . .  . . . .  . . . .
+  track A      . . . .  . . . .  . . . .  . . . .
+  track A2     . . . .  . . . .  . . . .  . . . .
+  track A3     . . . .  . . . .  . . . .  . . . .
+  track A4     . . . .  . . . .  . . . .  . . . .
+  track B      . . . .  . . . .  . . . .  . . . .
+  track B2     . . . .  . . . .  . . . .  . . . .
+  track B3     . . . .  . . . .  . . . .  . . . .
+  track B4     . . . .  . . . .  . . . .  . . . .
+  track BRIDGE . . . .  . . . .  . . . .  . . . .
+  track BRIDGE2 . . . .  . . . .  . . . .  . . . .
+  track END     . . . .  . . . .  . . . .  . . . .
+
+channel 4 notes PATTERN
+  note  Broken chord, up and back, on each chord.
+  voice KEYS
+  track INTRO Eb4 . Gb4 .  Bb4 . Eb5 .  Gb5 . Eb5 .  Bb4 . Gb4 .
+  track INTRO2 Db4 . F4 .  Ab4 . Db5 .  C5 . Ab4 .  Eb4 . C4 .
+  track A      Eb4 . Gb4 .  Bb4 . Eb5 .  Gb5 . Eb5 .  Bb4 . Gb4 .
+  track A2     Db4 . F4 .  Ab4 . Db5 .  F5 . Db5 .  Ab4 . F4 .
+  track A3     Db4 . F4 .  Ab4 . Db5 .  C5 . Ab4 .  Eb4 . C4 .
+  track B      Gb . . .  Gb . . .  Gb . . .  Gb . . .
+  track B2     Db . . .  Db . . .  Db . . .  Db . . .
+  track B3     Ebm . . .  Ebm . . .  Ebm . . .  Ebm . . .
+  track B4     Ab . . .  Ab . . .  Ab . . .  Ab . . .
+  track BRIDGE  Gb4 . Bb4 .  Db5 . Bb4 .  Ab4 . C5 .  Eb5 . C5 .
+  track BRIDGE2 Bb4 . Db5 .  F5 . Db5 .  Ab4 . C5 .  Eb5 . C5 .
+  track END     Db4 . . .  . . . .  . . . .  . . . .
+
+# The order list: a section at a time.
+speed  8
+section INTRO
+line   INTRO  INTRO  INTRO  INTRO
+line   INTRO2  INTRO2  INTRO2  INTRO2
+section A
+line   A  A  A  A
+line   A  A2  A2 A2
+line   A  A  A3 A
+line   A2  A3  A4 A3
+section B
+line   B  B  B  B
+line   B  B2  B2 B2
+line   B  B3  B3 B3
+line   B2  B4  B4 B4
+section A
+line   A  A  A  A
+line   A  A2  A2 A2
+line   A  A  A3 A
+line   A2  A3  A4 A3
+section B
+line   B  B  B  B
+line   B  B2  B2 B2
+line   B  B3  B3 B3
+line   B2  B4  B4 B4
+section BRIDGE
+line   BRIDGE  BRIDGE  BRIDGE  BRIDGE
+line   BRIDGE2  BRIDGE2  BRIDGE2  BRIDGE2
+section B
+line   B  B  B  B
+line   B  B2  B2 B2
+line   B  B3  B3 B3
+line   B2  B4  B4 B4
+section B
+line   B  B  B  B
+line   B  B2  B2 B2
+line   B  B3  B3 B3
+line   B2  B4  B4 B4
+section END
+line   END  END  END  END
+end
