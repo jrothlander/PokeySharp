@@ -442,7 +442,7 @@ public sealed class Tune
     }
 
     /// <summary>One line of the order list, with the settings in force when it was added.</summary>
-    private readonly record struct OrderLine(string[] Tracks, int FramesPerRow, int Audctl, string Section, bool Skip = false, bool[] Off = null);
+    private readonly record struct OrderLine(string[] Tracks, int FramesPerRow, int Audctl, string Section, bool Skip = false, bool[] Off = null, string Role = null);
 
     private readonly List<OrderLine> _order = new();
     private readonly List<string> _problems = new();
@@ -495,6 +495,29 @@ public sealed class Tune
     /// page header in place of the key. Null for a song in one piece.</summary>
     public string Section { get; set; }
 
+    /// <summary>
+    /// What the lines added from here on are for in the song's form - one of
+    /// <see cref="Roles"/>, or null where the song does not say. The driver never reads it;
+    /// it is there for tools that draw a song's structure, for sections whose names do not
+    /// say what they are. A <c>section</c> line clears it, since a role belongs to the
+    /// section it is written under.
+    /// </summary>
+    public string Role { get; set; }
+
+    /// <summary>The roles a <c>role</c> line can give: where a section sits in a pass
+    /// through a song.</summary>
+    public static readonly string[] Roles = { "INTRO", "VERSE", "PRECHORUS", "CHORUS", "BRIDGE", "ENDING" };
+
+    /// <summary>A role as written to its canonical form - <c>pre-chorus</c> and
+    /// <c>outro</c> are accepted for PRECHORUS and ENDING - or null if it is not one.</summary>
+    public static string ParseRole(string text)
+    {
+        string r = (text ?? "").Trim().ToUpperInvariant().Replace("-", "").Replace(" ", "");
+        if (r == "OUTRO") r = "ENDING";
+        if (r == "PRE") r = "PRECHORUS";
+        return Array.IndexOf(Roles, r) >= 0 ? r : null;
+    }
+
     public Part[] Parts { get; } = new Part[PokeyChip.Channels];
 
     public IReadOnlyList<string> Problems => _problems;
@@ -517,6 +540,7 @@ public sealed class Tune
     public int FramesPerRowAt(int line) => _order[line].FramesPerRow;
     public int AudctlAt(int line) => _order[line].Audctl;
     public string SectionAt(int line) => _order[line].Section;
+    public string RoleAt(int line) => _order[line].Role;
 
     public double Bpm(double frameHz, int line)
         => frameHz * 60.0 / (FramesPerRowAt(line) * RowsPerBeat);
@@ -632,7 +656,7 @@ public sealed class Tune
             if (tracks[c] != null && !Parts[c].Tracks.ContainsKey(tracks[c]))
                 _problems.Add($"LINE {_order.Count + 1}: {Parts[c].Role} HAS NO TRACK {tracks[c]}");
         }
-        _order.Add(new OrderLine(tracks, FramesPerRow, Audctl, Section, skip, off != null && off.Any(o => o) ? off : null));
+        _order.Add(new OrderLine(tracks, FramesPerRow, Audctl, Section, skip, off != null && off.Any(o => o) ? off : null, Role));
         return this;
     }
 
@@ -677,7 +701,7 @@ public sealed class Tune
 
         var heard = new Tune(Name, Key, FramesPerRow)
         {
-            Source = Source, Ends = Ends, Audctl = Audctl, Section = Section,
+            Source = Source, Ends = Ends, Audctl = Audctl, Section = Section, Role = Role,
             RowsPerLine = RowsPerLine, RowsPerBeat = RowsPerBeat, Instruments = Instruments,
         };
         for (int c = 0; c < Parts.Length; c++) heard.Parts[c] = Parts[c];
@@ -690,7 +714,7 @@ public sealed class Tune
             if (o.Skip) continue;
             if (loop < 0 && l >= LoopLine) loop = heard._order.Count;
             var tracks = o.Tracks.Select((t, c) => IsOff(c, l) ? null : t).ToArray();
-            heard._order.Add(new OrderLine(tracks, o.FramesPerRow, o.Audctl, o.Section, false, null));
+            heard._order.Add(new OrderLine(tracks, o.FramesPerRow, o.Audctl, o.Section, false, null, o.Role));
         }
         heard.LoopLine = loop < 0 ? 0 : loop;
         return heard;

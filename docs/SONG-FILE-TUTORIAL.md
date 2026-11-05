@@ -48,7 +48,7 @@ Five regions, always in this order:
 song / key / rows / beat        the header - what the song is
 instrument ...                  what a note sounds like
 channel ... track ...           the music itself, in named tracks
-speed / audctl / section        settings, placed where they take effect
+speed / audctl / section / role settings, placed where they take effect
 line / loop / end               the order list - what plays, in what order
 ```
 
@@ -217,6 +217,7 @@ line   FILL   DM     A1     PAD
 | `speed` | 1–60 | Frames per row — the tempo. Applies to the lines that follow it. Default 6. |
 | `audctl` | a byte: `40`, `$28` or `0x28` | The chip's control register, for the lines that follow. |
 | `section` | the rest of the line | A name for the lines that follow, shown in the tracker. Bare `section` clears it. |
+| `role` | `intro`, `verse`, `pre-chorus`, `chorus`, `bridge` or `ending` | What the section above it is for in the song's form. Not played - it is for tools that draw a song's structure, such as PokeyTracker's form chart, when the section's name does not say. The next `section` line clears it; so does bare `role`. |
 | `loop` | — | The song returns to the **next** line. |
 | `end` | — | Play once and stop. |
 
@@ -226,7 +227,7 @@ DM     ~A1    DM` - to silence that channel on that line while keeping its track
 does both from the order list's right-click menu (**Switch off or on**), a line, a section or
 a channel at a time, and shows what is off struck through.
 
-`speed`, `audctl` and `section` are placed *between* lines exactly where they take effect,
+`speed`, `audctl`, `section` and `role` are placed *between* lines exactly where they take effect,
 which is why they sit in this region rather than in the header.
 
 **Three ways to get the ending wrong**, all of which the reader catches:

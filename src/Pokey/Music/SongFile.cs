@@ -196,6 +196,16 @@ public static class SongFile
                 case "section":
                     CloseChannel();
                     tune.Section = tokens.Count > 1 ? Rest() : null;
+                    tune.Role = null;
+                    break;
+
+                // What the section is for in the song's form: "role chorus". Not played; for
+                // the tools that draw a song's structure. Bare "role" clears it.
+                case "role":
+                    CloseChannel();
+                    if (tokens.Count == 1) tune.Role = null;
+                    else if (Tune.ParseRole(Rest()) is string role) tune.Role = role;
+                    else Problem($"ROLE IS {string.Join(", ", Tune.Roles.Take(Tune.Roles.Length - 1))} OR {Tune.Roles[^1]}");
                     break;
 
                 case "loop":
@@ -604,7 +614,7 @@ public static class SongFile
         Line("# The order list: one line per bar, a track per channel, '.' for none.");
 
         int speed = -1, audctl = -1;
-        string section = null;
+        string section = null, role = null;
         bool first = true;
 
         for (int l = 0; l < tune.Lines; l++)
@@ -614,7 +624,9 @@ public static class SongFile
             {
                 section = tune.SectionAt(l);
                 if (section != null || !first) Line(section != null ? $"section {section}" : "section");
+                role = null;
             }
+            if (tune.RoleAt(l) != role) Line((role = tune.RoleAt(l)) != null ? $"role   {role.ToLowerInvariant()}" : "role");
             if (tune.FramesPerRowAt(l) != speed) Line($"speed  {N(speed = tune.FramesPerRowAt(l))}");
             if (tune.AudctlAt(l) != audctl) Line($"audctl ${(audctl = tune.AudctlAt(l)):X2}");
             first = false;
