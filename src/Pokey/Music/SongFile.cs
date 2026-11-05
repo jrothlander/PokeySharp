@@ -643,7 +643,7 @@ public static class SongFile
 
         int root = cell.Notes[0];
         if (cell.Notes.Length == 1) return $"{NoteTable.Letter(root)}{root / 12 - 1}";
-        return NoteTable.Letter(root) + (cell.Notes[1] - root == 3 ? "m" : "");
+        return NoteTable.ChordToken(cell.Notes) ?? NoteTable.Letter(root) + (cell.Notes[1] - root == 3 ? "m" : "");
     }
 
     /// <summary>A note as several <c>note</c> lines of a readable width — the reader joins

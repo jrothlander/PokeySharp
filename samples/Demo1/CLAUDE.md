@@ -164,7 +164,8 @@ the title. Nothing on the left is shortened.
 **A track can name its own instrument** (`Part.Track(name, rows, voice)`), which is how
 a channel changes sound between sections — on the hardware that was only ever the
 driver pointed at a different table. On a pitched channel one track can hold notes and
-chords alike: a token with an octave (`D4`) is a note, one without (`Dm`) is a chord.
+chords alike: a token with an octave (`D4`) is a note, one without (`Dm`) is a chord, and a
+chord can name its quality and root octave (`Bdim`, `Caug`, `Dm4`, `Cmaj5`).
 `Part.NotesUsed` groups by table, since a channel that changes instrument can use more
 than one, and the page prints a tuning line for each.
 

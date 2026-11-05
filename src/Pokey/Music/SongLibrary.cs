@@ -126,6 +126,69 @@ public sealed class NoteTable
     /// <summary>The note without its octave: <c>D</c>, <c>A#</c>.</summary>
     public static string Letter(int midi) => Names[midi % 12].TrimEnd('-');
 
+    private static readonly (string Suffix, string Label, int Third, int Fifth)[] Qualities =
+    {
+        ("maj", "MAJ", 4, 7), ("m", "MIN", 3, 7), ("dim", "DIM", 3, 6), ("aug", "AUG", 4, 8),
+    };
+
+    /// <summary>
+    /// A chord token to its three notes, or null if it is not one.
+    ///
+    /// <c>Dm</c>, <c>Bb</c>, <c>Bdim</c>, <c>Caug</c>: no octave, so the root is put between
+    /// G3 and F#4 - the octave where the pure-tone table is best in tune (see NoteTable) and
+    /// no chord climbs into the lead's register. <c>Cmaj5</c>, <c>Dm4</c>, <c>Bdim3</c>: the
+    /// quality, then the root's octave, for a chord that has to sit somewhere else - a scale's
+    /// chords climbing to the I an octave up. The quality is spelled out (<c>maj</c>) when an
+    /// octave follows, since <c>C5</c> is a note.
+    /// </summary>
+    public static int[] Chord(string token)
+    {
+        int semitone = Parse(token, out int at);
+        if (semitone < 0) return null;
+        string rest = token.Substring(Math.Min(at, token.Length));
+        int digits = rest.Length;
+        while (digits > 0 && char.IsDigit(rest[digits - 1])) digits--;
+        string suffix = rest.Substring(0, digits), octaveText = rest.Substring(digits);
+
+        var quality = suffix == "" ? Qualities[0] : Array.Find(Qualities, q => q.Suffix == suffix);
+        if (quality.Suffix == null) return null;
+        if (suffix == "" && octaveText != "") return null;      // a note, not a chord
+
+        int root;
+        if (octaveText == "")
+        {
+            root = 60 + (semitone + 12) % 12;
+            if (root > 66) root -= 12;
+        }
+        else if (int.TryParse(octaveText, out int octave)) root = (octave + 1) * 12 + semitone;
+        else return null;
+        return new[] { root, root + quality.Third, root + quality.Fifth };
+    }
+
+    private static int QualityOf(int[] notes)
+        => notes is { Length: 3 } ? Array.FindIndex(Qualities, q => notes[1] - notes[0] == q.Third && notes[2] - notes[0] == q.Fifth) : -1;
+
+    /// <summary>The tracker column's name for a chord: <c>D MIN</c>, <c>B DIM</c>.</summary>
+    public static string ChordLabel(int[] notes)
+        => $"{Letter(notes[0])} {(QualityOf(notes) is int q and >= 0 ? Qualities[q].Label : "MAJ")}";
+
+    /// <summary>
+    /// The token that makes a chord: <c>Dm</c> where the root is in the octave a bare token
+    /// puts it, <c>Dm5</c> where it is not - so every file written before chords could have
+    /// an octave writes back exactly as it was. Null if the notes are not a triad a token
+    /// can name.
+    /// </summary>
+    public static string ChordToken(int[] notes)
+    {
+        int q = QualityOf(notes);
+        if (q < 0) return null;
+        int root = notes[0], usual = 60 + root % 12;
+        if (usual > 66) usual -= 12;
+        string letter = Letter(root);
+        if (root == usual) return letter + (q == 0 ? "" : Qualities[q].Suffix);
+        return letter + Qualities[q].Suffix + (root / 12 - 1);
+    }
+
     /// <summary>
     /// <c>D4</c>, <c>A#3</c> or <c>Bb3</c> to a note number, or -1.
     ///
@@ -312,20 +375,8 @@ public sealed class Part
             return new Cell(CellKind.Play, voice, new[] { midi }, NoteTable.NoteName(midi));
         }
 
-        if (semitone >= 0 && (rest == "" || rest == "m"))
-        {
-            bool minor = rest == "m";
-
-            // Root between G3 and F#4, so every chord sits in the octave where the
-            // pure-tone table is best in tune (see NoteTable) and none of them climbs
-            // into the lead's register.
-            int root = 60 + (semitone + 12) % 12;
-            if (root > 66) root -= 12;
-
-            var notes = new[] { root, root + (minor ? 3 : 4), root + 7 };
-            return new Cell(CellKind.Play, voice, notes,
-                            $"{NoteTable.Letter(root)} {(minor ? "MIN" : "MAJ")}");
-        }
+        if (NoteTable.Chord(token) is { } chord)
+            return new Cell(CellKind.Play, voice, chord, NoteTable.ChordLabel(chord));
 
         problem = $"'{token}' IS NOT A NOTE OR A CHORD";
         return Cell.Empty;

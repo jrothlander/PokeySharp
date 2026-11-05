@@ -178,7 +178,9 @@ different table, and it is how a channel changes character between sections.
 | Token | Means |
 |---|---|
 | `D5`, `A#1`, `Bb3` | A note: letter, optional `#` or `b`, then the octave. |
-| `Dm`, `F`, `A` | A chord — **no octave**. The triad arpeggiates, one note a frame. |
+| `Dm`, `F`, `A` | A chord — **no octave**. The triad arpeggiates, one note a frame; its root sits between G3 and F#4. |
+| `Bdim`, `Caug` | A diminished or augmented chord. |
+| `Dm4`, `Cmaj5`, `Bdim3` | A chord with its root's octave — the quality comes first, so a major chord says `maj` (`C5` would be a note). |
 | `-` | Note off. The release takes over. |
 | `.` | Hold — nothing happens this row. |
 | `K`, `S`, `H` … | On a drums channel, a token from its `kit`. |
