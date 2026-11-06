@@ -248,7 +248,9 @@ can still be played slower than the first. Blocks can go anywhere in the file; a
 order list reads best. Change a line of the block and every play changes - that is the point -
 and a play that should differ is written out in full instead. PokeyTracker does both: right-click
 a line or a section for **Write repeated sections once**, which turns every exact repeat into
-a `define` and its `play`s, and **Write out this ...**, which turns one `play` back into lines.
+a `define` and its `play`s; **Write every section once**, which does it for the sections played
+once too, so the order list is nothing but `play`s - the song's form, read top to bottom; and
+**Write out this ...**, which turns one `play` back into lines.
 Either way the song plays exactly as it did.
 
 **Switching parts off.** To try an arrangement without deleting anything, write `skip` in
