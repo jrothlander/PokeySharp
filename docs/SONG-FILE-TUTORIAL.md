@@ -218,8 +218,38 @@ line   FILL   DM     A1     PAD
 | `audctl` | a byte: `40`, `$28` or `0x28` | The chip's control register, for the lines that follow. |
 | `section` | the rest of the line | A name for the lines that follow, shown in the tracker. Every `section` line starts a section, so `section B` twice in a row is the chorus played twice, shown as two. Bare `section` clears the name. |
 | `role` | `intro`, `verse`, `pre-chorus`, `chorus`, `bridge` or `ending` | What the section above it is for in the song's form. Not played - it is for tools that draw a song's structure, such as PokeyTracker's form chart, when the section's name does not say. The next `section` line clears it; so does bare `role`. |
+| `define` | a section name | A section written once: the `line`s (and `skip`s and `role`) under it are played by `play`, not where they are written. |
+| `play` | a section name | Plays a `define`d section here, all its lines, as a section of that name. |
 | `loop` | — | The song returns to the **next** line. |
 | `end` | — | Play once and stop. |
+
+**A section played more than once can be written once.** A chorus that comes back four
+times is four copies of the same lines - and a change made to one copy and forgotten in the
+others is a song that drifts. Write it once under `define`, and `play` it wherever it goes:
+
+```
+define CHORUS
+role   chorus
+line   BEAT   C      C1     PAD
+line   FILL   G      C2     PADG
+
+section VERSE
+line   BEAT   DM     A1     PAD
+play   CHORUS
+section VERSE
+line   BEAT   DM     A1     PAD
+play   CHORUS
+play   CHORUS
+```
+
+A `define` block is its lines, its `skip`s and its `role`, and nothing else: it ends at the
+first other instruction. So `speed` and `audctl` stay in the order list, and the last chorus
+can still be played slower than the first. Blocks can go anywhere in the file; above the
+order list reads best. Change a line of the block and every play changes - that is the point -
+and a play that should differ is written out in full instead. PokeyTracker does both: right-click
+a line or a section for **Write repeated sections once**, which turns every exact repeat into
+a `define` and its `play`s, and **Write out this ...**, which turns one `play` back into lines.
+Either way the song plays exactly as it did.
 
 **Switching parts off.** To try an arrangement without deleting anything, write `skip` in
 place of `line` for a line to leave out, or put `~` in front of a track name - `line   BEAT
@@ -227,7 +257,7 @@ DM     ~A1    DM` - to silence that channel on that line while keeping its track
 does both from the order list's right-click menu (**Switch off or on**), a line, a section or
 a channel at a time, and shows what is off struck through.
 
-`speed`, `audctl`, `section` and `role` are placed *between* lines exactly where they take effect,
+`speed`, `audctl`, `section`, `role` and `play` are placed *between* lines exactly where they take effect,
 which is why they sit in this region rather than in the header.
 
 **Three ways to get the ending wrong**, all of which the reader catches:

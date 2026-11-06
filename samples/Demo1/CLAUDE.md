@@ -302,12 +302,16 @@ section SOLO                      # a name for the lines that follow; bare to cl
 line   INTRO DM . .               # the order list: a track per channel, '.' for none
 skip   INTRO DM . .               # a line switched off: kept, jumped over when played
 line   INTRO ~DM . .              # '~': that channel switched off on this line, its track kept
+define CHORUS                     # a section written once: its lines play where it is played
+role   chorus                     #   (a define block is lines, skips and a role, nothing else)
+line   CH CHB . .
+play   CHORUS                     # the defined section's lines, here, as a section of its name
 loop                              # the song returns to the next line after its last
 end                               # or: play once and stop - a jingle; no loop then
 ```
 
 Blocks end at the next thing that is not part of them, and everything must be defined
-above where it is used — instruments before the channels that name them. A `pair`
+above where it is used - except a `define`, which may come before or after its `play`s — instruments before the channels that name them. A `pair`
 channel has no tracks; it is the low byte of the channel above it on lines whose
 `audctl` joins them, and `Tune.Check` holds the file to that as it does code.
 

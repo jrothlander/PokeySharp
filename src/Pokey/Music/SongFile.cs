@@ -23,7 +23,8 @@ namespace Pokey.Music;
 /// names the song, <c>instrument</c> blocks define the per-frame tables, <c>channel</c>
 /// blocks hold the tracks, and <c>line</c>s at the end are the order list, with
 /// <c>speed</c>, <c>audctl</c> and <c>section</c> changes placed between them exactly where
-/// they take effect.
+/// they take effect. A section played more than once can be written once, in a
+/// <c>define</c> block, and played by name with <c>play</c> - see <see cref="Definitions"/>.
 ///
 /// <b>Free of MonoGame</b>, like the rest of the song code, so the harness and
 /// <c>tools/soundexport</c> read the same files the page does.
@@ -84,8 +85,63 @@ public static class SongFile
         return tokens;
     }
 
+    /// <summary>A section written once, in a <c>define</c> block: its name as written, its
+    /// role, and its lines with their line numbers.</summary>
+    public sealed class Definition
+    {
+        public string Name;
+        public int Number;
+        public string Role;
+        public readonly List<(int Number, string Text)> Lines = new();
+    }
+
+    /// <summary>
+    /// The sections a song writes once, by name - every <c>define</c> block in the file.
+    ///
+    /// <b>A section written once and played by name.</b> <c>define CHORUS</c> starts a block
+    /// of <c>line</c>s (and <c>skip</c>s, and a <c>role</c>) that plays nothing where it is
+    /// written; <c>play CHORUS</c> in the order list plays them all, as a section of that
+    /// name. It is the order list doing for sections what it already does for tracks: a
+    /// chorus played four times is written once, so it cannot drift - change it and every
+    /// play of it changes. The block ends at the first line that is not a <c>line</c>,
+    /// <c>skip</c>, <c>role</c>, comment or blank, so <c>speed</c> and <c>audctl</c> stay
+    /// in the order list, where they belong to a place in the song rather than to a
+    /// section: the last chorus can still be played slower than the first.
+    ///
+    /// Collected before the order list is read, so a block may be written anywhere in the
+    /// file. The first block of a name wins; the reader says so of any other.
+    /// </summary>
+    public static Dictionary<string, Definition> Definitions(IList<string> lines)
+    {
+        var defined = new Dictionary<string, Definition>(StringComparer.OrdinalIgnoreCase);
+        Definition open = null;
+        for (int i = 0; i < lines.Count; i++)
+        {
+            var tokens = Tokenise(lines[i], out int end);
+            if (tokens.Count == 0) continue;
+            string keyword = tokens[0].Text.ToLowerInvariant();
+            if (keyword == "define")
+            {
+                string name = tokens.Count > 1 ? lines[i].Substring(tokens[1].At, end - tokens[1].At).Trim() : "";
+                if (name.Length > 0 && !defined.ContainsKey(name)) defined[name] = open = new Definition { Name = name, Number = i + 1 };
+                else open = new Definition();   // a duplicate or a nameless block: read past, kept nowhere
+                continue;
+            }
+            if (open == null) continue;
+            if (keyword is "line" or "skip") open.Lines.Add((i + 1, lines[i]));
+            else if (keyword == "role") open.Role = tokens.Count > 1 ? lines[i].Substring(tokens[1].At, end - tokens[1].At).Trim() : null;
+            else open = null;
+        }
+        return defined;
+    }
+
     public static Tune Parse(IEnumerable<string> lines, string source)
     {
+        var all = lines as IList<string> ?? lines.ToList();
+        var defined = Definitions(all);
+        var named = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        bool defining = false;
+
         var tune = new Tune("UNTITLED", "", framesPerRow: 6);
         var instruments = new Dictionary<string, Instrument>(StringComparer.OrdinalIgnoreCase);
 
@@ -117,7 +173,24 @@ public static class SongFile
             channel = null;
         }
 
-        foreach (string raw in lines)
+        // A line, or one switched off with "skip" - kept in the order list, jumped over
+        // when played. A track named with "~" in front is switched off on that line: kept,
+        // and silent. See Tune.Line(string[], bool, bool[]).
+        void AddLine(List<Token> tokens)
+        {
+            if (tokens.Count - 1 > PokeyChip.Channels) { Problem($"A LINE HAS {PokeyChip.Channels} TRACKS AT MOST"); return; }
+            var tracks = new string[PokeyChip.Channels];
+            var off = new bool[PokeyChip.Channels];
+            for (int c = 1; c < tokens.Count; c++)
+            {
+                string name = tokens[c].Text;
+                if (name.Length > 1 && name[0] == '~') { off[c - 1] = true; name = name.Substring(1); }
+                tracks[c - 1] = name == "." ? null : name;
+            }
+            tune.Line(tracks, skip: tokens[0].Text.Equals("skip", StringComparison.OrdinalIgnoreCase), off);
+        }
+
+        foreach (string raw in all)
         {
             number++;
             var tokens = Tokenise(raw, out int end);
@@ -126,6 +199,15 @@ public static class SongFile
             string keyword = tokens[0].Text.ToLowerInvariant();
             string Rest(int from = 1) => tokens.Count > from ? raw.Substring(tokens[from].At, end - tokens[from].At).Trim() : "";
             string[] Args() => tokens.Skip(1).Select(t => t.Text).ToArray();
+
+            // Inside a define block: its lines and role, played where the section is.
+            if (defining && keyword is "line" or "skip" or "role")
+            {
+                if (keyword == "role" && tokens.Count > 1 && Tune.ParseRole(Rest()) == null)
+                    Problem($"ROLE IS {string.Join(", ", Tune.Roles.Take(Tune.Roles.Length - 1))} OR {Tune.Roles[^1]}");
+                continue;
+            }
+            defining = false;
 
             // Inside an instrument block: its tables.
             if (instrument != null && instrument.Accepts(keyword))
@@ -225,16 +307,32 @@ public static class SongFile
                 case "line":
                 case "skip":
                     CloseChannel();
-                    if (tokens.Count - 1 > PokeyChip.Channels) { Problem($"A LINE HAS {PokeyChip.Channels} TRACKS AT MOST"); break; }
-                    var tracks = new string[PokeyChip.Channels];
-                    var off = new bool[PokeyChip.Channels];
-                    for (int c = 1; c < tokens.Count; c++)
+                    AddLine(tokens);
+                    break;
+
+                // A section written once: its lines are played by "play", not here.
+                case "define":
+                    CloseChannel();
+                    defining = true;
+                    if (tokens.Count < 2) Problem("DEFINE NEEDS A SECTION NAME");
+                    else if (!named.Add(Rest())) Problem($"SECTION {Rest()} IS DEFINED TWICE - THE FIRST IS PLAYED");
+                    break;
+
+                // A defined section, played here: a section of its name, with its role.
+                case "play":
+                    CloseChannel();
+                    if (tokens.Count < 2) { Problem("PLAY NEEDS A SECTION NAME"); break; }
+                    if (!defined.TryGetValue(Rest(), out var section)) { Problem($"NO SECTION {Rest()} IS DEFINED - WRITE IT UNDER define {Rest()}"); break; }
+                    if (section.Lines.Count == 0) { Problem($"SECTION {section.Name} HAS NO LINES"); break; }
+                    tune.Section = section.Name;
+                    tune.Role = section.Role != null ? Tune.ParseRole(section.Role) : null;
+                    int at = number;
+                    foreach (var (n, text) in section.Lines)
                     {
-                        string name = tokens[c].Text;
-                        if (name.Length > 1 && name[0] == '~') { off[c - 1] = true; name = name.Substring(1); }
-                        tracks[c - 1] = name == "." ? null : name;
+                        number = n;   // a problem in a played line is reported where it is written
+                        AddLine(Tokenise(text, out _));
                     }
-                    tune.Line(tracks, skip: tokens[0].Text.Equals("skip", StringComparison.OrdinalIgnoreCase), off);
+                    number = at;
                     break;
 
                 default:
