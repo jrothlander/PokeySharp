@@ -184,7 +184,7 @@ public static class MidiFile
             if (!options.Markers) continue;
 
             string now = tune.SectionAt(line);
-            if (now != null && now != section) Meta(tick, 0x06, Encoding.ASCII.GetBytes(now));
+            if (now != null && (now != section || tune.StartsSection(line))) Meta(tick, 0x06, Encoding.ASCII.GetBytes(now));
             section = now;
             if (!tune.Ends && line == tune.LoopLine && (i == 0 || lines[i - 1] != line))
                 Meta(tick, 0x06, Encoding.ASCII.GetBytes("loop start"));

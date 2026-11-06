@@ -442,7 +442,7 @@ public sealed class Tune
     }
 
     /// <summary>One line of the order list, with the settings in force when it was added.</summary>
-    private readonly record struct OrderLine(string[] Tracks, int FramesPerRow, int Audctl, string Section, bool Skip = false, bool[] Off = null, string Role = null);
+    private readonly record struct OrderLine(string[] Tracks, int FramesPerRow, int Audctl, string Section, bool Skip = false, bool[] Off = null, string Role = null, bool Starts = false);
 
     private readonly List<OrderLine> _order = new();
     private readonly List<string> _problems = new();
@@ -492,8 +492,14 @@ public sealed class Tune
     public int Audctl { get; set; }
 
     /// <summary>A name for the lines added from here on — "BALLAD", "HEAVY" — shown in the
-    /// page header in place of the key. Null for a song in one piece.</summary>
-    public string Section { get; set; }
+    /// page header in place of the key. Null for a song in one piece.
+    ///
+    /// <b>Setting it starts a section</b>, even under the name already in force: the next
+    /// line added begins a new one (<see cref="StartsSection"/>). A chorus played twice in a
+    /// row is two choruses, and a song file says so with two <c>section</c> lines.</summary>
+    public string Section { get => _section; set { _section = value; _sectionStarts = true; } }
+    private string _section;
+    private bool _sectionStarts;
 
     /// <summary>
     /// What the lines added from here on are for in the song's form - one of
@@ -540,6 +546,12 @@ public sealed class Tune
     public int FramesPerRowAt(int line) => _order[line].FramesPerRow;
     public int AudctlAt(int line) => _order[line].Audctl;
     public string SectionAt(int line) => _order[line].Section;
+
+    /// <summary>Whether a section begins at this line: the first line, a line under a new
+    /// <see cref="Section"/>, or one where the name changes. A repeat of the section before
+    /// it begins again, so two runs of a chorus side by side stay two.</summary>
+    public bool StartsSection(int line) =>
+        line == 0 || _order[line].Starts || _order[line].Section != _order[line - 1].Section;
     public string RoleAt(int line) => _order[line].Role;
 
     public double Bpm(double frameHz, int line)
@@ -656,7 +668,8 @@ public sealed class Tune
             if (tracks[c] != null && !Parts[c].Tracks.ContainsKey(tracks[c]))
                 _problems.Add($"LINE {_order.Count + 1}: {Parts[c].Role} HAS NO TRACK {tracks[c]}");
         }
-        _order.Add(new OrderLine(tracks, FramesPerRow, Audctl, Section, skip, off != null && off.Any(o => o) ? off : null, Role));
+        _order.Add(new OrderLine(tracks, FramesPerRow, Audctl, Section, skip, off != null && off.Any(o => o) ? off : null, Role, _sectionStarts));
+        _sectionStarts = false;
         return this;
     }
 
@@ -708,13 +721,16 @@ public sealed class Tune
         heard._problems.AddRange(_problems);
 
         int loop = -1;
+        bool starts = false;   // a section whose first line is skipped begins at the next one heard
         for (int l = 0; l < _order.Count; l++)
         {
             var o = _order[l];
+            starts |= o.Starts;
             if (o.Skip) continue;
             if (loop < 0 && l >= LoopLine) loop = heard._order.Count;
             var tracks = o.Tracks.Select((t, c) => IsOff(c, l) ? null : t).ToArray();
-            heard._order.Add(new OrderLine(tracks, o.FramesPerRow, o.Audctl, o.Section, false, null, o.Role));
+            heard._order.Add(new OrderLine(tracks, o.FramesPerRow, o.Audctl, o.Section, false, null, o.Role, starts));
+            starts = false;
         }
         heard.LoopLine = loop < 0 ? 0 : loop;
         return heard;

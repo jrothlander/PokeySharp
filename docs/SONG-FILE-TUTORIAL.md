@@ -216,7 +216,7 @@ line   FILL   DM     A1     PAD
 | `skip` | the same as `line` | A line switched **off**: kept in the song, jumped over when it plays and left out of exports. Change it back to `line` to switch it on. |
 | `speed` | 1–60 | Frames per row — the tempo. Applies to the lines that follow it. Default 6. |
 | `audctl` | a byte: `40`, `$28` or `0x28` | The chip's control register, for the lines that follow. |
-| `section` | the rest of the line | A name for the lines that follow, shown in the tracker. Bare `section` clears it. |
+| `section` | the rest of the line | A name for the lines that follow, shown in the tracker. Every `section` line starts a section, so `section B` twice in a row is the chorus played twice, shown as two. Bare `section` clears the name. |
 | `role` | `intro`, `verse`, `pre-chorus`, `chorus`, `bridge` or `ending` | What the section above it is for in the song's form. Not played - it is for tools that draw a song's structure, such as PokeyTracker's form chart, when the section's name does not say. The next `section` line clears it; so does bare `role`. |
 | `loop` | — | The song returns to the **next** line. |
 | `end` | — | Play once and stop. |

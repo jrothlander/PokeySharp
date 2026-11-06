@@ -620,7 +620,7 @@ public static class SongFile
         for (int l = 0; l < tune.Lines; l++)
         {
             if (l == tune.LoopLine && !tune.Ends) Line("loop");
-            if (first || tune.SectionAt(l) != section)
+            if (first || tune.StartsSection(l))
             {
                 section = tune.SectionAt(l);
                 if (section != null || !first) Line(section != null ? $"section {section}" : "section");
