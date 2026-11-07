@@ -73,6 +73,7 @@ dotnet run --project samples/PokeyLabForms
 | `docs/SOUND-RECIPE.md` | Designing a sound effect, start to finish. |
 | `docs/SOUND-TUNING.md` | Tuning envelope chains against reference recordings. |
 | `docs/SONG-FILE-TUTORIAL.md` | The `.song` format, instruction by instruction. |
+| `docs/PITCH-AND-DIVIDERS.md` | Why POKEY's high notes are out of tune, and why an in-tune melody costs two channels. |
 
 Each project also carries a `CLAUDE.md` recording why it is built the way it is — what the
 hardware documentation confirmed, what it corrected, and what is still unverified.

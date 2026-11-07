@@ -1,0 +1,142 @@
+# THE SAILOR'S HORNPIPE - traditional; first printed as the College Hornpipe, London,
+# about 1797. The format is in Demo1/CLAUDE.md, under "Song files". Instruments are
+# tables with one entry per frame; each channel holds named tracks; the lines at the end
+# are the order list. In a track '.' holds and '-' releases. '#' starts a comment.
+#
+# The tune is over two hundred years old and belongs to nobody. This file is a new
+# transcription of the melody as it is commonly played, written for PokeySharp, with
+# nothing copied from any edition or MIDI file. The chords and bass are not composed:
+# they are the plain harmony the tune's own notes spell, one chord a half bar - the
+# chord whose notes the melody lands on at the beat.
+#
+# The form is the hornpipe's: a pickup, then two eight-bar strains, each played twice -
+# A A B B. Each pass differs only in its last bar, the lead-in to what comes next: back
+# to A, on into B, or the end. Both strains close on the same two bars, A6 and A7, which
+# is why the B strain's tracks stop at B5.
+#
+# A row is an eighth and a line is a bar of 4/4. Channel 1 is the chords, held a half
+# bar each and arpeggiated as the chip plays every chord. Channel 2 is the bass, the
+# chord's root on beats 1 and 3. Channels 3 and 4 are one 16-bit voice for the tune,
+# which runs from D4 to D6 - the pure-tone table is twenty cents out above C5, and the
+# joined pair plays every note within a cent.
+
+song   THE SAILOR'S HORNPIPE
+key    D MAJOR
+rows   8
+beat   2
+
+# The tune: a fife or a whistle, breathed in, a slow vibrato.
+instrument FIFE
+  table      wide
+  volume     7 9 10 11 11 10 10 10 9 9
+  distortion tone
+  vibrato    0 2 3 2 0 -2 -3 -2
+  delay      12
+  release    2
+
+# The chords: soft and held, under the tune rather than beside it.
+instrument PAD
+  table      tone
+  volume     4 5 6 6 6 5 5 5 5 5 4
+  distortion tone
+  release    1
+
+# The bass: plucked, and gone before the next one.
+instrument BASS
+  table      tone
+  volume     11 10 9 8 7 6 5 4 3 2 1 0
+  distortion tone
+  release    2
+
+channel 1 notes CHORDS
+  note  The harmony the tune spells, a chord a half bar: D, G, A, and E in the B strain.
+  voice PAD
+  track KD   D . . .  D . . .
+  track KDG  D . . .  G . . .
+  track KGD  G . . .  D . . .
+  track KGA  G . . .  A . . .
+  track KG   G . . .  G . . .
+  track KA   A . . .  A . . .
+  track KE   E . . .  E . . .
+
+channel 2 notes BASS
+  note  The root of each chord, on beats 1 and 3.
+  voice BASS
+  track BD   D3 . . -  D3 . . -
+  track BDG  D3 . . -  G3 . . -
+  track BGD  G3 . . -  D3 . . -
+  track BGA  G3 . . -  A3 . . -
+  track BG   G3 . . -  G3 . . -
+  track BA   A3 . . -  A3 . . -
+  track BE   E3 . . -  E3 . . -
+
+channel 3 pair LOW BYTE
+  note  The low byte of channel 4's 16-bit divider. AUDCTL 28 joins 3 and 4 on the 1.79 MHz clock.
+
+channel 4 notes TUNE
+  note  The hornpipe. PU is the pickup; A1-A7 and B1-B5 the strains; A8 and A8B the
+  note  last bar of a pass, leading back to A or on to B; END the last bar of all.
+  voice FIFE
+  track PU    .  .   .  .    .  .   D5 C#5
+  track A1    D5 .   D4 -    D4 .   A4 G4
+  track A2    F#4 A4 D5 C#5  D5 F#5 E5 D5
+  track A3    E5 .   E4 -    E4 .   E5 D5
+  track A4    C#5 A4 C#5 E5  A5 .   B5 C#6
+  track A5    D6 C#6 B5 A5   B5 A5  G5 F#5
+  track A6    G5 F#5 E5 D5   D5 C#5 B4 A4
+  track A7    B4 D5  C#5 E5  D5 F#5 E5 G5
+  track A8    F#5 .  D5 -    D5 .   D5 C#5
+  track A8B   F#5 .  D5 -    D5 .   A4 G4
+  track B1    F#4 A4 D5 A4   F#4 A4 D5 A4
+  track B2    B4 .   G4 -    G4 .   B4 A4
+  track B3    G#4 B4 E5 B4   G#4 B4 E5 B4
+  track B4    C#5 .  A4 -    A4 .   G5 F#5
+  track B5    G5 .   B5 .    B5 A5  G5 F#5
+  track END   F#5 .  D5 -    D5 .   -  .
+
+# The order list: a line a bar. Chords, bass, low byte, tune.
+audctl $28
+speed  10
+loop
+section PICKUP
+line   .       .       .       PU
+
+section A
+line   KD      BD      .       A1
+line   KD      BD      .       A2
+line   KA      BA      .       A3
+line   KA      BA      .       A4
+line   KDG     BDG     .       A5
+line   KGD     BGD     .       A6
+line   KGA     BGA     .       A7
+line   KD      BD      .       A8
+
+section A
+line   KD      BD      .       A1
+line   KD      BD      .       A2
+line   KA      BA      .       A3
+line   KA      BA      .       A4
+line   KDG     BDG     .       A5
+line   KGD     BGD     .       A6
+line   KGA     BGA     .       A7
+line   KD      BD      .       A8B
+
+section B
+line   KD      BD      .       B1
+line   KG      BG      .       B2
+line   KE      BE      .       B3
+line   KA      BA      .       B4
+line   KG      BG      .       B5
+line   KGD     BGD     .       A6
+line   KGA     BGA     .       A7
+line   KD      BD      .       A8B
+
+section B
+line   KD      BD      .       B1
+line   KG      BG      .       B2
+line   KE      BE      .       B3
+line   KA      BA      .       B4
+line   KG      BG      .       B5
+line   KGD     BGD     .       A6
+line   KGA     BGA     .       A7
+line   KD      BD      .       END

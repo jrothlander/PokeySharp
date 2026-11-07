@@ -336,7 +336,8 @@ a cent instead of nine of them. It costs a channel and it needs three things to 
    (For channels 1 and 2 it is `$10` and `$40`.)
 
 `blue-danube.song` is the worked example: its melody goes up to D6, where the 8-bit table is
-twenty cents out.
+twenty cents out. Why the 8-bit table gets worse as notes rise, and what the pair costs an
+arrangement, is in [`PITCH-AND-DIVIDERS.md`](PITCH-AND-DIVIDERS.md).
 
 Every way of getting this wrong still makes a sound, which is why the reader checks it: a
 16-bit note without the join plays its high byte alone, and without the fast clock the pair
