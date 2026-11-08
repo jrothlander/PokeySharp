@@ -67,7 +67,7 @@ off — which is why the Base clock combo now follows the selection instead of s
 its own.
 
 To add your own, drop a `.sound` file in `banks/` and restart. The format is one keyword
-per line and is documented in [`Pokey/README.md`](../Pokey/README.md); a line the parser
+per line and is documented in [`src/Pokey/README.md`](../../src/Pokey/README.md); a line the parser
 cannot read is skipped rather than fatal, and whatever was skipped is listed in the Sound
 list's tooltip.
 
@@ -77,10 +77,10 @@ The lab can design a voice; **Copy as C#** is how it leaves. The clipboard gets 
 call ready to paste into a game, with the clock named rather than written as a bare
 number, so the line still says which machine it came from six months later.
 
-From there, [`docs/SOUND-RECIPE.md`](../docs/SOUND-RECIPE.md) walks the rest of the
+From there, [`docs/SOUND-RECIPE.md`](../../docs/SOUND-RECIPE.md) walks the rest of the
 loop, and [`Demo1`](../Demo1/README.md) will play it back beside two dozen others. To
 keep a whole set rather than one sound, put the same four numbers in a `.sound` file —
-see [`Pokey/README.md`](../Pokey/README.md) for the format; `RimWalker` reads its own
+see [`src/Pokey/README.md`](../../src/Pokey/README.md) for the format; `RimWalker` reads its own
 effects from one.
 
 ## Making it talk

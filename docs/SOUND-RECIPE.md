@@ -308,7 +308,7 @@ and the rendered waveform itself.
 
 It has a second page — press **2**, or click the tab — where the same idea is applied to
 speech: game lines synthesised at load from their English spelling, playable through a
-POKEY's four bits or through eight. See `Speech/README.md`.
+POKEY's four bits or through eight. See `src/Pokey.Speech/README.md`.
 
 The three things worth having it open for:
 
@@ -320,7 +320,7 @@ The three things worth having it open for:
 - **Duration is most of the design.** *Explosion* and *Hit* are close to the same shape;
   one runs 273 ms and the other 41 ms, and they read as completely different events.
 
-The recipes live in `Demo1/SoundLibrary.cs`, which is deliberately free of MonoGame — it is
+The recipes live in `samples/Demo1/SoundLibrary.cs`, which is deliberately free of MonoGame — it is
 a table of integers, so it can be rendered and checked without an audio device. Copy an
 entry into your own game and it will work unchanged.
 
@@ -337,7 +337,7 @@ twice. **Use `StepEnvelope` in new code** — the duplication is a wart, not a p
 **Its clock is multiplied by 28.** `Sfx.cs` stores `EffectiveClockHz`, which is the
 chip's *slow* clock, and multiplies back up to a base because the chip divides by 28
 internally. That is a compatibility knot around an unresolved question — see
-`ARCADE-SOURCE.md` §9. **Pass the base clock the lab shows you** and skip all of it.
+`ARCADE-SOURCE.md` §9 (in the RimWalker repository, not this one). **Pass the base clock the lab shows you** and skip all of it.
 
 ---
 
@@ -362,7 +362,7 @@ whether the problem is the voice or the wiring in about a minute.
 
 ## See also
 
-- **`Demo1/`** — twenty-two of these as a running program; see above.
+- **`samples/Demo1/`** — twenty-two of these as a running program; see above.
 - **`docs/POKEYLAB-GUIDE.md`** — the lab from nothing, if any of the above was opaque.
 - **`docs/SOUND-TUNING.md`** — the envelope panel in depth.
-- **`Pokey/README.md`** — the library's own API.
+- **`src/Pokey/README.md`** — the library's own API.

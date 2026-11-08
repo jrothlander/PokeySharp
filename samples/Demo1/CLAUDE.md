@@ -31,7 +31,7 @@ WinForms form, and Tab is a dialog navigation key there — it never reaches
 - **`SoundPage`** — a list of sounds down the left, and for the selected one its
   AUDF/AUDC chains, what the divider and volume do over its life, and the rendered
   waveform. `B` cycles banks, `O` opens one from disk.
-- **`VoicePage`** — a dozen lines said through `Speech/` at five settings. The level
+- **`VoicePage`** — a dozen lines said through `src/Pokey.Speech/` at five settings. The level
   count is the interesting one: 15 is four bits, all a POKEY's volume nibble could
   hold and how S.A.M. actually spoke, against 255 for the same synthesiser
   unquantised.
@@ -64,7 +64,7 @@ WinForms form, and Tab is a dialog navigation key there — it never reaches
 Four files, split the same way as the sounds: **`SongLibrary`** is the data model
 (note tables, instruments, parts, `Tune`) and the one song built in code;
 **`SongFile`** reads and writes the `.song` files in `songs/`; **`MusicDriver`** is the
-player. Those three now live in the Pokey library, in `Pokey/Music` under the
+player. Those three now live in the Pokey library, in `src/Pokey/Music` under the
 `Pokey.Music` namespace — they were written here and moved when the song editor became
 the third program to need them. **`SongPage`**, the half that needs an audio device, is
 the only one left in Demo1.
@@ -381,7 +381,7 @@ needs a relatively lighter stroke to survive it, not merely a smaller one.
 to sum; composited with alpha instead, each paints over the last and the core never
 reaches full brightness — the text comes out both haloed and dim.
 
-**The vector font is linked, not copied**, from `RimWalker/Core/`. `BeamFont` is
+**The vector font is linked, not copied**, from `samples/shared/`. `BeamFont` is
 deliberately *not* among the linked files: it presents the font as `IFontRenderer`,
 which has no stroke-thickness parameter, so every call would take the default weight
 and reintroduce the blur above.
@@ -390,7 +390,7 @@ and reintroduce the blur above.
 
 Sets of sounds come from `.sound` files at the repo root, parsed by
 `Pokey.EnvelopeBank`. The format and its keywords live in
-[`Pokey/CLAUDE.md`](../Pokey/CLAUDE.md); what matters here is that a loaded file
+[`src/Pokey/CLAUDE.md`](../../src/Pokey/CLAUDE.md); what matters here is that a loaded file
 behaves exactly like the built-in set, because everything drawn reads through
 `SoundPage.Bank` rather than through `SoundLibrary`'s statics.
 
@@ -443,9 +443,9 @@ for the meter are both reported, and a 16/4 song writes no meter lines. A
 song that ends must report ended after exactly its own length in frames, read no row
 after that, stay on its last line, and be silent half a second later.
 
-**`tools/soundexport` is the second thing in the repo to use these files**: each song as
+**RimWalker's `tools/soundexport` is the second program to use these files**: each song as
 an intro and a seamless loop for a game that plays audio files, from the same catalog. It
-linked them at first, as the harness did; the rule in `Pokey/CLAUDE.md` said a third
+linked them at first, as the harness did; the rule in `src/Pokey/CLAUDE.md` said a third
 consumer was the point to move them into `Pokey` instead, and the song editor was that
 third consumer — so all of them now reference `Pokey.Music`.
 
@@ -476,5 +476,5 @@ third consumer — so all of them now reference `Pokey.Music`.
 
 - `docs/SOUND-RECIPE.md` (in the workshop repo this came from, not here) — designing a voice in the lab and
   getting it into a game.
-- [`Pokey/CLAUDE.md`](../Pokey/CLAUDE.md) — the chip and the bank format.
-- [`Speech/CLAUDE.md`](../Speech/CLAUDE.md) — the synthesiser behind the voice page.
+- [`src/Pokey/CLAUDE.md`](../../src/Pokey/CLAUDE.md) — the chip and the bank format.
+- [`src/Pokey.Speech/CLAUDE.md`](../../src/Pokey.Speech/CLAUDE.md) — the synthesiser behind the voice page.

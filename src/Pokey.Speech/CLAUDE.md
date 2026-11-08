@@ -7,7 +7,7 @@ want it.
 number of levels, so "4-bit" is the front end's fact, not this library's. That split is
 what makes it testable on its own and what would let it drive anything else.
 
-It began inside `Pokey/` on the honest argument that it was pure arithmetic with no UI —
+It began inside `src/Pokey/` on the honest argument that it was pure arithmetic with no UI —
 still true — and was split out once it grew a phoneme inventory, a transition model and a
 letter-to-sound engine, none of which has anything to do with a sound chip.
 
@@ -61,7 +61,7 @@ Each is a separate stage, and the boundaries are where the design decisions live
   conventional textbook values adjusted by ear.** They are a starting point, not
   evidence. Do not cite them.
 - **`VoiceProfile.Deliberate` is fitted to a measured reference** through
-  `tools/voicedump` and a numpy analysis script — the same method `ARCADE-SOURCE.md` §9
+  `samples/voicedump` and a numpy analysis script — the same method `ARCADE-SOURCE.md` §9 (in the RimWalker repository, not this one)
   used on the shot sound.
 
 **Do not port the reverse-engineered S.A.M. tables.** S.A.M. is copyrighted 1982
@@ -114,7 +114,7 @@ because the quantiser normalises to whichever is loudest. It is 0.015.
 
 ## Testing, and how the rules are scored
 
-Tests live in `PokeyLab/SelfTest.cs`. Run:
+Tests live in `tests/Pokey.SelfTest/SelfTest.cs`. Run:
 
 ```
 dotnet run --project PokeyLab -- --selftest
@@ -150,5 +150,5 @@ measured, never committed.
 ## See also
 
 - `docs/POKEYLAB-GUIDE.md` — the user-facing guide, including the phoneme notation
-- `Pokey/CLAUDE.md` — the chip this usually plays through
-- `tools/voicedump` — renders to WAV so output can be measured against a reference
+- `src/Pokey/CLAUDE.md` — the chip this usually plays through
+- `samples/voicedump` — renders to WAV so output can be measured against a reference

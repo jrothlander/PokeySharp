@@ -5,7 +5,7 @@ folder — from an empty file, one instruction at a time, and every step is some
 show on screen. Follow it straight through and you have a song and a video.
 
 Everything here is checked against the reader that actually loads these files
-(`Pokey/Music/SongFile.cs`) rather than from memory. The finished file loads with **no
+(`src/Pokey/Music/SongFile.cs`) rather than from memory. The finished file loads with **no
 problems** and peaks at 0.84, well under clipping.
 
 ---

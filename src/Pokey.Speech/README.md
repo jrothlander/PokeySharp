@@ -32,7 +32,7 @@ limitation — but it is worth knowing before you go looking for it in your own 
 
 `Demo1` has a working example: a page of spoken lines, each synthesised at load from its
 English spelling with no audio file anywhere, and the same sentence playable through a
-POKEY's four bits or through eight. The game-facing part is `Demo1/Voice.cs` and it is
+POKEY's four bits or through eight. The game-facing part is `samples/Demo1/Voice.cs` and it is
 about thirty lines — derive the phonemes, call `Speak`, hold each level until the next to
 get PCM, hand that to a `SoundEffect`.
 
@@ -150,7 +150,7 @@ neutral vowel would pass every structural check.
 
 ## Measuring against a reference
 
-`tools/voicedump` renders an utterance to WAV at the DAC's own rate and bit depth, so
+`samples/voicedump` renders an utterance to WAV at the DAC's own rate and bit depth, so
 your output and a reference recording can go through one analysis. That is how
 `VoiceProfile.Deliberate` was fitted, and it is the only honest way to tune a voice —
 guessing got two of its five parameters backwards.

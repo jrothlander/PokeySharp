@@ -69,7 +69,7 @@ is held on, which of them decay and how fast, and what the game changes between 
 firing and the next.
 
 The bank files are plain text at `banks/` in the repo root, meant to be edited by
-hand. The format is documented in [`Pokey/README.md`](../Pokey/README.md). In the
+hand. The format is documented in [`src/Pokey/README.md`](../../src/Pokey/README.md). In the
 workshop repo this came from, the game reads `banks/rimwalker.sound` too, so a voice
 retuned there and auditioned here is the
 one the game plays.
@@ -204,7 +204,7 @@ driver reads no more rows. The header says *ENDED*, and Enter plays it again.
 | Under it | IV–V–I in the bass, a snare roll into a crash | i–VI–V–i, and one low thud on the last chord |
 | Ends | The held note and the tonic chord fade | Everything was already fading: a release can take at most a quarter-second, so the long fade is built into the volume tables |
 
-`tools/soundexport` writes a song that ends as a single `name.wav`, trimmed to the end
+RimWalker's `tools/soundexport` writes a song that ends as a single `name.wav`, trimmed to the end
 of its fade, rather than an intro and a loop.
 
 **9 — *High Seas*** is a sea-shanty jig in A minor at 109 BPM, and the one song that
@@ -237,7 +237,7 @@ of the same tune sound at once.
 It is in A major rather than D, because the bass table misses D major's B and G by 26 and
 19 cents, and abridged to six statements of the line rather than the original's many. The
 rows are 32nd notes, so the file says `beat 8` and the header's 64 BPM is the piece's own
-quarter note. It ends rather than looping; `tools/soundexport` writes it as one file.
+quarter note. It ends rather than looping; RimWalker's `tools/soundexport` writes it as one file.
 
 **11 — *Alla Hornpipe*** is Handel's, from the *Water Music* (1717), and also public
 domain. The notes were read bar by bar off a public-domain full score. It covers the
@@ -323,7 +323,7 @@ Three things worth having it open for:
   divider. In *Rim Suite* it changes while you watch, going into and out of the heavy
   section.
 
-To use a song in a game that plays audio files, `tools/soundexport --songs` writes each
+To use a song in a game that plays audio files, RimWalker's `tools/soundexport --songs` writes each
 one as an intro and a loop that joins itself without a click.
 
 ### Song files
@@ -368,7 +368,7 @@ the page header, naming the line. The shipped songs are the best examples;
 [`CLAUDE.md`](CLAUDE.md) documents every keyword, including drums, the 16-bit bass and
 tempo changes mid-song.
 
-*Rim Patrol* is also built in code, in `Pokey/Music/SongLibrary.cs`, as the example of setting a
+*Rim Patrol* is also built in code, in `src/Pokey/Music/SongLibrary.cs`, as the example of setting a
 song up programmatically. The file of the same name replaces it when present.
 
 ## Making a sound of your own

@@ -370,7 +370,7 @@ transcription errors come from. `docs/SOUND-RECIPE.md` walks the rest of the way
 running game, and `Demo1` will play your sound back beside two dozen others.
 
 For a whole set rather than one voice, the same four numbers go in a `.sound` file —
-see `Pokey/README.md` for the format. RimWalker reads its own effects from one, so a
+see `src/Pokey/README.md` for the format. RimWalker reads its own effects from one, so a
 voice tuned here can be heard in the game without a rebuild.
 
 ---
@@ -592,10 +592,9 @@ Enter in any of the text boxes renders and speaks.
 
 - **`docs/SOUND-RECIPE.md`** — from a voice dialled in here to one playing in a game.
 - **`docs/SOUND-TUNING.md`** — the envelope page in detail, and the open clock question.
-- **`docs/ARCADE-SOURCE.md` §9** — where the arcade sound data came from, with citations.
-- **`Speech/README.md`** — the synthesiser's own documentation.
-- **`Pokey/README.md`** — the chip emulation, and the `.sound` bank format.
-- **`Demo1/README.md`** — a runnable shelf of chip sounds, a talking demo, and eight
+- **`src/Pokey.Speech/README.md`** — the synthesiser's own documentation.
+- **`src/Pokey/README.md`** — the chip emulation, and the `.sound` bank format.
+- **`samples/Demo1/README.md`** — a runnable shelf of chip sounds, a talking demo, and eight
   songs played the way an Atari 800 played music.
 
 ### The chip's own documentation
@@ -608,7 +607,7 @@ frequencies, and how the high-pass filters are actually built. It does **not** g
 polynomial counters' tap positions or their periods, which is why this project still
 describes those as unverified.
 
-`Pokey/CLAUDE.md` records exactly what that reference confirmed, what it corrected, and
+`src/Pokey/CLAUDE.md` records exactly what that reference confirmed, what it corrected, and
 what it leaves open.
 
 ### If something seems wrong

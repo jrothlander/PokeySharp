@@ -6,7 +6,7 @@ audio API, no dependencies, and it stays that way.**
 That constraint is the whole design. Kept free of all of it, the chip can be driven by
 anything, and several things already do: the two PokeyLab front ends, the headless
 self-test, **RimWalker itself**, and — through `Pokey.Music` — Demo1's song page,
-PokeyTracker and `tools/soundexport`.
+PokeyTracker and RimWalker's `tools/soundexport`.
 
 ## Who drives it, and how differently
 
@@ -121,9 +121,9 @@ agree on, so the binding stays in each app as a single line.
 **`ToWav` is a file format, not an audio API**, so it belongs here: bytes in, bytes out,
 naming nothing either front end links. It takes floats or, for a caller with its own
 renderer such as RimWalker, shorts. It exists for the same reason as the rest of this
-class — `tools/lasers` and the song harness had each written the 44-byte header, and a
+class — `samples/lasers` and the song harness had each written the 44-byte header, and a
 header is exactly what is right in one copy and subtly wrong in the next.
-`PokeyLab/SelfTest.cs`'s *wav files* section reads it back the way a player does: tags
+`tests/Pokey.SelfTest/SelfTest.cs`'s *wav files* section reads it back the way a player does: tags
 at their offsets, the two sizes, the rate fields agreeing, and the body equal to
 `ToPcm16`'s bytes.
 
@@ -189,7 +189,7 @@ writes the `.song` files in `songs/` at the repo root; `NoteTable` turns a note 
 divider for each distortion and says how far off it lands.
 
 **It lives here because a third program needed it.** It was written in Demo1 for the song
-page, then linked into `tools/soundexport` and the song harness, and the rule that moved
+page, then linked into RimWalker's `tools/soundexport` and the song harness, and the rule that moved
 `EnvelopeBank` applies: the song editor would have been the third project linking source
 out of a demo, so the three files moved into this library instead. Demo1, soundexport
 and the editor now reference one copy. The move changed no behaviour — every shipped song
@@ -198,7 +198,7 @@ renders the same samples, which the harness asserts.
 **Like the rest of this project it has no audio API.** `MusicDriver.Render` fills a float
 buffer; whoever owns an audio device streams it — Demo1 through MonoGame, PokeyTracker
 through waveOut, soundexport into a WAV. The format, the driver's design and the reasons
-behind both are documented with the song page, in `Demo1/CLAUDE.md` under "The song page"
+behind both are documented with the song page, in `samples/Demo1/CLAUDE.md` under "The song page"
 and "Song files".
 
 **Another voice can play the driver's notes.** Each `Frame` also records, per channel, the
@@ -213,10 +213,10 @@ skipped lines and mutes included. None of it changes what the chip renders when 
 **`SongExport` is how a song leaves as audio**: rendered through `MusicDriver`, the intro,
 and the loop cut from the second time round so its end runs into its start, with the seam
 measured - and, if asked, the full version: the song once through, rendered from a copy
-of it that ends. It was written in `tools/soundexport`; PokeyTracker's Export audio made it the
+of it that ends. It was written in RimWalker's `tools/soundexport`; PokeyTracker's Export audio made it the
 second caller, so it moved here under the same rule as the rest of this folder. The move
 changed no samples - every song's WAVs are byte-identical before and after. How the cut is
-made and why is in `tools/soundexport/README.md`.
+made and why is in RimWalker's `tools/soundexport/README.md`.
 
 **`MidiFile` is how a song leaves as notes** rather than as sound: a Standard MIDI File, one
 track a channel, drums on channel 10, tempo from the frames a row, velocity from the volume
@@ -236,7 +236,7 @@ because those are choices a person makes in a window. The writer records a time 
 song: a hard cut, from the top, mutes cleared. `Edit` is the same song changed — what an
 editor makes on every keystroke — and keeps the place and every sounding note. `Seek` can
 start from a row, and `Hold` keeps the driver on one row, which is how PokeyTracker plays
-a typed note on its own through the real driver. The reasons are in `Demo1/CLAUDE.md`.
+a typed note on its own through the real driver. The reasons are in `samples/Demo1/CLAUDE.md`.
 
 **`Tune.Instruments` is every instrument a file defined**, by its name in the file, used or
 not. The reader always built them all; only the ones a channel used were reachable, and
@@ -343,12 +343,11 @@ block at their write boundaries. The difference is only the rate and the payload
 - **No UI and no audio API.** A front end may not leak backwards into this project.
 - Keep it deterministic — the poly counters and anything seeded must give the same
   sequence every run, because that is what makes them testable.
-- Tests live in `PokeyLab/SelfTest.cs`, not here, so that this project has no test
+- Tests live in `tests/Pokey.SelfTest/SelfTest.cs`, not here, so that this project has no test
   framework dependency either. Run them with
   `dotnet run --project PokeyLab -- --selftest`.
 
 ## See also
 
-- `docs/ARCADE-SOURCE.md` §9 — where the sound data came from, with citations
 - `docs/SOUND-TUNING.md` — the envelope page and the open clock question
 - `docs/POKEYLAB-GUIDE.md` — how to actually use any of this

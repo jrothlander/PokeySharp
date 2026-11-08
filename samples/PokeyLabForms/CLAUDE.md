@@ -137,7 +137,7 @@ in the repo that could not play a sound it had itself been used to design.
 
 **Reading the bank rather than copying its numbers into a second table** is the whole
 point. A table here would be a second copy of the recipes with nothing keeping it in step,
-and the file is what `Copy as C#` and `tools/lasers` both write.
+and the file is what `Copy as C#` and `samples/lasers` both write.
 
 **A selection now sets the base clock, which is a real change of ownership.** The Base
 clock combo used to be the only thing that set `Chip.BaseClockHz` and so never needed to
@@ -165,7 +165,7 @@ never throws, so a mistyped line is skipped and recorded, and a caller that swal
 
 ## The AUDC delta annotation
 
-`StepEnvelope.VolumeDelta` (in `Pokey/`, deliberately not here) answers what a delta is
+`StepEnvelope.VolumeDelta` (in `src/Pokey/`, deliberately not here) answers what a delta is
 actually worth once `Apply` masks it into the four-bit volume nibble: **only `delta mod 16`
 does anything.** `-8` and `+8` are the same edit; `+16`, `-32` and `+64` are all no-ops.
 The column clamps to -64..64 — one shared `Limits` row serving both grids, which is right
@@ -281,13 +281,13 @@ containing a `Percent` column is the other half of the same trap.
 | `Views/` | Scope, sweep graph, poly trains, register bits — handed data, never the chip |
 | `Panels/` | Channel strips, AUDCTL, envelope, measured verdict, voice, poly |
 
-`ScopeTrace.cs` is **linked** from `PokeyLab/`, not copied, so a fix to the trigger search
+`ScopeTrace.cs` is **linked** from `samples/shared/`, not copied, so a fix to the trigger search
 lands in both front ends. It keeps its `PokeyLab` namespace because it is PokeyLab's file.
 
 `banks/*.sound` is **copied** beside the executable by the csproj, exactly as `Demo1`
 takes it. Copied and not embedded because the point of the format is that a file can be
 edited and reopened; embedding would make the shipped banks the only ones that could never
-be changed. The set includes `lasers.sound`, which `tools/lasers` writes.
+be changed. The set includes `lasers.sound`, which `samples/lasers` writes.
 
 ## Copy as C# — how a voice leaves the lab
 
@@ -302,8 +302,8 @@ six months later. Anything reading that table destructures three fields now, not
 
 The output is wrapped for chains longer than three steps, using `Environment.NewLine`
 rather than `\n` — a mixed-ending block pasted into an editor is its own small
-annoyance. See [`docs/SOUND-RECIPE.md`](../docs/SOUND-RECIPE.md) for the loop this
-feeds, and [`Pokey/README.md`](../Pokey/README.md) for the `.sound` file format if a
+annoyance. See [`docs/SOUND-RECIPE.md`](../../docs/SOUND-RECIPE.md) for the loop this
+feeds, and [`src/Pokey/README.md`](../../src/Pokey/README.md) for the `.sound` file format if a
 whole set is wanted rather than one voice.
 
 ## Conventions
@@ -318,7 +318,7 @@ whole set is wanted rather than one voice.
 ## Testing
 
 There is **no `--selftest` here**, deliberately. The emulation checks in
-`PokeyLab/SelfTest.cs` already cover the shared libraries, and duplicating them would buy
+`tests/Pokey.SelfTest/SelfTest.cs` already cover the shared libraries, and duplicating them would buy
 two copies to keep in step and no coverage.
 
 ```
@@ -328,4 +328,4 @@ dotnet run --project PokeyLab -- --selftest
 ## See also
 
 - `docs/POKEYLAB-GUIDE.md` — how to actually use this window
-- `Pokey/CLAUDE.md`, `Speech/CLAUDE.md` — the two libraries it drives
+- `src/Pokey/CLAUDE.md`, `src/Pokey.Speech/CLAUDE.md` — the two libraries it drives

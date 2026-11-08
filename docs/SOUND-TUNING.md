@@ -4,7 +4,7 @@ What every register does, how to read the target box, and how to go after the on
 thing that is still known to be wrong.
 
 For where the numbers came from — the decoded sound engine and the measurements
-taken off the reference captures — see [`ARCADE-SOURCE.md`](ARCADE-SOURCE.md) §9.
+taken off the reference captures — see `ARCADE-SOURCE.md` §9 in the RimWalker repository, which is not public.
 This document is about *using* the tool.
 
 > This guide used to describe an **F8** page inside RimWalker. That page was retired
@@ -128,7 +128,7 @@ divides its own clock input by 28 to make the "64 kHz" clock, which is why the
 Atari's figure is 63,921 and never the round number its name suggests. 1.512 MHz ÷
 28 is 54,000, full stop. So `RIMWALKER 0.896` is not an unknown clock waiting to be
 explained; it is a **known-wrong** one, kept because the game is tuned to it. See
-`ARCADE-SOURCE.md` §9.
+`ARCADE-SOURCE.md` §9 (in the RimWalker repository, not this one).
 
 ### `AUDF` and `AUDC` — `STEPS`, `EDITING STEP`, and the four fields
 
@@ -244,7 +244,7 @@ evidence for each other: **the 32kHz clock is not an independent finding.** The
 measured start pitch is one equation with two unknowns —
 `f = clock / (2 x (AUDF + 1))` — so fixing `AUDF` at 16 and solving gives 32kHz,
 while fixing the clock at Tempest's 54kHz and solving gives `AUDF` ≈ 27. The
-capture supports both equally. `ARCADE-SOURCE.md` §9 has the full argument.
+capture supports both equally. `ARCADE-SOURCE.md` §9 (in the RimWalker repository, not this one) has the full argument.
 
 Where the divider *should* end: at an effective 32 kHz, a 170 Hz target needs
 `AUDF + 1 = 16000/170`, so **`AUDF` ≈ 93** rather than 233.
@@ -322,9 +322,9 @@ this page is for narrowing down what to expect before going to look.
 2. Play it against the reference clips in `sounds/` with `LOOP` on.
 3. Get the values out. There are now two places they can go, and they are for
    different things:
-   - **`banks/rimwalker.sound`** to hear it in the game without a rebuild. `Sfx`
+   - **RimWalker's `banks/rimwalker.sound`** to hear it in the game without a rebuild. `Sfx`
      reads that file at startup and looks each voice up by name. This is the fast
-     loop, and [`Demo1`](../Demo1/README.md) will play the same file back to you.
+     loop, and [`Demo1`](../samples/Demo1/README.md) will play the same file back to you.
    - **`Core/Sfx.cs`** to make it the answer — the `*Audf` / `*Audc` constants for
      the envelope, `PokeyTickHz` / `PokeyPitchFudge` for the clock — **with a
      comment saying what the evidence was.** The constants are what the game falls
@@ -351,7 +351,7 @@ the open gap rather than a regression — if you close it, that line is where yo
 see it, and this document and ARCADE-SOURCE §9 both need updating to match.
 
 Its `the sound bank file` section covers the three ways an edit to
-`banks/rimwalker.sound` goes wrong **silently**: a renamed sound falls back to the
+RimWalker's `banks/rimwalker.sound` goes wrong **silently**: a renamed sound falls back to the
 constant so the edit appears to do nothing, a chain longer than one step plays only
 its first because `Sfx`'s renderer predates `StepEnvelope`, and a changed clock moves
 every pitch in the game. If an edit there seems to have had no effect, run this first.
