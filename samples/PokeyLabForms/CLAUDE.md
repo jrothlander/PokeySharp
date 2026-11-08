@@ -130,7 +130,7 @@ scrollbar. Anything new on this panel comes out of that budget.
 
 ## The Sound list reads the banks, and that makes the chip the clock's authority
 
-The list is Tempest's eight compiled-in voices followed by every sound in every `.sound`
+The list is one compiled-in voice, the library's zap, followed by every sound in every `.sound`
 file in `banks/`, discovered once at construction from beside the executable. Those files
 already existed and `Demo1` and `RimWalker` already read them; the lab was the one place
 in the repo that could not play a sound it had itself been used to design.
@@ -144,12 +144,16 @@ clock combo used to be the only thing that set `Chip.BaseClockHz` and so never n
 read it back. A bank carries the clock it was designed against — every pitch in it scales
 with that number, so RimWalker's set at Tempest's clock is in the wrong key, not slightly
 off — so loading one has to move the clock, and `AudctlPanel.SyncFromChip` now follows the
-chip like every other readout on the form. **The ROM voices carry Tempest's clock for the
-same reason**: once anything in the list can change it, a voice that leaves it alone
-inherits whichever machine the previous selection picked, and Player shot would silently
-play a fifth out.
+chip like every other readout on the form. **The built-in voice carries Tempest's clock
+for the same reason**: once anything in the list can change it, a voice that leaves it
+alone inherits whichever machine the previous selection picked, and would silently play a
+fifth out.
 
-Tick Hz follows a *bank* sound but not a ROM one: every ROM voice already runs at the
+Tempest's own eight voices used to be compiled in here too. They are the ROM's numbers, so
+they moved to a private bank (`banks/tempest.sound` in RimWalker) on 2026-11-08; to
+audition them, copy that file into `banks/` beside the lab's executable.
+
+Tick Hz follows a *bank* sound but not the built-in one: it already runs at the
 220 Hz the app opens at, and the tick is a knob the guide asks you to turn. The recipe's
 `amp` is ignored — this lab has no output volume, and the chip's own volume nibble is
 inside AUDC where it can be seen.
