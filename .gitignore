@@ -23,6 +23,3 @@ artifacts/
 
 # Piano SoundFonts: large, and each under its own licence - see soundfonts/README.md
 soundfonts/*.sf2
-
-# One machine's paths - see samples/PokeyTracker/local.props.example
-local.props

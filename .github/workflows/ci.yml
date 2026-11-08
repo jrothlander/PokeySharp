@@ -33,7 +33,6 @@ jobs:
 
       - name: Build the samples
         run: |
-          dotnet build samples/PokeyTracker/PokeyTracker.csproj -c Release
           dotnet build samples/PokeyLabForms/PokeyLabForms.csproj -c Release
           dotnet build samples/lasers/lasers.csproj -c Release
           dotnet build samples/voicedump/voicedump.csproj -c Release

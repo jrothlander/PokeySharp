@@ -54,14 +54,12 @@ right. It sings, too.
 
 | | |
 |---|---|
-| `samples/PokeyTracker` | A tracker: open a song, play it, edit it from an on-screen piano, watch the registers change. WinForms. |
 | `samples/PokeyLabForms` | The laboratory — turn a knob, hear what moves. The fastest way to learn what AUDCTL does. WinForms. |
 | `samples/Demo1` | The demo that plays all of it: sounds, speech and songs. MonoGame. |
 | `samples/lasers` | The API applied to ten laser shots, one layer at a time. Console; writes WAVs. |
 | `samples/voicedump` | Speech to a WAV from the command line. Console. |
 
 ```
-dotnet run --project samples/PokeyTracker
 dotnet run --project samples/PokeyLabForms
 ```
 
