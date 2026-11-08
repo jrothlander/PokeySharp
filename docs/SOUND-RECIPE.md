@@ -364,5 +364,4 @@ whether the problem is the voice or the wiring in about a minute.
 
 - **`samples/Demo1/`** — twenty-two of these as a running program; see above.
 - **`docs/POKEYLAB-GUIDE.md`** — the lab from nothing, if any of the above was opaque.
-- **`docs/SOUND-TUNING.md`** — the envelope panel in depth.
 - **`src/Pokey/README.md`** — the library's own API.

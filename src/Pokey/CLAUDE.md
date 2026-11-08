@@ -349,5 +349,4 @@ block at their write boundaries. The difference is only the rate and the payload
 
 ## See also
 
-- `docs/SOUND-TUNING.md` — the envelope page and the open clock question
 - `docs/POKEYLAB-GUIDE.md` — how to actually use any of this

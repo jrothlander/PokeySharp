@@ -333,8 +333,8 @@ effective delta, the levels it actually visits, and how often it repeats. A delt
 moves nothing is coloured as a warning, because otherwise it reads as a broken control:
 the edit is accepted and the sound is identical.
 
-The grid still shows the ROM's own number, not the effective one. `−8` is what is in the
-cartridge and what **Copy as C#** emits; the interpretation stays in the note and the
+The grid still shows the table's own number, not the effective one. `−8` is what is in the
+table and what **Copy as C#** emits; the interpretation stays in the note and the
 tooltip where it cannot be mistaken for the data.
 
 ### The graph, and the measured box
@@ -342,13 +342,13 @@ tooltip where it cannot be mistaken for the data.
 The graph plots the sweep tick by tick, drawn from the same arithmetic that drives the
 registers — so it is the sound being played, not an idealisation.
 
-The green **MEASURED** box is where real recordings of a real cabinet say the player's
+The green **MEASURED** box is where real recordings of a Tempest cabinet say its player's
 shot should start and end. The readout beneath judges four numbers against those bands
 and marks each **OK** or **no**.
 
-You will notice the shot does not currently land in the box. That is not a bug in the
-display — it is a genuine unsolved question about the clock, and the box is there so it
-cannot be quietly forgotten. `docs/SOUND-TUNING.md` goes into it properly.
+The box belongs to that one sound, so nothing in this repository is expected to land in
+it: the built-in zap and the bank sounds are other sounds entirely. Untick **Show the measured
+target box** to give the graph to the sound you are working on.
 
 **Switch it off with "Show the measured target box"** beneath the graph, and the axes go
 with it. That second part is the point. While the box is shown the axes are held wide
@@ -591,7 +591,6 @@ Enter in any of the text boxes renders and speaks.
 ### Going deeper
 
 - **`docs/SOUND-RECIPE.md`** — from a voice dialled in here to one playing in a game.
-- **`docs/SOUND-TUNING.md`** — the envelope page in detail, and the open clock question.
 - **`src/Pokey.Speech/README.md`** — the synthesiser's own documentation.
 - **`src/Pokey/README.md`** — the chip emulation, and the `.sound` bank format.
 - **`samples/Demo1/README.md`** — a runnable shelf of chip sounds, a talking demo, and eight
