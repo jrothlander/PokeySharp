@@ -1,6 +1,6 @@
 # DRIFT CREDITS
 # THIS COPY HAS A LEAD MELODY ON CHANNEL 3, WRITTEN BY CLAUDE AS AN EXAMPLE of what could go
-# there. It is not Greg's writing. The accompaniment is the same as in songs/drift/.
+# there. The accompaniment is the same as in songs/drift/.
 # The credits: the title's chords come back, a broken chord over the roots and a half-time
 # beat; the chorus takes the Royal Road on open tenths. Plays once and ends.
 # DRIFT, a chill suite for one game: TITLE, CAFE, FIELD, RAIN, NIGHT, VICTORY, GAME OVER and
@@ -90,7 +90,7 @@ channel 2 notes BASS
   track END    Bb3 . . .  . . . .  . . . .  . . . .
 
 channel 3 notes LEAD
-  note  An example lead melody, written by Claude - not Greg's. The tracks are named M + the section's chord track.
+  note  An example lead melody, written by Claude. The tracks are named M + the section's chord track.
   voice LEAD
   track MA D5 . . .  . . Bb4 .  . . G4 .  . . . .
   track MA2 Eb5 . . .  . . D5 .  . . Bb4 .  G4 . . .

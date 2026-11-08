@@ -1,6 +1,6 @@
 # LANTERN VICTORY
 # THIS COPY HAS A LEAD MELODY ON CHANNEL 3, WRITTEN BY CLAUDE AS AN EXAMPLE of what could go
-# there. It is not Greg's writing. The accompaniment is the same as in songs/lantern/.
+# there. The accompaniment is the same as in songs/lantern/.
 # A small victory: a short jingle, IV - V - I, chip chords and a last hit. Plays once.
 # LANTERN, a ballad suite for one game: TITLE, VILLAGE, JOURNEY, MEMORY, NIGHT, VICTORY,
 # GAME OVER and CREDITS. All in C major or its relative A minor, piano-led, on one set of
@@ -75,7 +75,7 @@ channel 2 notes BASS
   track END    C1 . . .  . . . .  . . . .  . . . .
 
 channel 3 notes LEAD
-  note  An example lead melody, written by Claude - not Greg's. The tracks are named M + the section's chord track.
+  note  An example lead melody, written by Claude. The tracks are named M + the section's chord track.
   voice LEAD
   track MINTRO C5 . C5 .  C5 . . .  A4 . C5 .  F5 . . .
   track MINTRO2 D5 . D5 .  D5 . . .  B4 . D5 .  G5 . . .

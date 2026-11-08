@@ -1,6 +1,6 @@
 # DRIFT TITLE
 # THIS COPY HAS A LEAD MELODY ON CHANNEL 3, WRITTEN BY CLAUDE AS AN EXAMPLE of what could go
-# there. It is not Greg's writing. The accompaniment is the same as in songs/drift/.
+# there. The accompaniment is the same as in songs/drift/.
 # The title screen: New song's Chill style as it comes, in B flat - a broken chord over long
 # roots and a half-time beat, from the minor chord; the chorus takes the Royal Road with an
 # octave bass.
@@ -95,7 +95,7 @@ channel 2 notes BASS
   track BUILD2 Eb3 . Eb3 .  Eb3 . Eb3 .  F3 . F3 .  F3 . F3 .
 
 channel 3 notes LEAD
-  note  An example lead melody, written by Claude - not Greg's. The tracks are named M + the section's chord track.
+  note  An example lead melody, written by Claude. The tracks are named M + the section's chord track.
   voice LEAD
   track MA D5 . . Bb4  . . G4 .  . . A4 .  Bb4 . . .
   track MA2 G4 . . .  . . Bb4 .  . . . .  G4 . Eb4 .

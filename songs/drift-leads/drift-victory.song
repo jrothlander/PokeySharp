@@ -1,6 +1,6 @@
 # DRIFT VICTORY
 # THIS COPY HAS A LEAD MELODY ON CHANNEL 3, WRITTEN BY CLAUDE AS AN EXAMPLE of what could go
-# there. It is not Greg's writing. The accompaniment is the same as in songs/drift/.
+# there. The accompaniment is the same as in songs/drift/.
 # A small win: a relaxed jingle, IV - V - I, chip chords and a last hit. Plays once.
 # DRIFT, a chill suite for one game: TITLE, CAFE, FIELD, RAIN, NIGHT, VICTORY, GAME OVER and
 # CREDITS. All in B flat major or its relative G minor, laid-back, on one set of
@@ -77,7 +77,7 @@ channel 2 notes BASS
   track END    Bb3 . . .  . . . .  . . . .  . . . .
 
 channel 3 notes LEAD
-  note  An example lead melody, written by Claude - not Greg's. The tracks are named M + the section's chord track.
+  note  An example lead melody, written by Claude. The tracks are named M + the section's chord track.
   voice LEAD
   track MINTRO Bb4 . Bb4 .  Bb4 . . .  G4 . Bb4 .  Eb5 . . .
   track MINTRO2 C5 . C5 .  C5 . . .  A4 . C5 .  F5 . . .

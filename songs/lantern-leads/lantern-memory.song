@@ -1,6 +1,6 @@
 # LANTERN MEMORY
 # THIS COPY HAS A LEAD MELODY ON CHANNEL 1, WRITTEN BY CLAUDE AS AN EXAMPLE of what could go
-# there. It is not Greg's writing. The accompaniment is the same as in songs/lantern/.
+# there. The accompaniment is the same as in songs/lantern/.
 # A sad scene or flashback: the relative minor, slow six-eight, the 16-bit piano rolling
 # 1-5-8-10; the chorus turns to Moonlight triplets.
 # LANTERN, a ballad suite for one game: TITLE, VILLAGE, JOURNEY, MEMORY, NIGHT, VICTORY,
@@ -39,7 +39,7 @@ instrument PIANO
   release    3
 
 channel 1 notes LEAD
-  note  An example lead melody, written by Claude - not Greg's. The tracks are named M + the section's chord track.
+  note  An example lead melody, written by Claude. The tracks are named M + the section's chord track.
   voice LEAD
   track MA E5 . .  . . .  C5 . .  A4 . .
   track MA2 C5 . .  . . .  A4 . .  F4 . .

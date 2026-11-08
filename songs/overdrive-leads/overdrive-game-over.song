@@ -1,6 +1,6 @@
 # OVERDRIVE GAME OVER
 # THIS COPY HAS A LEAD MELODY ON CHANNEL 1, WRITTEN BY CLAUDE AS AN EXAMPLE of what could go
-# there. It is not Greg's writing. The accompaniment is the same as in songs/overdrive/.
+# there. The accompaniment is the same as in songs/overdrive/.
 # Game over: a slow falling jingle, held 16-bit piano chords, no drums. Plays once.
 # OVERDRIVE, a suite for one game: TITLE, STAGE, BOSS, CALM, DUNGEON, VICTORY, GAME OVER and
 # CREDITS. All in F# minor or its relative A major, on one set of instruments, so the cues
@@ -36,7 +36,7 @@ instrument PIANO
   release    3
 
 channel 1 notes LEAD
-  note  An example lead melody, written by Claude - not Greg's. The tracks are named M + the section's chord track.
+  note  An example lead melody, written by Claude. The tracks are named M + the section's chord track.
   voice LEAD
   track MINTRO C#5 . . .  . . . .  B4 . . .  A4 . . .
   track MINTRO2 G#4 . . .  . . . .  G#4 . . .  E4 . . .

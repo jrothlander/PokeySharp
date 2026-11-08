@@ -1,6 +1,6 @@
 # COUNTRY SOUL DEMO
 # THIS COPY HAS A LEAD MELODY ON CHANNEL 3, WRITTEN BY CLAUDE AS AN EXAMPLE of what could go
-# there. It is not Greg's writing. Everything else is country-soul-skeleton.song unchanged.
+# there. Everything else is country-soul-skeleton.song unchanged.
 # The lead follows the skeleton's own brief: a low, talky verse that circles G# and B with
 # repeated notes, a chorus that climbs from B4 to a held B5 and lets its long notes ring (B5,
 # not G#5: on the tone table G#5 is 22 cents sharp, and every note here is in tune), a sparse
@@ -115,7 +115,7 @@ channel 2 notes BASS
   track END     G#3 . .  . . .  . . .  . . .
 
 channel 3 notes LEAD
-  note  An example lead melody, written by Claude - not Greg's.
+  note  An example lead melody, written by Claude.
   voice LEAD
   track INTRO . . .  . . .  . . D#5  B4 . G#4
   track INTRO2 G#4 . .  . . B4  A#4 . .  . . -

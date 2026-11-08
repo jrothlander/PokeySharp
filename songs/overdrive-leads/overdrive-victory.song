@@ -1,6 +1,6 @@
 # OVERDRIVE VICTORY
 # THIS COPY HAS A LEAD MELODY ON CHANNEL 3, WRITTEN BY CLAUDE AS AN EXAMPLE of what could go
-# there. It is not Greg's writing. The accompaniment is the same as in songs/overdrive/.
+# there. The accompaniment is the same as in songs/overdrive/.
 # Stage clear: a short jingle in the relative major, IV - V - I, chip chords and a last hit.
 # Plays once.
 # OVERDRIVE, a suite for one game: TITLE, STAGE, BOSS, CALM, DUNGEON, VICTORY, GAME OVER and
@@ -76,7 +76,7 @@ channel 2 notes BASS
   track END    A1 . . .  . . . .  . . . .  . . . .
 
 channel 3 notes LEAD
-  note  An example lead melody, written by Claude - not Greg's. The tracks are named M + the section's chord track.
+  note  An example lead melody, written by Claude. The tracks are named M + the section's chord track.
   voice LEAD
   track MINTRO A4 . A4 .  A4 . . .  F#4 . A4 .  D5 . . .
   track MINTRO2 B4 . B4 .  B4 . . .  G#4 . B4 .  E5 . . .

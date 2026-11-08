@@ -1,6 +1,6 @@
 # LANTERN VILLAGE
 # THIS COPY HAS A LEAD MELODY ON CHANNEL 3, WRITTEN BY CLAUDE AS AN EXAMPLE of what could go
-# there. It is not Greg's writing. The accompaniment is the same as in songs/lantern/.
+# there. The accompaniment is the same as in songs/lantern/.
 # The village or hub: a gentle waltz, oom-pah-pah on soft keys; the chorus rolls an arpeggio
 # round the circle of fifths.
 # LANTERN, a ballad suite for one game: TITLE, VILLAGE, JOURNEY, MEMORY, NIGHT, VICTORY,
@@ -92,7 +92,7 @@ channel 2 notes BASS
   track BRIDGE2 F2 . . .  . . . .  . . . .
 
 channel 3 notes LEAD
-  note  An example lead melody, written by Claude - not Greg's. The tracks are named M + the section's chord track.
+  note  An example lead melody, written by Claude. The tracks are named M + the section's chord track.
   voice LEAD
   track MA G4 . . .  C5 . . .  E5 . . .
   track MA2 F5 . . .  E5 . . .  C5 . . .

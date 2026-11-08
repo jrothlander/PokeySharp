@@ -1,6 +1,6 @@
 # LANTERN CREDITS
 # THIS COPY HAS A LEAD MELODY ON CHANNEL 3, WRITTEN BY CLAUDE AS AN EXAMPLE of what could go
-# there. It is not Greg's writing. The accompaniment is the same as in songs/lantern/.
+# there. The accompaniment is the same as in songs/lantern/.
 # The credits: six-eight, soft keys rolling 1-5-8-10 over a gentle beat; the chorus goes
 # round the circle of fifths. Plays once and ends.
 # LANTERN, a ballad suite for one game: TITLE, VILLAGE, JOURNEY, MEMORY, NIGHT, VICTORY,
@@ -90,7 +90,7 @@ channel 2 notes BASS
   track END    C1 . .  . . .  . . .  . . .
 
 channel 3 notes LEAD
-  note  An example lead melody, written by Claude - not Greg's. The tracks are named M + the section's chord track.
+  note  An example lead melody, written by Claude. The tracks are named M + the section's chord track.
   voice LEAD
   track MA E5 . .  D5 C5 D5  E5 . .  G4 . .
   track MA2 C5 . .  B4 A4 B4  C5 . .  E4 . .

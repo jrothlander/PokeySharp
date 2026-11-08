@@ -1,6 +1,6 @@
 # OVERDRIVE TITLE
 # THIS COPY HAS A LEAD MELODY ON CHANNEL 1, WRITTEN BY CLAUDE AS AN EXAMPLE of what could go
-# there. It is not Greg's writing. The accompaniment is the same as in songs/overdrive/.
+# there. The accompaniment is the same as in songs/overdrive/.
 # The title screen: stately, no drums, a 16-bit piano sweeping the stage's chords; the
 # chorus descends.
 # OVERDRIVE, a suite for one game: TITLE, STAGE, BOSS, CALM, DUNGEON, VICTORY, GAME OVER and
@@ -37,7 +37,7 @@ instrument PIANO
   release    3
 
 channel 1 notes LEAD
-  note  An example lead melody, written by Claude - not Greg's. The tracks are named M + the section's chord track.
+  note  An example lead melody, written by Claude. The tracks are named M + the section's chord track.
   voice LEAD
   track MA F#4 . . .  A4 . . .  C#5 . . .  . . . .
   track MA2 A4 . . .  D5 . . .  . . . .  C#5 . A4 .

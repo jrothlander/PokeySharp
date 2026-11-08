@@ -1,6 +1,6 @@
 # LANTERN GAME OVER
 # THIS COPY HAS A LEAD MELODY ON CHANNEL 1, WRITTEN BY CLAUDE AS AN EXAMPLE of what could go
-# there. It is not Greg's writing. The accompaniment is the same as in songs/lantern/.
+# there. The accompaniment is the same as in songs/lantern/.
 # Game over: slow held 16-bit piano chords falling in A minor, no drums. Plays once.
 # LANTERN, a ballad suite for one game: TITLE, VILLAGE, JOURNEY, MEMORY, NIGHT, VICTORY,
 # GAME OVER and CREDITS. All in C major or its relative A minor, piano-led, on one set of
@@ -36,7 +36,7 @@ instrument PIANO
   release    3
 
 channel 1 notes LEAD
-  note  An example lead melody, written by Claude - not Greg's. The tracks are named M + the section's chord track.
+  note  An example lead melody, written by Claude. The tracks are named M + the section's chord track.
   voice LEAD
   track MINTRO E5 . . .  . . . .  D5 . . .  C5 . . .
   track MINTRO2 B4 . . .  . . . .  B4 . . .  G4 . . .

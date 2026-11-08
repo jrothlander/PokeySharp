@@ -1,6 +1,6 @@
 # DRIFT CAFE
 # THIS COPY HAS A LEAD MELODY ON CHANNEL 3, WRITTEN BY CLAUDE AS AN EXAMPLE of what could go
-# there. It is not Greg's writing. The accompaniment is the same as in songs/drift/.
+# there. The accompaniment is the same as in songs/drift/.
 # The cafe, shop or hub: the jazz turnaround, soft keys rocking 1-5-8-9-10 over a walking
 # bass; the chorus turns to the 50s progression.
 # DRIFT, a chill suite for one game: TITLE, CAFE, FIELD, RAIN, NIGHT, VICTORY, GAME OVER and
@@ -92,7 +92,7 @@ channel 2 notes BASS
   track BRIDGE2 F3 . . .  . . . .  . . . .  . . . .
 
 channel 3 notes LEAD
-  note  An example lead melody, written by Claude - not Greg's. The tracks are named M + the section's chord track.
+  note  An example lead melody, written by Claude. The tracks are named M + the section's chord track.
   voice LEAD
   track MA Eb5 . . D5  . . C5 .  G4 . . .  Bb4 . . .
   track MA2 A4 . . C5  . . F5 .  Eb5 . . .  C5 . . .

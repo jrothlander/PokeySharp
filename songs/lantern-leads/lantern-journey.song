@@ -1,6 +1,6 @@
 # LANTERN JOURNEY
 # THIS COPY HAS A LEAD MELODY ON CHANNEL 3, WRITTEN BY CLAUDE AS AN EXAMPLE of what could go
-# there. It is not Greg's writing. The accompaniment is the same as in songs/lantern/.
+# there. The accompaniment is the same as in songs/lantern/.
 # The road between places: the pop progression, an open-tenth pattern over a half-time beat;
 # the chorus takes the Royal Road.
 # LANTERN, a ballad suite for one game: TITLE, VILLAGE, JOURNEY, MEMORY, NIGHT, VICTORY,
@@ -86,7 +86,7 @@ channel 2 notes BASS
   track B4     A1 . E2 .  A1 . E2 .  G1 . D2 .  G1 . D2 .
 
 channel 3 notes LEAD
-  note  An example lead melody, written by Claude - not Greg's. The tracks are named M + the section's chord track.
+  note  An example lead melody, written by Claude. The tracks are named M + the section's chord track.
   voice LEAD
   track MA E4 . G4 .  C5 . . .  E5 . D5 .  C5 . . .
   track MA2 B4 . . .  G4 . . .  D5 . . .  . . . .
