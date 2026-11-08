@@ -1,0 +1,187 @@
+# MARS, THE BRINGER OF WAR - Holst, The Planets, Op. 32, no. 1 (written 1914, published 1921).
+# The format is in Demo1/CLAUDE.md, under "Song files". Instruments are tables with
+# one entry per frame; each channel holds named tracks; the lines at the end are the
+# order list. In a track '.' holds and '-' releases. '#' starts a comment.
+#
+# Public domain in the United States, the United Kingdom and the European Union: published in
+# 1921, and Holst died in 1934. The notes of bars 1 to 20 were read bar by bar off the full
+# score Goodwin & Tabb published in 1921 (IMSLP 05396).
+#
+# The ostinato - a triplet, two quarters, two eighths, a quarter, on G, over and over, the
+# strings hitting it with the wood of the bow - then the theme in the bassoons and horns: G
+# held eight beats, up to D, down a semitone to D flat. Again, and this time it climbs, D flat
+# to A flat, G to D, the oboes carrying it an octave higher, until the wind and brass crash
+# onto a D flat chord against the G and let it die away. At figure I the trombones start the
+# theme again, quietly, from D flat. The song loops there back to the ostinato. Everything
+# after bar 20 - the build to the great brass climax, the march, the end - is left out.
+#
+# A row is a sixth of a quarter note, a line a bar of 5/4 at 150 quarter notes a minute -
+# Holst's Allegro. Six rows a beat is what lets the ostinato's triplet and its eighths both
+# land on rows, and it is also why the sheet music page writes the bars as 15/8: it counts
+# six rows as a dotted quarter. The key line says C major only so that the sheet has no key
+# signature, as Holst's score has none; the music centres on G.
+#
+# What four channels keep. Channel 1 is the ostinato, on the violins' G. Channel 2 is the
+# upper voice: the horns, the oboes, the chord, the first trombone. Channels 3 and 4 are a
+# 16-bit bass - the bassoons, the bass oboe, the bass trombone - down to D flat 2, in tune.
+# The D flat chord of bars 14 to 16 is Holst's D flat, F, A flat, C flat and E flat; channel 2
+# plays its D flat major triad and the bass holds the bass clarinet's F.
+
+song   MARS
+key    C MAJOR
+rows   30
+beat   6
+
+# Col legno: the wood of the bow on the string - a tap, gone at once.
+instrument COL_LEGNO
+  table      tone
+  volume     7 6 4 3 2 1 0
+  distortion tone
+  release    1
+
+instrument CRESCENDO
+  table      tone
+  volume     9 8 6 4 3 2 1 0
+  distortion tone
+  release    1
+
+instrument MEZZO_FORTE
+  table      tone
+  volume     12 10 8 6 4 3 2 1 0
+  distortion tone
+  release    1
+
+instrument HORN
+  table      tone
+  volume     2 3 4 5 5 6 6 6 7
+  distortion tone
+  release    2
+
+instrument OBOE
+  table      tone
+  volume     6 8 9 9 9 8 8 8
+  distortion tone
+  vibrato    0 1 0 -1
+  delay      12
+  release    2
+
+instrument BASSOON
+  table      wide
+  volume     3 4 5 6 6 6 7
+  distortion tone
+  release    2
+
+instrument DOUBLE_BASSOON
+  table      wide
+  volume     5 6 7 8 8 8 9
+  distortion tone
+  release    2
+
+instrument BASS_OBOE
+  table      wide
+  volume     7 8 9 10 10 10 10
+  distortion tone
+  release    2
+
+# The chord: struck mf with an accent, then a diminuendo across two bars.
+instrument CHORD
+  table      tone
+  volume     13 12 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+  distortion tone
+  release    2
+
+instrument CHORD_BASS
+  table      wide
+  volume     12 11 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+  distortion tone
+  release    2
+
+instrument TROMBONE
+  table      tone
+  volume     2 3 4 4 5 5 5 6
+  distortion tone
+  release    2
+
+instrument BASS_TROMBONE
+  table      wide
+  volume     3 4 5 5 6 6 6 7
+  distortion tone
+  release    2
+
+channel 1 notes OSTINATO
+  note  G, in the rhythm of the whole movement: a triplet, two quarters, two eighths, a quarter.
+  voice COL_LEGNO
+  track O1 G3 . G3 . G3 .  G3 . . . . .  G3 . . . . .  G3 . . G3 . .  G3 . . . . .
+  track O2 @CRESCENDO G3 . G3 . G3 .  G3 . . . . .  G3 . . . . .  G3 . . G3 . .  G3 . . . . .
+  track O3 @MEZZO_FORTE G3 . G3 . G3 .  G3 . . . . .  G3 . . . . .  G3 . . G3 . .  G3 . . . . .
+
+channel 2 notes UPPER
+  note  The horns, the oboes, the D flat chord, the first trombone.
+  voice HORN
+  track U1  G3 . . . . .  . . . . . .  . . . . . .  . . . . . .  . . . . . .
+  track U2  . . . . . .  . . . . . .  . . . . . .  D4 . . . . .  . . . . . .
+  track U3  Db4 . . . . .  . . . . . .  . . . . . .  . . . . . .  . . . . . .
+  track U4  . . . . . .  . . . . . .  . . . . . .  - . . . . .  . . . . . .
+  track U5  Db4 . . . . .  . . . . . .  . . . . . .  Ab3 . . . . .  . . . . . .
+  track U6  @OBOE Db4 . . . . .  . . . . . .  . . . . . .  Ab4 . . . . .  . . . . . .
+  track U7  @OBOE G4 . . . . .  . . . . . .  . . . . . .  D5 . . . . .  . . . . . .
+  track U8  @CHORD Db . . . . .  . . . . . .  . . . . . .  . . . . . .  . . . . . .
+  track U9  . . . . . .  . . . . . .  . . . . . .  . . . . . .  . . . . . .
+  track U10 @CHORD Db . . . . .  - . . . . .  . . . . . .  . . . . . .  . . . . . .
+  track U11 @TROMBONE Db3 . . . . .  . . . . . .  . . . . . .  . . . . . .  . . . . . .
+  track U12 @TROMBONE . . . . . .  . . . . . .  . . . . . .  Bb3 . . . . .  . . . . . .
+  track U13 @TROMBONE A3 . . . . .  . . . . . .  . . . . . .  . . . . . .  . . . . . .
+  track U14 @TROMBONE . . . . . .  . . . . . .  . . . . . .  - . . . . .  . . . . . .
+
+channel 3 pair LOW BYTE
+  note  The low byte of the bass. AUDCTL 28 joins channels 3 and 4 on the 1.79 MHz clock.
+
+channel 4 notes BASS
+  note  The bassoons, the bass oboe, the bass trombone.
+  voice BASSOON
+  track B1  G2 . . . . .  . . . . . .  . . . . . .  . . . . . .  . . . . . .
+  track B2  . . . . . .  . . . . . .  . . . . . .  D3 . . . . .  . . . . . .
+  track B3  Db3 . . . . .  . . . . . .  . . . . . .  . . . . . .  . . . . . .
+  track B4  . . . . . .  . . . . . .  . . . . . .  - . . . . .  . . . . . .
+  track B5  @DOUBLE_BASSOON Db3 . . . . .  . . . . . .  . . . . . .  Ab2 . . . . .  . . . . . .
+  track B6  @DOUBLE_BASSOON G2 . . . . .  . . . . . .  . . . . . .  D3 . . . . .  . . . . . .
+  track B7  @BASS_OBOE Db3 . . . . .  . . . . . .  . . . . . .  Ab3 . . . . .  . . . . . .
+  track B8  @BASS_OBOE G3 . . . . .  . . . . . .  . . . . . .  D4 . . . . .  . . . . . .
+  track B9  @CHORD_BASS F3 . . . . .  . . . . . .  . . . . . .  . . . . . .  . . . . . .
+  track B10 . . . . . .  . . . . . .  . . . . . .  . . . . . .  . . . . . .
+  track B11 @CHORD_BASS F3 . . . . .  - . . . . .  . . . . . .  . . . . . .  . . . . . .
+  track B12 @BASS_TROMBONE Db2 . . . . .  . . . . . .  . . . . . .  . . . . . .  . . . . . .
+  track B13 @BASS_TROMBONE . . . . . .  . . . . . .  . . . . . .  Bb2 . . . . .  . . . . . .
+  track B14 @BASS_TROMBONE A2 . . . . .  . . . . . .  . . . . . .  . . . . . .  . . . . . .
+  track B15 @BASS_TROMBONE . . . . . .  . . . . . .  . . . . . .  - . . . . .  . . . . . .
+
+# The order list: a line is a bar of 5/4. Ostinato, upper voice, low byte, bass.
+speed  4
+audctl $28
+loop
+section OSTINATO
+line   O1      .       .       .
+line   O1      .       .       .
+section THEME
+line   O1      U1      .       B1
+line   O1      U2      .       B2
+line   O1      U3      .       B3
+line   O1      U4      .       B4
+line   O1      .       .       .
+section AGAIN
+line   O1      U1      .       B1
+line   O1      U2      .       B2
+section CLIMBING
+line   O2      U5      .       B5
+line   O2      U1      .       B6
+line   O2      U6      .       B7
+line   O2      U7      .       B8
+section THE CHORD
+line   O3      U8      .       B9
+line   O3      U9      .       B10
+line   O3      U10     .       B11
+section TROMBONES
+line   O1      U11     .       B12
+line   O1      U12     .       B13
+line   O1      U13     .       B14
+line   O1      U14     .       B15

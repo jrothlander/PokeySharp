@@ -1,0 +1,127 @@
+# GREENSLEEVES - traditional English, sixteenth century.
+# The format is in Demo1/CLAUDE.md, under "Song files". Instruments are tables with
+# one entry per frame; each channel holds named tracks; the lines at the end are the
+# order list. In a track '.' holds and '-' releases. '#' starts a comment.
+#
+# A folk tune four hundred years old, and public domain; this arrangement is new, written
+# from the tune everyone knows. For a tavern, a market square, a castle town.
+#
+# The tune is usually heard in A minor. It is in E minor here because that keeps it in the
+# octave where the pure-tone table is best - every note within ten cents but the chorus's
+# top D, thirteen out - where in A minor its E and D sit fifteen cents off throughout.
+#
+# A row is a sixteenth, a line a bar of 3/4 at 112 quarter notes a minute. The verse, then
+# the chorus, and round again; the last bar of the chorus carries the verse's pickup.
+#
+# What four channels keep. Channel 1 is a plucked chord on beats two and three, as a lute
+# would strum it; channel 2 the tune, a recorder with a late vibrato; channels 3 and 4 a
+# 16-bit bass on the beat.
+
+song   GREENSLEEVES
+key    E MINOR
+rows   12
+beat   4
+
+instrument PLUCK
+  table      tone
+  volume     7 6 5 4 3 2 1 0
+  distortion tone
+  release    2
+
+# A recorder: breathed in, held, and a small vibrato once the note has settled.
+instrument RECORDER
+  table      tone
+  volume     8 10 11 11 10 10 10 9 9 9 8
+  distortion tone
+  vibrato    0 1 1 0 -1 -1
+  delay      20
+  release    2
+
+instrument LUTE_BASS
+  table      wide
+  volume     10 9 8 7 6 5 4 4 3
+  distortion tone
+  release    2
+
+channel 1 notes LUTE
+  note  A chord plucked on beats two and three: E minor, G, D, B minor, B.
+  voice PLUCK
+  track CEM . . . .  Em . . .  Em . . .
+  track CG  . . . .  G . . .  G . . .
+  track CD  . . . .  D . . .  D . . .
+  track CBM . . . .  Bm . . .  Bm . . .
+  track CB  . . . .  B . . .  B . . .
+
+channel 2 notes TUNE
+  note  E, G A, B C B, A F# - the verse; D, D C# B - the chorus. A row is a sixteenth.
+  voice RECORDER
+  track G0  . . . .  . . . .  E4 . . .
+  track G1  G4 . . .  . . . .  A4 . . .
+  track G2  B4 . . .  . . C5 .  B4 . . .
+  track G3  A4 . . .  . . . .  F#4 . . .
+  track G4  D4 . . .  . . E4 .  F#4 . . .
+  track G5  G4 . . .  . . . .  E4 . . .
+  track G6  E4 . . .  . . D#4 .  E4 . . .
+  track G7  F#4 . . .  . . . .  D#4 . . .
+  track G8  B3 . . .  . . . .  E4 . . .
+  track G13 G4 . . .  . . F#4 .  E4 . . .
+  track G14 D#4 . . .  . . C#4 .  D#4 . . .
+  track G15 E4 . . .  . . . .  . . . .
+  track G16 E4 . . .  . . . .  - . . .
+  track G17 D5 . . .  . . . .  . . . .
+  track G18 D5 . . .  . . C#5 .  B4 . . .
+  track G24 B3 . . .  . . . .  . . . .
+  track G32 E4 . . .  . . . .  E4 . . .
+
+channel 3 pair LOW BYTE
+  note  The low byte of the bass. AUDCTL 28 joins channels 3 and 4 on the 1.79 MHz clock.
+
+channel 4 notes BASS
+  note  The root of each chord on the first beat.
+  voice LUTE_BASS
+  track BEM E2 . . .  . . . .  . . . .
+  track BG  G2 . . .  . . . .  . . . .
+  track BD  D2 . . .  . . . .  . . . .
+  track BBM B1 . . .  . . . .  . . . .
+  track BB  B1 . . .  . . . .  . . . .
+
+# The order list: a line is a bar of 3/4. Lute, tune, low byte, bass.
+speed  8
+audctl $28
+section PICKUP
+line   .       G0      .       .
+loop
+section VERSE
+line   CEM     G1      .       BEM
+line   CG      G2      .       BG
+line   CD      G3      .       BD
+line   CBM     G4      .       BBM
+line   CEM     G5      .       BEM
+line   CEM     G6      .       BEM
+line   CB      G7      .       BB
+line   CB      G8      .       BB
+line   CEM     G1      .       BEM
+line   CG      G2      .       BG
+line   CD      G3      .       BD
+line   CBM     G4      .       BBM
+line   CEM     G13     .       BEM
+line   CB      G14     .       BB
+line   CEM     G15     .       BEM
+line   CEM     G16     .       BEM
+section CHORUS
+line   CG      G17     .       BG
+line   CD      G18     .       BD
+line   CD      G3      .       BD
+line   CBM     G4      .       BBM
+line   CEM     G5      .       BEM
+line   CEM     G6      .       BEM
+line   CB      G7      .       BB
+line   CB      G24     .       BB
+line   CG      G17     .       BG
+line   CD      G18     .       BD
+line   CD      G3      .       BD
+line   CBM     G4      .       BBM
+line   CEM     G13     .       BEM
+line   CB      G14     .       BB
+line   CEM     G15     .       BEM
+line   CEM     G32     .       BEM

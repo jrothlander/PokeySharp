@@ -28,11 +28,13 @@
     <None Include="../../banks\*.sound" Link="banks\%(Filename)%(Extension)"
           CopyToOutputDirectory="PreserveNewest" />
     <!--
-      Song files, for the same reasons and from the same kind of place: songs/ at the repo
-      root, beside banks/, where tools/soundexport reads them too.
+      Song files, copied beside the executable for the same reason. Unlike the banks these
+      are the demo's own copies in songs/ here, not a link to songs/ at the repo root: the
+      demo ships a chosen set, and taking a song out of it must not delete it from the
+      library. Update, not Include, because the SDK already includes every file in the
+      project folder as None.
     -->
-    <None Include="../../songs\*.song" Link="songs\%(Filename)%(Extension)"
-          CopyToOutputDirectory="PreserveNewest" />
+    <None Update="songs\*.song" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\Pokey\Pokey.csproj" />

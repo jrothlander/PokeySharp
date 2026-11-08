@@ -1,0 +1,632 @@
+# WILLIAM TELL - the gallop that ends Rossini's overture to Guillaume Tell, complete.
+# The format is in Demo1/CLAUDE.md, under "Song files". Instruments are tables with
+# one entry per frame; each channel holds named tracks; the lines at the end are the
+# order list. In a track '.' holds and '-' releases. '#' starts a comment.
+#
+# Written in 1829; Rossini died in 1868, so it is public domain - its later life as a
+# radio and television theme changed nothing about that. The notes were read bar by bar
+# from Max Wilkinson's typeset score of the overture (IMSLP 22579, CC BY 3.0 - thank you),
+# bars 226 to 453, the whole Allegro vivace, and checked against the conductor's score of
+# the opera (IMSLP 686684) where they overlap. The first version of this song was read
+# from that older scan alone, and the clean edition corrected it in two places: the full
+# orchestra's strain sits on a C# pedal, not E, and its turn toward B goes G# C# B A#.
+# Nothing of either edition is copied but Rossini's notes.
+#
+# How it goes. The trumpet call and the gallop gathering on one note. The famous tune,
+# twice, and the full orchestra's answer in C# minor. The violins' running figure over a
+# rising pizzicato bass, and the tune again. Two big tutti passages around a quiet C#
+# minor episode. The answer and the running figure again, the tune pianissimo and then
+# fortissimo, and a stringendo section that Rossini repeats - here the second time is a
+# frame a row faster. Then the tune's opening one last time, a silent bar, a chromatic
+# run up, and E hammered until it stops.
+#
+# The gallop is a rhythm: an eighth and two sixteenths. So a row is a sixteenth note and
+# a line is one bar of 2/4. Speed 6 is 150 beats a minute, where Rossini asks for 152, and
+# speed 5 is 180 for the stringendo.
+#
+# Channel 2 carries the tune whoever plays it. The violins' fast passages sit an octave
+# below where they are written, because the pure-tone table plays the octave above
+# 20 cents out and this one within 11 - except the quiet episode, whose written notes
+# already reach down to the table's bottom. Channels 3 and 4 are the bass as one 16-bit
+# counter, every note within a cent. Channel 1 is the timpani, cymbals and bass drum.
+# The horns' harmony, the woodwinds' doubling and the trombones' chords are left out.
+
+song   WILLIAM TELL
+key    E MAJOR
+rows   8
+beat   4
+
+# --- Percussion ---------------------------------------------------------------------
+
+# Timpani on B: distortion C at divider 67, B1 and 27 cents sharp.
+instrument TIMP
+  table      none
+  volume     12 11 10 9 8 7 6 5 4 3 2 1 0
+  distortion buzz
+  audf       67
+  release    2
+
+# The timpani under the quiet tune: the same drum tapped, on B and on E (divider 51, E2).
+instrument TIMP_B
+  table      none
+  volume     8 7 6 5 4 3 2 1 0
+  distortion buzz
+  audf       67
+  release    2
+
+instrument TIMP_E
+  table      none
+  volume     8 7 6 5 4 3 2 1 0
+  distortion buzz
+  audf       51
+  release    2
+
+# The roll under the held chord: the drum's volume beating every frame.
+instrument ROLL
+  table      none
+  volume     8 4 8 4 9 5 9 5 10 6 10 6 11 7 11 7 12 8 12 8 12 8 12 8 12 8 12 8 12 8 12 8 12 8 12 8 12 8 12 8 12 8 12 8 12 8 12 8 12 8 12 8 12 8 12 8 12 8 12 8 12 8 12 8 12 8 12 8 12 8 12 8 12 8 12 8 12 8 12 8 12 8 12 8 12 8 12 8 12 8
+  distortion buzz
+  audf       67
+  release    2
+
+# Bass drum, cymbal and triangle together: two frames of thump, then ringing noise.
+instrument CRASHKICK
+  table      none
+  volume     15 14 13 12 11 10 9 8 7 6 5 4 3 2 1 0
+  distortion tone buzz noise
+  audf       40 20 1 1 2 2 3 3 4 4 5 5 6
+  release    2
+
+# --- The tune -----------------------------------------------------------------------
+
+# The trumpets in E: struck hard, a fanfare.
+instrument TRUMPET
+  table      tone
+  volume     13 12 11 11 10 10 9 9
+  distortion tone
+  release    2
+
+# The violins, pianissimo and staccato: a tap per note.
+instrument VIOLIN_PP
+  table      tone
+  volume     7 6 5 4 3 2 1 0
+  distortion tone
+  release    2
+
+# The same, the second time round, when the woodwinds have joined and it is building.
+instrument VIOLIN_MF
+  table      tone
+  volume     10 9 8 7 5 4 2 0
+  distortion tone
+  release    2
+
+# The violins' running figure after the tutti: fp, then light and quick.
+instrument FIGURE
+  table      tone
+  volume     9 7 6 5 4 3 2 1
+  distortion tone
+  release    2
+
+# The quiet episode in C# minor: legato, soft, even.
+instrument DOLCE
+  table      tone
+  volume     8 8 7 7 6 6 5 5
+  distortion tone
+  release    2
+
+# The whole orchestra.
+instrument TUTTI
+  table      tone
+  volume     13 13 12 11 10 9 8 7
+  distortion tone
+  release    2
+
+# --- The bass -----------------------------------------------------------------------
+
+# Cellos and basses, staccato: every note of the gallop separate.
+instrument BASS
+  table      wide
+  volume     11 10 8 6 4 3 2 0
+  distortion tone
+  release    2
+
+# The trombones' root under the held chord.
+instrument BASS_HOLD
+  table      wide
+  volume     13 13 12 12 11 11 11 10
+  distortion tone
+  release    3
+
+instrument BASS_FF
+  table      wide
+  volume     14 13 11 9 7 5 3 0
+  distortion tone
+  release    2
+
+channel 1 drums DRUMS
+  note  Timpani galloping under the brass and rolling under the held chord, tapping E and
+  note  B softly under the quiet tune, and in the loud passages bass drum, cymbal and
+  note  triangle as one instrument on every beat - or every eighth, when Rossini doubles
+  note  them for the stringendo.
+  kit   T=TIMP R=ROLL X=CRASHKICK e=TIMP_E b=TIMP_B
+  track TGAL    T . T T  T . T .
+  track TROLL   R . . .  . . . .
+  track THIT    T . . .  . . . .
+  track TIMPE   e . - .  e . - .
+  track TIMPEEE e . e .  e . - .
+  track TIMPBBB b . b .  b . - .
+  track TIMPB   b . - .  b . - .
+  track BEAT    X . . .  X . . .
+  track BEAT3   X . X .  X . . .
+  track BEAT8   X . X .  X . X .
+  track OFF3    . . X .  X . X .
+  track LAND    X . . .  . . . .
+
+channel 2 notes TUNE
+  note  The tune, whoever has it - the trumpets' call, then the violins, then everyone. A
+  note  row is a sixteenth, so the gallop is always a note, a hold, and two notes: B . B B.
+  voice VIOLIN_PP
+  track CALL  @TRUMPET B4 . . .  - . B4 B4
+  track DOWN  @TRUMPET B4 . G#4 .  E4 . G#4 .
+  track UP    @TRUMPET B4 . G#4 .  B4 . E5 .
+  track TGAL  @TRUMPET B4 . B4 B4  B4 . B4 .
+  track THOLD @TRUMPET B4 . . .  . . . .
+  track TOFF  . . - .  . . . .
+  track PICK  . . . .  . . B3 B3
+  track A1    B3 . B3 B3  B3 . B3 B3
+  track A2    E4 . F#4 .  G#4 . B3 B3
+  track A3    B3 . B3 B3  E4 . G#4 G#4
+  track A4    F#4 . D#4 .  B3 . B3 B3
+  track A6    E4 . F#4 .  G#4 . E4 G#4
+  track A7    B4 . . .  . A4 G#4 F#4
+  track A8    E4 . G#4 .  E4 . B3 B3
+  track M1    @VIOLIN_MF B3 . B3 B3  B3 . B3 B3
+  track M2    @VIOLIN_MF E4 . F#4 .  G#4 . B3 B3
+  track M3    @VIOLIN_MF B3 . B3 B3  E4 . G#4 G#4
+  track M4    @VIOLIN_MF F#4 . D#4 .  B3 . B3 B3
+  track M6    @VIOLIN_MF E4 . F#4 .  G#4 . E4 G#4
+  track M7    @VIOLIN_MF B4 . . .  . A4 G#4 F#4
+  track M8    @VIOLIN_MF E4 . G#4 .  E4 . G#4 G#4
+  track M8R   @VIOLIN_MF E4 . G#4 .  E4 . B4 D#5
+  track Y1    @TUTTI G#4 . G#4 G#4  G#4 . G#4 G#4
+  track Y2    @TUTTI G#4 . C#5 .  G#4 . C#5 .
+  track Y3    @TUTTI G#4 . C#5 .  G#4 . F#4 .
+  track Y4    @TUTTI E4 . D#4 .  C#4 . G#4 G#4
+  track Y7    @TUTTI G#4 . C#5 .  B4 . A#4 .
+  track Y8    @TUTTI B4 . A#4 .  B4 . G#4 G#4
+  track FIG   @FIGURE B4 A#4 C#5 A#4  B4 A#4 C#5 A#4
+  track FDOWN @FIGURE B4 . B4 B4  B4 . B3 B3
+  track G1    @TUTTI E5 . E5 E5  E5 . E5 .
+  track G2    @TUTTI G#5 . . .  . . F#5 F#5
+  track G3    @TUTTI E5 E5 D#5 D#5  E5 E5 C#5 C#5
+  track G4    @TUTTI B4 C#5 B4 C#5  B4 C#5 D#5 E5
+  track G5    @TUTTI A4 B4 A4 B4  A4 B4 C#5 D#5
+  track G6    @TUTTI G#4 A4 G#4 A4  G#4 A4 B4 C#5
+  track G7    @TUTTI F#4 G#4 F#4 G#4  F#4 G#4 F#4 G#4
+  track G8    @TUTTI F#4 G#4 F#4 D#4  B3 B4 C#5 D#5
+  track G7B   @TUTTI F#4 G#4 F#4 G#4  F#4 A4 G#4 F#4
+  track G8B   @TUTTI E5 . - .  C#5 . . .
+  track G8C   @TUTTI E4 . B3 .  E4 . G#4 G#4
+  track N16   @DOLCE . B#4 C#5 B#4  D#5 C#5 B4 A4
+  track N17   @DOLCE A4 G#4 E4 C#4  C#4 C#4 C#4 C#4
+  track N18   @DOLCE E4 D#4 B#3 G#3  G#3 G#3 G#3 G#3
+  track N19   @DOLCE G#3 C#4 E4 G#4  C#5 C#5 C#5 C#5
+  track N20   @DOLCE C#5 B#4 C#5 B#4  D#5 C#5 B4 A4
+  track N21   @DOLCE G#4 E4 C#4 C#4  C#4 C#4 C#4 C#4
+  track N23   @DOLCE G#3 C#4 E4 G#4  C#5 E5 D#5 C#5
+  track N24   @DOLCE D#5 B#4 G#4 G#4  G#4 G#5 E5 C#5
+  track N26   @DOLCE D#5 B4 G#4 G#4  A#4 G4 D#4 D#4
+  track N27   @DOLCE G#4 G4 G#4 G4  G#4 A4 G#4 F#4
+  track N28   @DOLCE E4 B3 A#3 B3  E4 B3 F#4 B3
+  track N29   @DOLCE G#4 E4 D#4 E4  G#4 E4 A4 F#4
+  track N30   @DOLCE B4 G#5 F#5 E5  D#5 F#5 E5 C#5
+  track N31   @DOLCE B4 C#5 B4 C#5  D#5 E5 F#5 G#5
+  track N32   @DOLCE A4 B4 A4 B4  C#5 D#5 E5 F#5
+  track N33   @DOLCE G#4 A4 G#4 A4  B4 C#5 D#5 E5
+  track N34   @DOLCE F#4 G#4 F#4 G#4  F#4 G#4 F#4 G#4
+  track N35   @DOLCE F#4 G#4 F#4 D#4  B3 B#3 C#4 D#4
+  track N42   @DOLCE F#4 C#5 B#4 C#5  D#5 C#5 A4 F#4
+  track N43   @TUTTI E4 E4 F#4 G#4  A4 B4 C#5 D#5
+  track T8    E4 . G#4 .  E4 . B4 B4
+  track T1    @TUTTI B4 . B4 B4  B4 . B4 B4
+  track T2    @TUTTI E5 . F#5 .  G#5 . B4 B4
+  track T3    @TUTTI B4 . B4 B4  E5 . G#5 G#5
+  track T4    @TUTTI F#5 . D#5 .  B4 . B4 B4
+  track T6    @TUTTI E5 . F#5 .  G#5 . E5 G#5
+  track T7    @TUTTI B5 . . .  . A5 G#5 F#5
+  track S1    @TUTTI E4 F#4 G#4 A4  G#4 A4 B4 C#5
+  track S2    @TUTTI B4 C#5 D#5 E5  D#5 E5 F#5 G#5
+  track S3    @TUTTI A5 . . .  . . . .
+  track K1    @TUTTI G#5 G#5 G#5 G#5  G#5 D#5 D#5 D#5
+  track K2    @TUTTI D#5 E5 E5 E5  E5 F#5 F#5 F#5
+  track K3    @TUTTI F#5 G#5 G#5 G#5  G#5 D#5 D#5 D#5
+  track C11   @TUTTI C5 . . .  . . . .
+  track C12   @TUTTI G5 G5 E5 E5  C5 C5 E5 E5
+  track C13   @TUTTI G#5 . . .  . . . .
+  track C14   @TUTTI G#5 G#5 E5 E5  B4 B4 E5 E5
+  track C15   @TUTTI E5 . . .  . . . .
+  track C16   @TUTTI G#5 G#5 E#5 E#5  C#5 C#5 E#5 E#5
+  track C17   @TUTTI A#5 . . .  . . . .
+  track C18   @TUTTI A#5 . G5 .  E5 . G5 .
+  track C19   @TUTTI B5 . A#5 .  A5 . G#5 .
+  track C20   @TUTTI F#5 . E5 .  D#5 . C#5 .
+  track C21   @TUTTI B4 . A#4 .  A4 . G#4 .
+  track C22   @TUTTI F#4 . E4 .  D#4 . F#4 .
+  track E23   @TUTTI E5 D#5 E5 D#5  E5 . B4 B4
+  track E27   @TUTTI G#5 . A5 .  B5 . - .
+  track E28   @TUTTI E5 . F#5 .  G#5 . - .
+  track E29   @TUTTI G#4 . A4 .  B4 . - .
+  track GP    - . . .  . . . .
+  track E31   @TUTTI B3 C4 C#4 D4  D#4 E4 F4 F#4
+  track E32   @TUTTI G4 G#4 A4 A#4  B4 C5 C#5 D#5
+  track E33   @TUTTI E5 D#5 F#5 D#5  E5 D#5 F#5 D#5
+  track E37   @TUTTI E5 . E5 E5  E5 . E5 .
+  track E38   @TUTTI E5 . B4 B4  B4 . B4 .
+  track E39   @TUTTI B4 . G#4 G#4  G#4 . G#4 .
+  track E40   @TUTTI G#4 . E4 E4  E4 . E4 .
+  track E41   @TUTTI E4 . E5 E5  E5 . E5 .
+  track E45   @TUTTI E4 . B3 B3  E4 E4 B3 B3
+  track E46   @TUTTI G#4 G#4 E4 E4  B4 B4 G#4 G#4
+  track E47   @TUTTI E5 . B4 B4  E5 E5 B4 B4
+  track E48   @TUTTI G#5 G#5 E5 E5  B5 B5 G#5 G#5
+  track E49   @TUTTI E6 . - .  - . E6 E6
+  track E50   @TUTTI E6 . E6 .  E6 . E6 .
+  track E51   @TUTTI E6 . . .  - . . E6
+  track E52   @TUTTI E6 . . .  - . . E5
+  track E53   @TUTTI E5 . . .  . . . .
+
+channel 3 pair LOW BYTE
+  note  The low byte of the bass. AUDCTL 28 joins channels 3 and 4 into one 16-bit
+  note  counter on the 1.79 MHz clock, and this channel's own volume is never heard.
+
+channel 4 notes BASS
+  note  Cellos and basses an octave down, on the 16-bit table: E galloping under the tune,
+  note  a C# pedal under the full orchestra's answer, a pizzicato scale climbing under the
+  note  violins' figure, and the stringendo's chromatic bass - every note within a cent.
+  voice BASS
+  track HOLD  @BASS_HOLD B1 . . .  . . . .
+  track HOFF  . . - .  . . . .
+  track PICK  . . . .  . . E2 E2
+  track EG    E2 . E2 E2  E2 . E2 E2
+  track EQ    E2 . E2 .  E2 . E2 E2
+  track BQ    B1 . B1 .  B1 . E2 E2
+  track BG    B1 . B1 B1  B1 . B1 B1
+  track EEE   E2 . E2 .  E2 . - .
+  track TC    @BASS_FF C#2 . - .  C#2 . - .
+  track TCG   @BASS_FF C#2 . - .  G#2 . G#1 .
+  track TCCC  @BASS_FF C#2 . C#2 .  C#2 . - .
+  track TCF   @BASS_FF C#2 . - .  F#2 . F#1 .
+  track TBBB  @BASS_FF B1 . B1 .  B1 . - .
+  track TLAND @BASS_FF B1 . - .  . . . .
+  track LUP1  - . B1 .  C#2 . D#2 .
+  track LUP2  E2 . F#2 .  G#2 . A2 .
+  track LUP3  B2 . B1 .  B2 . - .
+  track LDOWN B2 . - .  - . E2 E2
+  track ME8   @BASS_FF E2 . E2 .  E2 . E2 .
+  track ME    @BASS_FF E2 . - .  E2 . - .
+  track MD    @BASS_FF D#2 . - .  D#2 . - .
+  track MA    @BASS_FF A1 . - .  A1 . - .
+  track MB    @BASS_FF B1 . - .  - . . .
+  track MAB   @BASS_FF A1 . - .  B1 . - .
+  track ME1   @BASS_FF E2 . - .  - . . .
+  track MEEE  @BASS_FF E2 . E2 .  E2 . - .
+  track N16   C#3 . - .  F#2 . - .
+  track N17   C#2 . - .  - . C#2 .
+  track N18   G#2 . - .  - . G#1 .
+  track N19   C#2 . - .  - . . .
+  track N24   G#2 . - .  - . G#2 .
+  track N26   D#2 . - .  D#2 . - .
+  track N27   G#2 . - .  - . . .
+  track NE1   E2 . - .  - . . .
+  track NEE   E2 . - .  E2 . - .
+  track NBB   B1 . - .  B1 . - .
+  track NAA   A1 . - .  A1 . - .
+  track NB1   B1 . - .  - . . .
+  track NAB   A1 . - .  B1 . - .
+  track TE2   @BASS_FF E2 . - .  E2 . - .
+  track TB2   @BASS_FF B1 . - .  B1 . - .
+  track S1B   @BASS_FF E2 . . E3  E3 . . .
+  track S2B   @BASS_FF . . B2 .  G#2 . E2 .
+  track S3B   @BASS_FF B1 . C2 .  C#2 . D2 .
+  track S4B   @BASS_FF D#2 . F#2 .  B2 . B1 .
+  track KE    @BASS_FF E2 . - .  G#1 . - .
+  track KC    @BASS_FF C#2 . - .  B1 . - .
+  track C8    @BASS_FF C2 . C2 .  C2 . C2 .
+  track C1    @BASS_FF C2 . - .  - . . .
+  track E8    @BASS_FF E2 . E2 .  E2 . E2 .
+  track CS8   @BASS_FF C#2 . C#2 .  C#2 . C#2 .
+  track CS1   @BASS_FF C#2 . - .  - . . .
+  track B8    @BASS_FF B1 . B1 .  B1 . B1 .
+  track X25   @BASS_FF - . - .  - . B2 B2
+  track X26   @BASS_FF B2 . B2 B2  B2 . B2 B2
+  track X27   @BASS_FF G#3 . A3 .  B3 . - .
+  track X28   @BASS_FF E3 . F#3 .  G#3 . - .
+  track X29   @BASS_FF G#2 . A2 .  B2 . - .
+  track X30   - . . .  . . . .
+  track X33   @BASS_FF E2 . B1 .  E2 . B1 .
+  track X37   @BASS_FF E2 . E2 E2  E2 . E2 .
+  track X41   @BASS_FF E2 . E3 E3  E3 . E3 .
+  track X42   @BASS_FF E3 . B2 B2  B2 . B2 .
+  track X43   @BASS_FF B2 . G#2 G#2  G#2 . G#2 .
+  track X44   @BASS_FF G#2 . E2 E2  E2 . E2 .
+  track X47   @BASS_FF - . B1 .  E2 . B1 .
+  track X48   @BASS_FF G#2 . E2 .  B2 . G#2 .
+  track X49   @BASS_FF E3 . - .  - . E3 E3
+  track X50   @BASS_FF E3 . B2 .  G#2 . B2 .
+  track X51   @BASS_FF E2 . . .  - . . E2
+  track X53   @BASS_FF E2 . . .  . . . .
+
+# The order list: one line per bar of 2/4, bars 226 to 453. Drums, tune, low byte, bass.
+speed  6
+audctl $28
+section THE CALL
+line   .       CALL   .    .
+line   .       CALL   .    .
+line   .       DOWN   .    .
+line   .       UP     .    .
+line   .       DOWN   .    .
+line   .       UP     .    .
+line   .       CALL   .    .
+line   .       CALL   .    .
+line   .       CALL   .    .
+line   .       CALL   .    .
+section GATHERING
+line   TGAL    TGAL   .    .
+line   TGAL    TGAL   .    .
+line   TGAL    TGAL   .    .
+line   TGAL    TGAL   .    .
+line   TROLL   THOLD  .    HOLD
+line   .       .      .    .
+line   THIT    TOFF   .    HOFF
+section THE TUNE
+line   .       PICK   .    PICK
+line   TIMPE   A1     .    EG
+line   TIMPEEE A2     .    EQ
+line   TIMPE   A3     .    EG
+line   TIMPBBB A4     .    BQ
+line   TIMPE   A1     .    EG
+line   TIMPEEE A6     .    EQ
+line   TIMPB   A7     .    BG
+line   TIMPEEE A8     .    EQ
+line   TIMPE   M1     .    EG
+line   TIMPEEE M2     .    EQ
+line   TIMPE   M3     .    EG
+line   TIMPBBB M4     .    BQ
+line   TIMPE   M1     .    EG
+line   TIMPEEE M6     .    EQ
+line   TIMPB   M7     .    BG
+line   TIMPEEE M8     .    EEE
+section FULL ORCHESTRA
+line   BEAT    Y1     .    TC
+line   BEAT    Y2     .    TC
+line   BEAT    Y3     .    TCG
+line   BEAT3   Y4     .    TCCC
+line   BEAT    Y1     .    TC
+line   BEAT    Y2     .    TC
+line   BEAT    Y7     .    TCF
+line   BEAT3   Y8     .    TBBB
+line   BEAT    Y1     .    TC
+line   BEAT    Y2     .    TC
+line   BEAT    Y3     .    TCG
+line   BEAT3   Y4     .    TCCC
+line   BEAT    Y1     .    TC
+line   BEAT    Y2     .    TC
+line   BEAT    Y7     .    TCF
+section THE VIOLINS
+line   LAND    FIG    .    TLAND
+line   .       FIG    .    .
+line   .       FIG    .    LUP1
+line   .       FIG    .    LUP2
+line   .       FIG    .    LUP3
+line   .       FIG    .    .
+line   .       FIG    .    LUP1
+line   .       FIG    .    LUP2
+line   .       FDOWN  .    LDOWN
+section THE TUNE
+line   TIMPE   A1     .    EG
+line   TIMPEEE A2     .    EQ
+line   TIMPE   A3     .    EG
+line   TIMPBBB A4     .    BQ
+line   TIMPE   A1     .    EG
+line   TIMPEEE A6     .    EQ
+line   TIMPB   A7     .    BG
+line   TIMPEEE A8     .    EQ
+line   TIMPE   M1     .    EG
+line   TIMPEEE M2     .    EQ
+line   TIMPE   M3     .    EG
+line   TIMPBBB M4     .    BQ
+line   TIMPE   M1     .    EG
+line   TIMPEEE M6     .    EQ
+line   TIMPB   M7     .    BG
+line   TIMPEEE M8R    .    EEE
+section TUTTA FORZA
+line   BEAT    G1     .    ME8
+line   BEAT    G2     .    ME8
+line   BEAT    G3     .    ME8
+line   BEAT    G4     .    ME
+line   BEAT    G5     .    MD
+line   BEAT    G6     .    ME
+line   BEAT    G7     .    MA
+line   LAND    G8     .    MB
+line   BEAT    G1     .    ME8
+line   BEAT    G2     .    ME8
+line   BEAT    G3     .    ME8
+line   BEAT    G4     .    ME
+line   BEAT    G5     .    MD
+line   BEAT    G6     .    ME
+line   BEAT    G7B    .    MAB
+line   LAND    G8B    .    ME1
+section DOLCE
+line   .       N16    .    N16
+line   .       N17    .    N17
+line   .       N18    .    N18
+line   .       N19    .    N19
+line   .       N20    .    N16
+line   .       N21    .    N17
+line   .       N18    .    N18
+line   .       N23    .    N19
+line   .       N24    .    N24
+line   .       N24    .    N24
+line   .       N26    .    N26
+line   .       N27    .    N27
+line   .       N28    .    NE1
+line   .       N29    .    NE1
+line   .       N30    .    NEE
+line   .       N31    .    NEE
+line   .       N32    .    NBB
+line   .       N33    .    NEE
+line   .       N34    .    NAA
+line   .       N35    .    NB1
+line   .       N28    .    NE1
+line   .       N29    .    NE1
+line   .       N30    .    NEE
+line   .       N31    .    NEE
+line   .       N32    .    NBB
+line   .       N33    .    NEE
+line   .       N42    .    NAB
+line   .       N43    .    NE1
+section TUTTA FORZA
+line   BEAT    G1     .    ME8
+line   BEAT    G2     .    ME8
+line   BEAT    G3     .    ME8
+line   BEAT    G4     .    ME
+line   BEAT    G5     .    MD
+line   BEAT    G6     .    ME
+line   BEAT    G7     .    MA
+line   LAND    G8     .    MB
+line   BEAT    G1     .    ME8
+line   BEAT    G2     .    ME8
+line   BEAT    G3     .    ME8
+line   BEAT    G4     .    ME
+line   BEAT    G5     .    MD
+line   BEAT    G6     .    ME
+line   BEAT    G7B    .    MAB
+line   BEAT3   G8C    .    MEEE
+section FULL ORCHESTRA
+line   BEAT    Y1     .    TC
+line   BEAT    Y2     .    TC
+line   BEAT    Y3     .    TCG
+line   BEAT3   Y4     .    TCCC
+line   BEAT    Y1     .    TC
+line   BEAT    Y2     .    TC
+line   BEAT    Y7     .    TCF
+line   BEAT3   Y8     .    TBBB
+line   BEAT    Y1     .    TC
+line   BEAT    Y2     .    TC
+line   BEAT    Y3     .    TCG
+line   BEAT3   Y4     .    TCCC
+line   BEAT    Y1     .    TC
+line   BEAT    Y2     .    TC
+line   BEAT    Y7     .    TCF
+section THE VIOLINS
+line   LAND    FIG    .    TLAND
+line   .       FIG    .    .
+line   .       FIG    .    LUP1
+line   .       FIG    .    LUP2
+line   .       FIG    .    LUP3
+line   .       FIG    .    .
+line   .       FIG    .    LUP1
+line   .       FIG    .    LUP2
+line   .       FDOWN  .    LDOWN
+section THE TUNE
+line   TIMPE   A1     .    EG
+line   TIMPEEE A2     .    EQ
+line   TIMPE   A3     .    EG
+line   TIMPBBB A4     .    BQ
+line   TIMPE   A1     .    EG
+line   TIMPEEE A6     .    EQ
+line   TIMPB   A7     .    BG
+line   TIMPEEE T8     .    EQ
+section THE TUNE FORTISSIMO
+line   BEAT    T1     .    TE2
+line   BEAT    T2     .    TE2
+line   BEAT    T3     .    TE2
+line   BEAT    T4     .    TB2
+line   BEAT    T1     .    TE2
+line   BEAT    T6     .    TE2
+line   BEAT    T7     .    TB2
+section STRINGENDO
+line   BEAT    S1     .    S1B
+line   BEAT    S2     .    S2B
+line   OFF3    S3     .    S3B
+line   BEAT8   .      .    S4B
+line   BEAT    S1     .    S1B
+line   BEAT    S2     .    S2B
+line   OFF3    S3     .    S3B
+line   BEAT8   .      .    S4B
+line   BEAT    K1     .    KE
+line   BEAT    K2     .    KC
+line   BEAT    K3     .    KE
+line   BEAT    K2     .    KC
+line   LAND    C11    .    C8
+line   LAND    C12    .    C1
+line   LAND    C13    .    E8
+line   LAND    C14    .    ME1
+line   LAND    C15    .    CS8
+line   LAND    C16    .    CS1
+line   LAND    C17    .    C8
+line   LAND    C18    .    C1
+line   BEAT    C19    .    B8
+line   BEAT    C20    .    B8
+line   BEAT    C21    .    B8
+line   BEAT    C22    .    B8
+section STRINGENDO AGAIN
+speed  5
+line   BEAT    S1     .    S1B
+line   BEAT    S2     .    S2B
+line   OFF3    S3     .    S3B
+line   BEAT8   .      .    S4B
+line   BEAT    S1     .    S1B
+line   BEAT    S2     .    S2B
+line   OFF3    S3     .    S3B
+line   BEAT8   .      .    S4B
+line   BEAT    K1     .    KE
+line   BEAT    K2     .    KC
+line   BEAT    K3     .    KE
+line   BEAT    K2     .    KC
+line   LAND    C11    .    C8
+line   LAND    C12    .    C1
+line   LAND    C13    .    E8
+line   LAND    C14    .    ME1
+line   LAND    C15    .    CS8
+line   LAND    C16    .    CS1
+line   LAND    C17    .    C8
+line   LAND    C18    .    C1
+line   BEAT    C19    .    B8
+line   BEAT    C20    .    B8
+line   BEAT    C21    .    B8
+line   BEAT    C22    .    B8
+section THE LAST CALL
+line   LAND    E23    .    ME1
+line   .       T1     .    .
+line   .       T2     .    X25
+line   .       T1     .    X26
+line   .       E27    .    X27
+line   .       E28    .    X28
+line   .       E29    .    X29
+line   .       GP     .    X30
+section THE END
+line   BEAT    E31    .    B8
+line   BEAT    E32    .    B8
+line   BEAT8   E33    .    X33
+line   BEAT8   E33    .    X33
+line   BEAT8   E33    .    X33
+line   BEAT8   E33    .    X33
+line   LAND    E37    .    X37
+line   LAND    E38    .    X37
+line   LAND    E39    .    X37
+line   LAND    E40    .    X37
+line   LAND    E41    .    X41
+line   LAND    E38    .    X42
+line   LAND    E39    .    X43
+line   LAND    E40    .    X44
+line   LAND    E45    .    ME1
+line   .       E46    .    .
+line   .       E47    .    X47
+line   .       E48    .    X48
+line   .       E49    .    X49
+line   BEAT    E50    .    X50
+line   LAND    E51    .    X51
+line   LAND    E52    .    X51
+line   LAND    E53    .    X53
+end

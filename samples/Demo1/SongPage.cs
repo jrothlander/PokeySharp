@@ -86,7 +86,7 @@ public sealed class SongPage : IPage, IDisposable
         "ENTER PLAY PAUSE    N SONG    O OPEN    LEFT RIGHT LINE    UP DOWN CHANNEL    M MUTE    S SOLO";
 
     /// <summary>Where shipped song files live: beside the executable, copied there from
-    /// the repo's <c>songs/</c> the way banks are copied from <c>banks/</c>.</summary>
+    /// this project's own <c>songs/</c>, the demo's chosen set.</summary>
     public static string SongDirectory => System.IO.Path.Combine(AppContext.BaseDirectory, "songs");
 
     /// <summary><paramref name="blips"/> is <see cref="Game1"/>'s interface bank, for the

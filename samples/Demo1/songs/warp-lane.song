@@ -1,0 +1,130 @@
+# WARP LANE - a song for Demo1's song page and tools/soundexport.
+# The format is in Demo1/CLAUDE.md, under "Song files". Instruments are tables with
+# one entry per frame; each channel holds named tracks of sixteen rows; the lines at the
+# end are the order list. In a track '.' holds and '-' releases. '#' starts a comment.
+
+song   WARP LANE
+key    G MAJOR
+
+# A click of tone, then the buzz table's divider climbing 20 to 80 - a pitch falling from
+# 200 Hz to 50, as close to a thump as one channel gets.
+instrument KICK
+  table      none
+  volume     15 14 13 11 9 7 5 3 1 0
+  distortion tone buzz
+  audf       40 20 27 34 43 52 62 71 80
+  release    2
+
+# One frame of tone for the crack, then the 17-bit poly for the rattle, darkening as it decays.
+instrument SNARE
+  table      none
+  volume     14 13 11 9 7 6 5 4 3 2 1 0
+  distortion tone noise
+  audf       50 6 7 8 9 10 11 12 13
+  release    2
+
+# The poly at divider 0, the brightest noise the chip has, for four frames.
+instrument HAT
+  table      none
+  volume     7 4 2 1 0
+  distortion noise
+  audf       0
+  release    2
+
+instrument OPEN
+  table      none
+  volume     7 6 5 5 4 4 3 3 2 2 1 1 0
+  distortion noise
+  audf       0
+  release    2
+
+# A quick fall to a lower sustain, so a line at 150 beats a minute stays separate notes.
+instrument PLUCK
+  table      tone
+  volume     13 11 10 9 8 8 7 7 6
+  distortion tone
+  vibrato    0 1 1 0 -1 -1
+  delay      14
+  release    1
+
+# The 16-bit table: channels 3 and 4 joined on the 1.79 MHz clock, every note within a cent.
+# It plays only on lines whose AUDCTL joins them - see audctl in the order list.
+instrument WIDE_BASS
+  table      wide
+  volume     13 12 11 10 9 9 8
+  distortion tone
+  release    3
+
+channel 1 drums DRUMS
+  note  The same kit as Rim Patrol, on the same single channel, a frame faster per row.
+  note  Nothing about the drums changes when the bass takes two channels - they were
+  note  already sharing one.
+  kit   K=KICK S=SNARE H=HAT O=OPEN
+  track INTRO K . . .  K . . .  K . . .  K . H H
+  track RUN   K . H .  S . H K  K . H .  S . O .
+  track LIFT  K . O .  S . O .  K . O .  S . O .
+  track FILL  K . H .  S . S .  S S . S  S S S S
+
+channel 2 notes LEAD
+  note  Pure tone, plucked: a quick fall to a lower level, so a line at 150 beats a minute
+  note  stays separate notes. Still on the 64 kHz table and so still a few cents out -
+  note  only the bass got the good table.
+  voice PLUCK
+  track A1 B4 . D5 .  G5 . . .  F#5 . G5 .  D5 . B4 .
+  track A2 E5 . . .  G5 . E5 .  B4 . . .  - . D5 .
+  track A3 C5 . E5 .  G5 . . .  E5 . C5 .  G4 . . .
+  track A4 D5 . . .  F#5 . . .  A5 . . .  F#5 . D5 .
+  track A5 G5 . . .  D5 . B4 .  G4 . B4 .  D5 . . .
+  track A6 E5 . G5 .  B5 . . .  A5 . G5 .  E5 . . .
+  track A7 C5 . . .  E5 . G5 .  A5 . G5 .  E5 . C5 .
+  track A8 D5 . . .  - . D5 .  E5 . F#5 .  G5 . . .
+  track B1 E5 . . .  . . . .  G5 . . .  E5 . . .
+  track B2 F#5 . . .  . . . .  A5 . . .  F#5 . . .
+  track B3 D5 . . .  . . B4 .  D5 . F#5 .  - . . .
+  track B4 E5 . . .  . . . .  B4 . . .  - . . .
+  track B5 C5 . E5 .  G5 . E5 .  C5 . E5 .  G5 . . .
+  track B6 D5 . F#5 .  A5 . F#5 .  D5 . F#5 .  A5 . . .
+  track B7 G5 . . .  . . . .  . . . .  . . . .
+  track B8 - . . .  . . . .  D5 . B4 .  G4 . . .
+
+channel 3 pair LOW BYTE
+  note  Channel 3 has been given to the bass. AUDCTL 28 joins it to channel 4 as one
+  note  16-bit counter and clocks it at 1.79 MHz; channel 3's AUDF is the bottom byte of
+  note  the divider, and its own volume is never heard. This is what a bass in tune cost
+  note  on the Atari: one of the four voices, and here the chords went with it.
+
+channel 4 notes BASS
+  note  Pure tone on channels 3 and 4 joined. A 16-bit divider on the 1.79 MHz clock puts
+  note  every note within a cent, so the bass can bounce octaves and the song can be in
+  note  any key. Rim Patrol's buzz bass could do neither, and the high byte alone is what
+  note  shows as this channel's AUDF.
+  voice WIDE_BASS
+  track G    G2 . G3 .  G2 . G3 .  G2 . G3 .  G2 . D3 .
+  track EM   E2 . E3 .  E2 . E3 .  E2 . E3 .  E2 . B2 .
+  track C    C2 . C3 .  C2 . C3 .  C2 . C3 .  C2 . G2 .
+  track D    D2 . D3 .  D2 . D3 .  D2 . D3 .  D2 . A2 .
+  track BM   B1 . B2 .  B1 . B2 .  B1 . B2 .  B1 . F#2 .
+  track GEND G2 . . .  . . . .  . . . .  D2 . F#2 .
+
+# The order list: one line per bar, a track per channel, '.' for none.
+speed  6
+audctl $28
+line   INTRO  .      .      G
+line   FILL   .      .      D
+loop
+line   RUN    A1     .      G
+line   RUN    A2     .      EM
+line   RUN    A3     .      C
+line   RUN    A4     .      D
+line   RUN    A5     .      G
+line   RUN    A6     .      EM
+line   RUN    A7     .      C
+line   FILL   A8     .      D
+line   LIFT   B1     .      C
+line   LIFT   B2     .      D
+line   LIFT   B3     .      BM
+line   LIFT   B4     .      EM
+line   LIFT   B5     .      C
+line   LIFT   B6     .      D
+line   LIFT   B7     .      G
+line   FILL   B8     .      GEND

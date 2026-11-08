@@ -263,8 +263,10 @@ music changes hands is the whole trick; nothing in the driver knows about bars.
 
 ## Song files
 
-Songs live as `.song` text files in `songs/` at the repo root, beside `banks/`, and are
-copied beside the executable the same way. All but one exist *only* as files;
+Songs live as `.song` text files. The demo ships **its own copies** in `samples/Demo1/songs/`,
+copied beside the executable like the banks - not a link to `songs/` at the repo root, so
+the demo's set can be pruned without deleting anything from the library. A song changed in
+the root `songs/` is not picked up here until it is copied over. All but one exist *only* as files;
 *Rim Patrol* is also built in code (`SongLibrary.BuiltIn`), as the worked example of the
 API and so the page is never empty. **The file wins**: `SongFile.Catalog` offers the
 built-in songs, each replaced by a file of the same name, then every other file —

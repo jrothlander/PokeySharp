@@ -1,0 +1,137 @@
+# LA CARRERA - a song for Demo1's song page and tools/soundexport.
+# The format is in Demo1/CLAUDE.md, under "Song files". Instruments are tables with
+# one entry per frame; each channel holds named tracks of sixteen rows; the lines at the
+# end are the order list. In a track '.' holds and '-' releases. '#' starts a comment.
+
+song   LA CARRERA
+key    A MAJOR
+
+# A plucked bass: struck hard and let go, so an oom-pah line is separate notes, not a drone.
+instrument GUITARRON
+  table      buzz
+  volume     12 11 9 8 7 6 5 4
+  distortion buzz
+  release    2
+
+# A strummed chord is literally an arpeggio: the chord's notes one frame apart, gone in four
+# or five frames. The fast decay is all that separates it from Rim Patrol's shimmering chords.
+instrument STRUM
+  table      tone
+  volume     10 9 8 6 4 2 1 0
+  distortion tone
+  release    3
+
+# Straight in, and a wide vibrato once a note has been held - how the style is sung.
+instrument VOICE
+  table      tone
+  volume     11 11 10 10 9 9 9 8
+  distortion tone
+  vibrato    0 1 1 0 -1 -1
+  delay      12
+  release    1
+
+# Loud but not full: two of these over the strums and the bass is the densest moment in any
+# song here, and a level louder it clipped.
+instrument TRUMPET
+  table      tone
+  volume     12 12 11 11 10 10 9
+  distortion tone
+  release    2
+
+# The second voice, a level quieter, so the duet leans on the melody.
+instrument HIGH_VOICE
+  table      tone
+  volume     10 10 9 9 8 8 8 7
+  distortion tone
+  vibrato    0 1 1 0 -1 -1
+  delay      12
+  release    1
+
+channel 1 notes BASS
+  note  The guitarron's oom-pah, on distortion C: root on the beat, fifth on the next. The
+  note  key is A major because all three of its chords land on the buzz table - A at +11
+  note  cents, D at +1, E at -10. E's own fifth, B, is 26 cents out, so the E bars swing
+  note  between the root and the third instead.
+  voice GUITARRON
+  track A  A1 . . .  E2 . . .  A1 . . .  E2 . . .
+  track A2 A1 . . .  E2 . . .  A1 . C#2 .  E2 . F#2 .
+  track D  D2 . . .  A1 . . .  D2 . . .  A1 . . .
+  track E  E2 . . .  G#1 . . .  E2 . . .  G#1 . . .
+  track E2 E2 . . .  G#1 . . .  E2 . . .  D2 . C#2 .
+
+channel 2 notes GUITAR
+  note  The whole rhythm section. Each strum is the chord's three notes one frame apart -
+  note  a real strum is the same thing, only faster - and they fall on the off-beats,
+  note  between the bass notes, which is the rhythm of the style. There are no drums;
+  note  there did not need to be.
+  voice STRUM
+  track A    . . A .  . . A .  . . A .  . . A A
+  track D    . . D .  . . D .  . . D .  . . D D
+  track E    . . E .  . . E .  . . E .  . . E E
+  track RASG A A A .  A . A .  A A A .  A . A A
+
+channel 3 notes VOICE
+  note  The melody, with the wide vibrato the style is sung with, held back until a note
+  note  has lasted. In the fanfares the same channel is a trumpet - a different table,
+  note  named by the track.
+  voice VOICE
+  track V1 E4 . A4 .  A4 . B4 .  C#5 . . .  B4 . A4 .
+  track V2 B4 . . .  G#4 . E4 .  B4 . . .  - . E4 .
+  track V3 G#4 . B4 .  B4 . C#5 .  D5 . . .  C#5 . B4 .
+  track V4 C#5 . . .  A4 . . .  - . . .  . . E4 .
+  track V5 A4 . A4 .  C#5 . E5 .  E5 . . .  D5 . C#5 .
+  track V6 D5 . . .  F#4 . A4 .  D5 . . .  C#5 . B4 .
+  track V7 B4 . . .  G#4 . B4 .  E5 . . .  D5 . B4 .
+  track V8 A4 . . .  . . . .  . . . .  - . . .
+  track C1 F#4 . F#4 .  A4 . . .  F#4 . A4 .  D5 . . .
+  track C2 C#5 . . .  B4 . A4 .  C#5 . . .  - . . .
+  track C3 B4 . B4 .  G#4 . B4 .  D5 . . .  C#5 . B4 .
+  track C4 A4 . . .  . . . .  E4 . . .  A4 . . .
+  track C8 A4 . . .  . . . .  . . . .  - . . .
+  track T1 @TRUMPET A4 . C#5 .  E5 . C#5 .  A4 . C#5 .  E5 . . .
+  track T2 @TRUMPET D5 . B4 .  G#4 . B4 .  E4 . G#4 .  B4 . . .
+  track T3 @TRUMPET A4 . . .  E4 . . .  A4 . . .  - . . .
+
+channel 4 notes HIGH VOICE
+  note  Silent through the verse, then a third above the melody in the chorus - the second
+  note  voice of a duet, and the sound of the style. Parallel thirds are also where the
+  note  note tables show: the two voices can miss in opposite directions, so an interval
+  note  can be further out than either note.
+  voice HIGH_VOICE
+  track C1 A4 . A4 .  C#5 . . .  A4 . C#5 .  F#5 . . .
+  track C2 E5 . . .  D5 . C#5 .  E5 . . .  - . . .
+  track C3 D5 . D5 .  B4 . D5 .  F#5 . . .  E5 . D5 .
+  track C4 C#5 . . .  . . . .  G#4 . . .  C#5 . . .
+  track C8 C#5 . . .  . . . .  E5 . . .  - . . .
+  track T1 @TRUMPET C#5 . E5 .  A5 . E5 .  C#5 . E5 .  A5 . . .
+  track T2 @TRUMPET F#5 . D5 .  B4 . D5 .  G#4 . B4 .  D5 . . .
+  track T3 @TRUMPET C#5 . . .  C#5 . . .  E5 . . .  - . . .
+
+# The order list: one line per bar, a track per channel, '.' for none.
+speed  5
+audctl $00
+line   A      RASG   T1     T1
+line   E2     E      T2     T2
+line   A      A      T3     T3
+line   E2     E      .      .
+loop
+line   A      A      V1     .
+line   E      E      V2     .
+line   E2     E      V3     .
+line   A2     A      V4     .
+line   A      A      V5     .
+line   D      D      V6     .
+line   E2     E      V7     .
+line   A2     A      V8     .
+line   D      D      C1     C1
+line   A      A      C2     C2
+line   E      E      C3     C3
+line   A2     A      C4     C4
+line   D      D      C1     C1
+line   A      A      C2     C2
+line   E2     E      C3     C3
+line   A      A      C8     C8
+line   A      RASG   T1     T1
+line   E2     E      T2     T2
+line   A      A      T3     T3
+line   E2     E      .      .

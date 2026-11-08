@@ -1,0 +1,54 @@
+# UNTITLED
+# The format is in Demo1/CLAUDE.md, under "Song files". Instruments are tables with
+# one entry per frame; each channel holds named tracks of 16 rows; the lines at the
+# end are the order list. In a track '.' holds and '-' releases. '#' starts a comment.
+
+song   UNTITLED
+key    
+
+# A plain square wave, for a melody.
+instrument LEAD
+  table      tone
+  volume     12 11 10 10 9
+  distortion tone
+  release    2
+
+# Distortion C, for a bass. Its table skips notes - see which in the tracker's colours.
+instrument BASS
+  table      buzz
+  volume     12 11 10 9 8
+  distortion buzz
+  release    3
+
+# Two drums, each a short fall in pitch or a burst of noise.
+instrument KICK
+  table      none
+  volume     15 13 10 7 4 2 0
+  distortion buzz
+  audf       40 55 70 85 100 115 130
+
+instrument HAT
+  table      none
+  volume     8 5 3 1 0
+  distortion noise
+  audf       2
+
+channel 1 drums DRUMS
+  kit   K=KICK H=HAT
+  track D1  H . . .  K . . .  H . . .  K . . .
+
+channel 2 notes BASS
+  voice BASS
+  track B1  D2 . . .  D2 . . F2  . D2 . .  D2 . . .
+
+channel 3 notes LEAD
+  voice LEAD
+  track L1  D5 E5 F5 .  . F5 E5 D5  . . . .  A4 G4 F4 .
+
+channel 4 notes HARMONY
+  voice LEAD
+  track H1  . . F5 .  . . . .  . . . .  . . . F5
+
+# The order list: a track per channel on each line, '.' for none.
+speed  6
+line   D1  B1  L1  H1

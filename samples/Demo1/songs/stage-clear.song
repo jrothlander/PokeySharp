@@ -1,0 +1,109 @@
+# STAGE CLEAR - the level-complete fanfare: plays once, and ends.
+# The format is in Demo1/CLAUDE.md, under "Song files". Instruments are tables with
+# one entry per frame; each channel holds named tracks of sixteen rows; the lines at the
+# end are the order list. In a track '.' holds and '-' releases. '#' starts a comment.
+#
+# Two bars of IV and V under a two-voice bugle call, a snare roll into the downbeat, and
+# a held tonic with the chord shimmering under it. 'end' at the bottom instead of 'loop':
+# after the last line every channel is released, the notes fade by their own release
+# rates, and the driver reads no more rows.
+#
+# The harmony is a tenth below the lead rather than a third. The pure-tone table is
+# 15 to 22 cents sharp in octave 5 and within 10 cents in octave 4, so the second voice
+# sits in the octave that is in tune.
+
+song   STAGE CLEAR
+key    A MAJOR
+
+instrument KICK
+  table      none
+  volume     15 14 13 11 9 7 5 3 1 0
+  distortion tone buzz
+  audf       40 20 27 34 43 52 62 71 80
+  release    2
+
+instrument SNARE
+  table      none
+  volume     14 13 11 9 7 6 5 4 3 2 1 0
+  distortion tone noise
+  audf       50 6 7 8 9 10 11 12 13
+  release    2
+
+# A cymbal: bright noise, struck and left to ring for most of half a second. It lands with
+# the bass, the top bugle note and the chord all at once, and at 12 that clipped.
+instrument CRASH
+  table      none
+  volume     10 10 9 9 8 8 7 7 6 6 5 5 4 4 3 3 3 2 2 2 1 1 1 0
+  distortion noise
+  audf       2
+  release    1
+
+# The bugle: loud almost at once, settling as it holds, and a vibrato that only arrives on
+# the long final note - the short notes of the call stay straight.
+#
+# The first frame is a step softer, here and on the harmony and bass. The song starts
+# with all four channels from silence, and the chip's DC blocker passes that whole jump
+# before the level settles: the same volumes that peak at 0.55 mid-bar peaked at 0.82 on
+# the very first frame, and clipped. One quieter frame at the start of a note is too short
+# to hear as an attack and enough to take the edge off the jump.
+instrument BUGLE
+  table      tone
+  volume     9 12 11 11 10 10 10 9 9 9 9 8 8 8 8
+  distortion tone
+  vibrato    0 1 1 0 -1 -1
+  delay      18
+  release    1
+
+instrument BUGLE_LOW
+  table      tone
+  volume     8 11 10 10 9 9 8 8 8 8 7 7 7 7 6
+  distortion tone
+  release    1
+
+# The tonic chord at the end, as an arpeggio that holds.
+instrument SHIMMER
+  table      tone
+  volume     8 8 7 7 6 6 6 6 5
+  distortion tone
+  release    1
+
+instrument BASS
+  table      buzz
+  volume     8 11 9 9 8 8
+  distortion buzz
+  release    2
+
+channel 1 drums DRUMS
+  note  Two kicks, a snare roll into the downbeat, and a crash on it - the fanfare's
+  note  punctuation, all on one channel.
+  kit   K=KICK S=SNARE C=CRASH
+  track ROLL  K . . .  K . . .  S S S S  S S S S
+  track HIT   C . . .  . . . .  . . . .  . . . .
+
+channel 2 notes BASS
+  note  Distortion C on D, E and A - IV, V, I - which land within 11 cents on the buzz
+  note  table, which is why a fanfare in A major works here at all.
+  voice BASS
+  track IV-V  D2 . . .  D2 . . .  E2 . . .  E2 . E2 .
+  track I     A1 . . .  . . . .  . . . .  . . . .
+
+channel 3 notes BUGLE
+  note  The call: a pickup, a leap to the top, a step down and up again, and the tonic
+  note  held until the song ends and the note fades.
+  voice BUGLE
+  track CALL  E5 . E5 E5  A5 . . .  G#5 . F#5 .  G#5 . B5 .
+  track TOP   A5 . . .  . . . .  . . . .  . . . .
+
+channel 4 notes HARMONY
+  note  The second bugle a tenth below, in octave 4 where the table is in tune; then the
+  note  tonic chord as an arpeggio under the held note.
+  voice BUGLE_LOW
+  track CALL  C#4 . C#4 C#4  F#4 . . .  E4 . D4 .  E4 . G#4 .
+  track CHORD @SHIMMER A . . .  . . . .  . . . .  . . . .
+
+# The order list: drums, bass, bugle, harmony. It ends rather than loops.
+speed  6
+audctl $00
+line   ROLL   IV-V   CALL   CALL
+line   HIT    I      TOP    CHORD
+end

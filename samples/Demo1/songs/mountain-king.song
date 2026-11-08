@@ -1,0 +1,386 @@
+# IN THE HALL OF THE MOUNTAIN KING - Grieg, Peer Gynt Suite No. 1 (Op. 46), no. 4.
+# The format is in Demo1/CLAUDE.md, under "Song files". Instruments are tables with
+# one entry per frame; each channel holds named tracks; the lines at the end are the
+# order list. In a track '.' holds and '-' releases. '#' starts a comment.
+#
+# Written in 1875, published in the suite in 1888; Grieg died in 1907, so it is public
+# domain. The notes were read bar by bar off the full score in Brandon Amaro's 2022
+# edition (IMSLP 808246), itself dedicated to the public domain - all 88 bars.
+#
+# The piece is one idea, repeated until it breaks. A four-bar theme in B minor, and a
+# four-bar answer a fifth up, pass from cellos to bassoons to violins to oboes, each
+# time a little louder, until the whole orchestra takes them at bar 50; at bar 66 Grieg
+# writes "stringendo al fine" - faster to the end - and the song does that the only way a
+# tracker can, by taking a frame off every row every two bars, 138 beats a minute to
+# 257. Those speed lines are the whole trick: nothing else in the file knows it is
+# accelerating.
+#
+# What four channels keep. Channel 1 is the percussion - a quiet bass drum every other
+# bar at first, timpani as it builds, a march of bass drum and cymbal in the tutti, a roll
+# into the last chord. Channel 2 is the theme, wherever it is: an octave above the cellos
+# and bassoons at the start (the pure-tone table cannot reach their B2), then where the
+# violins and oboes play it. Channels 3 and 4 are one 16-bit bass, so B minor's B, G and
+# A# are all within a cent - the buzz table would miss B by 26. Left out: the off-beat
+# chords in the horns and clarinets, the violas' flourishes, the horns' accents at the
+# end of each phrase, the woodwinds' trills in the tutti. The final stabs alternate a
+# chord built on G# and B with B minor; a C# major chord stands in for the first, which
+# shares three of its notes.
+
+song   IN THE HALL OF THE MOUNTAIN KING
+key    B MINOR
+rows   8
+beat   2
+
+# --- Percussion ---------------------------------------------------------------------
+
+# The concert bass drum at pianissimo: Guardian's kick, quieter.
+instrument BD_SOFT
+  table      none
+  volume     9 8 7 6 5 4 3 2 1 0
+  distortion tone buzz
+  audf       40 20 27 34 43 52 62 71 80
+  release    2
+
+# The same drum at fortissimo.
+instrument KICK
+  table      none
+  volume     15 14 13 11 9 7 5 3 1 0
+  distortion tone buzz
+  audf       40 20 27 34 43 52 62 71 80
+  release    2
+
+# A crash: noise, falling slowly in level and in pitch.
+instrument CRASH
+  table      none
+  volume     13 12 11 10 9 9 8 8 7 7 6 6 5 5 4 4 3 3 2 2 1 1 0
+  distortion noise
+  audf       0 0 1 1 2 2 3 3 4 4 5 5 6
+  release    2
+
+# Timpani on B: distortion C at divider 67, 62.7 Hz - B1, 27 cents sharp, which a drum
+# can afford.
+instrument TIMP
+  table      none
+  volume     12 11 10 9 8 7 6 5 4 3 2 1 0
+  distortion buzz
+  audf       67
+  release    2
+
+# The roll into the last chord: the same drum, its volume beating up and down every
+# frame while the whole climbs - a tremolo written out as a volume table.
+instrument ROLL
+  table      none
+  volume     5 2 5 2 6 2 6 3 6 3 7 3 7 3 7 4 8 4 8 4 8 4 9 5 9 5 9 5 10 6 10 6 10 6 11 7 11 7 11 7 12 8 12 8 12 8 13 9 13 9 13 9 14 10 14 10 14 10 15 11 15 11 15 11 15 12 15 12 15 12 15 13 15 13 15 13 15 13 15 13 15 13 15 13 15 13
+  distortion buzz
+  audf       67
+  release    2
+
+# --- The theme --------------------------------------------------------------------
+
+# Cellos pizzicato, pianissimo: plucked, and gone before the next eighth.
+instrument PIZZ
+  table      tone
+  volume     7 6 5 4 3 2 1 0
+  distortion tone
+  release    2
+
+# Bassoons, staccato: a softer front than the pizzicato, and a little longer.
+instrument BASSOON
+  table      tone
+  volume     5 7 7 6 5 3 1 0
+  distortion tone
+  release    2
+
+# Violins pizzicato: the cellos' pluck, a level louder.
+instrument VPIZZ
+  table      tone
+  volume     9 8 6 5 4 3 2 1 0
+  distortion tone
+  release    2
+
+instrument OBOE
+  table      tone
+  volume     8 9 9 8 7 5 3 0
+  distortion tone
+  release    2
+
+# Violins with the bow, forte: held for the length of the note.
+instrument VIOLIN
+  table      tone
+  volume     11 11 10 10 9 9 9 8 8
+  distortion tone
+  release    2
+
+instrument OBOE_F
+  table      tone
+  volume     11 12 11 10 9 7 5 0
+  distortion tone
+  release    2
+
+# The whole orchestra.
+instrument TUTTI
+  table      tone
+  volume     13 13 12 12 11 11 10 10
+  distortion tone
+  release    2
+
+# A chord struck and cut: the arpeggio, gone in eight frames.
+instrument STAB
+  table      tone
+  volume     14 13 11 9 7 5 3 1 0
+  distortion tone
+  release    2
+
+# The horns' held note before anything moves.
+instrument HORN
+  table      tone
+  volume     3 4 5 5 6 6 6 6 6 6 5
+  distortion tone
+  release    2
+
+# --- The bass -----------------------------------------------------------------------
+
+instrument BASS_PP
+  table      wide
+  volume     7 7 6 5 4 3 2 1 0
+  distortion tone
+  release    2
+
+instrument BASS_P
+  table      wide
+  volume     9 9 8 7 5 4 3 2 1 0
+  distortion tone
+  release    2
+
+instrument BASS_F
+  table      wide
+  volume     11 11 10 9 8 6 4 2 0
+  distortion tone
+  release    2
+
+instrument BASS_FF
+  table      wide
+  volume     13 12 11 10 10 9 9 8
+  distortion tone
+  release    2
+
+channel 1 drums DRUMS
+  note  A bass drum on every other bar from the start, so quiet it is felt more than
+  note  heard. Timpani from bar 42, then the tutti's march - bass drum on one and three,
+  note  cymbal on two and four - and at the end a roll, written as a volume table that
+  note  beats every frame, into the last chord.
+  kit   D=BD_SOFT K=KICK C=CRASH T=TIMP R=ROLL
+  track PULSE  D . . .  . . . .
+  track TIMP1  D . . .  T . . .
+  track TIMP4  T . T .  T . T .
+  track MARCH  K . C .  K . C .
+  track STAB   K . C .  . . . .
+  track CYM3   K . C .  C . C .
+  track CYM4   C . C .  C . C .
+  track ROLLIN . . . .  R . . .
+
+channel 2 notes THEME
+  note  The tune, wherever it is - a row is an eighth note, a line a bar. B C# D E F# D
+  note  F#, then the answer a fifth up, F# G# A# B C# A# C#. Each group has its own
+  note  instrument, so the theme gets louder by being handed on.
+  voice PIZZ
+  track FERM @HORN B3 . . .  . . . -
+  track TA   B3 C#4 D4 E4  F#4 D4 F#4 .
+  track TB   E#4 C#4 E#4 .  E4 C4 E4 .
+  track TC   B3 C#4 D4 E4  F#4 D4 F#4 B4
+  track TD   A4 F#4 D4 F#4  A4 . - .
+  track AA   F#4 G#4 A#4 B4  C#5 A#4 C#5 .
+  track AB   D5 A#4 D5 .  C#5 A#4 C#5 .
+  track AD   D5 A#4 D5 .  C#5 . - .
+  track BTA  @BASSOON B3 C#4 D4 E4  F#4 D4 F#4 .
+  track BTB  @BASSOON E#4 C#4 E#4 .  E4 C4 E4 .
+  track BTC  @BASSOON B3 C#4 D4 E4  F#4 D4 F#4 B4
+  track BTD  @BASSOON A4 F#4 D4 F#4  A4 . - .
+  track BTE  @BASSOON F#4 D4 F#4 B4  B3 . . .
+  track BAA  @BASSOON F#4 G#4 A#4 B4  C#5 A#4 C#5 .
+  track BAB  @BASSOON D5 A#4 D5 .  C#5 A#4 C#5 .
+  track BAD  @BASSOON D5 A#4 D5 .  C#5 . - .
+  track VTA  @VPIZZ B4 C#5 D5 E5  F#5 D5 F#5 .
+  track VTB  @VPIZZ E#5 C#5 E#5 .  E5 C5 E5 .
+  track VTC  @VPIZZ B4 C#5 D5 E5  F#5 D5 F#5 B5
+  track VTD  @VPIZZ A5 F#5 D5 F#5  A5 . - .
+  track VAA  @VPIZZ F#5 G#5 A#5 B5  C#6 A#5 C#6 .
+  track VAB  @VPIZZ D6 A#5 D6 .  C#6 A#5 C#6 .
+  track VAD  @VPIZZ D6 A#5 D6 .  C#6 . - .
+  track OTA  @OBOE B4 C#5 D5 E5  F#5 D5 F#5 .
+  track OTB  @OBOE E#5 C#5 E#5 .  E5 C5 E5 .
+  track OTC  @OBOE B4 C#5 D5 E5  F#5 D5 F#5 B5
+  track OTD  @OBOE A5 F#5 D5 F#5  A5 . . .
+  track OAA  @OBOE F#5 G#5 A#5 B5  C#6 A#5 C#6 .
+  track OAB  @OBOE D6 A#5 D6 .  C#6 A#5 C#6 .
+  track OAD  @OBOE D6 A#5 D6 .  C#6 . . .
+  track ATA  @VIOLIN B4 C#5 D5 E5  F#5 D5 F#5 .
+  track ATB  @VIOLIN E#5 C#5 E#5 .  E5 C5 E5 .
+  track ATC  @VIOLIN B4 C#5 D5 E5  F#5 D5 F#5 B5
+  track ATD  @VIOLIN A5 F#5 D5 F#5  A5 . - .
+  track FTA  @OBOE_F B4 C#5 D5 E5  F#5 D5 F#5 .
+  track FTB  @OBOE_F E#5 C#5 E#5 .  E5 C5 E5 .
+  track FTC  @OBOE_F B4 C#5 D5 E5  F#5 D5 F#5 B5
+  track FTE  @OBOE_F F#5 D5 F#5 B5  B4 . . .
+  track X1   @TUTTI B4 C#5 D5 E5  F#5 D5 F#5 F#5
+  track X2   @TUTTI E#5 C#5 E#5 E#5  E5 C5 E5 E5
+  track X3   @TUTTI B4 C#5 D5 E5  F#5 D5 F#5 B5
+  track X4   @TUTTI A5 F#5 D5 F#5  A5 . . .
+  track X4B  @TUTTI F#5 D5 F#5 B5  B4 . . .
+  track Y1   @TUTTI F#5 G#5 A#5 B5  C#6 A#5 C#6 C#6
+  track Y2   @TUTTI D6 A#5 D6 D6  C#6 A#5 C#6 C#6
+  track Y4   @TUTTI D6 A#5 D6 D6  C#6 . . .
+  track RUN  @TUTTI A#5 F#5 A#5 C#6  B5 . . .
+  track SC   @STAB - . C# .  - . . .
+  track SB   @STAB - . Bm .  - . . .
+  track S3   @STAB - . C# .  C# . C# .
+  track S4   @STAB C# . C# .  C# . C# .
+
+channel 3 pair LOW BYTE
+  note  The low byte of the bass. AUDCTL 28 joins channels 3 and 4 into one 16-bit
+  note  counter on the 1.79 MHz clock, and this channel's own volume is never heard.
+
+channel 4 notes BASS
+  note  The pulse under everything: B and F# in staccato quarters at first, octaves when
+  note  the violins take the tune, and in the tutti the cellos' and basses' falling
+  note  eighths, B A G F#. On the 16-bit table, every note within a cent.
+  voice BASS_PP
+  track O1   B1 . F#2 .  B1 . F#2 .
+  track O2   D2 . A2 .  D2 . A2 .
+  track P1   F#2 . C#3 .  F#2 . A#2 .
+  track P2   D2 . A#2 .  F#2 . A#2 .
+  track O3   B1 . B2 .  A2 . G2 .
+  track O4   F#2 . E2 .  D2 . C#2 .
+  track Q1   @BASS_P B1 . B2 .  B1 . B2 .
+  track Q2   @BASS_P D2 . D3 .  D2 . D3 .
+  track Q3   @BASS_P F#2 . F#3 .  F#2 . F#3 .
+  track Q4   @BASS_P D2 . D3 .  F#2 . F#3 .
+  track QF1  @BASS_F B1 . B2 .  B1 . B2 .
+  track QF2  @BASS_F D2 . D3 .  D2 . D3 .
+  track QF3  @BASS_F B1 . B2 .  A2 . G2 .
+  track QF4  @BASS_F F#2 . E2 .  D2 . C#2 .
+  track R1   @BASS_FF B1 A1 G1 F#1  B1 A1 G1 F#1
+  track R2   @BASS_FF D2 C#2 B1 A1  D2 C#2 B1 A1
+  track R3   @BASS_FF F#2 E2 D2 C#2  F#2 E2 D2 C#2
+  track R4   @BASS_FF D2 C#2 D2 E2  F#2 E2 D2 C#2
+  track R5   @BASS_FF F#2 E#2 D#2 C#2  F#2 E2 D2 C#2
+  track R6   @BASS_FF D#2 C#2 D#2 E#2  F#2 E2 D2 C#2
+  track CB   @BASS_FF B1 . - .  . . . .
+  track C76  @BASS_FF G2 . . -  F#2 . . -
+  track C77  @BASS_FF F#1 . . -  B1 . . -
+  track FIN  @BASS_FF B1 . B2 .  - . . .
+
+# The order list: a line is a bar. Percussion, theme, low byte, bass.
+speed  13
+audctl $28
+section FERMATA
+line   .      FERM   .    .
+section CELLOS
+line   PULSE  TA     .    O1
+line   .      TB     .    O1
+line   PULSE  TC     .    O1
+line   .      TD     .    O2
+section BASSOONS
+line   PULSE  BTA    .    O1
+line   .      BTB    .    O1
+line   PULSE  BTC    .    O1
+line   .      BTD    .    O2
+section CELLOS
+line   PULSE  AA     .    P1
+line   .      AB     .    P2
+line   PULSE  AA     .    P1
+line   .      AD     .    P2
+section BASSOONS
+line   PULSE  BAA    .    P1
+line   .      BAB    .    P2
+line   PULSE  BAA    .    P1
+line   .      BAD    .    P2
+section CELLOS
+line   PULSE  TA     .    O1
+line   .      TB     .    O1
+line   PULSE  TC     .    O1
+line   .      TD     .    O2
+section BASSOONS
+line   PULSE  BTA    .    O1
+line   .      BTB    .    O1
+line   PULSE  BTC    .    O3
+line   .      BTE    .    O4
+section VIOLINS
+line   PULSE  VTA    .    Q1
+line   .      VTB    .    Q1
+line   PULSE  VTC    .    Q1
+line   .      VTD    .    Q2
+section OBOES
+line   PULSE  OTA    .    Q1
+line   .      OTB    .    Q1
+line   PULSE  OTC    .    Q1
+line   .      OTD    .    Q2
+section VIOLINS
+line   PULSE  VAA    .    Q3
+line   .      VAB    .    Q4
+line   PULSE  VAA    .    Q3
+line   .      VAD    .    Q4
+section OBOES
+line   PULSE  OAA    .    Q3
+line   .      OAB    .    Q4
+line   PULSE  OAA    .    Q3
+line   .      OAD    .    Q4
+section VIOLINS FORTE
+line   TIMP1  ATA    .    QF1
+line   .      ATB    .    QF1
+line   TIMP1  ATC    .    QF1
+line   .      ATD    .    QF2
+section OBOES FORTE
+line   TIMP1  FTA    .    QF1
+line   .      FTB    .    QF1
+line   TIMP4  FTC    .    QF3
+line   TIMP4  FTE    .    QF4
+section TUTTI
+line   MARCH  X1     .    R1
+line   MARCH  X2     .    R1
+line   MARCH  X3     .    R1
+line   MARCH  X4     .    R2
+line   MARCH  X1     .    R1
+line   MARCH  X2     .    R1
+line   MARCH  X3     .    R1
+line   MARCH  X4     .    R2
+line   MARCH  Y1     .    R3
+line   MARCH  Y2     .    R4
+line   MARCH  Y1     .    R3
+line   MARCH  Y4     .    R4
+line   MARCH  Y1     .    R5
+line   MARCH  Y2     .    R6
+line   MARCH  Y1     .    R5
+line   MARCH  Y4     .    R6
+section STRINGENDO
+speed  12
+line   MARCH  X1     .    R1
+line   MARCH  X2     .    R1
+speed  11
+line   MARCH  X3     .    R1
+line   MARCH  X4     .    R2
+speed  10
+line   MARCH  X1     .    R1
+line   MARCH  X2     .    R1
+speed  9
+line   MARCH  X3     .    R1
+line   MARCH  X4B    .    R1
+section THE END
+speed  8
+line   STAB   SC     .    CB
+line   STAB   SB     .    CB
+line   .      X3     .    C76
+line   .      RUN    .    C77
+speed  7
+line   STAB   SC     .    CB
+line   STAB   SB     .    CB
+line   .      X3     .    C76
+line   .      RUN    .    C77
+line   STAB   SC     .    CB
+line   STAB   SC     .    CB
+line   CYM3   S3     .    CB
+line   CYM4   S4     .    .
+line   ROLLIN .      .    .
+line   .      .      .    .
+line   STAB   SB     .    FIN
+end

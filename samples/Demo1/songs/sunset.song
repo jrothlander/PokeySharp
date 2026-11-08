@@ -1,0 +1,83 @@
+# SUNSET
+# The format is in Demo1/CLAUDE.md, under "Song files". Instruments are tables with
+# one entry per frame; each channel holds named tracks of 16 rows; the lines at the
+# end are the order list. In a track '.' holds and '-' releases. '#' starts a comment.
+
+song   SUNSET
+key    C MAJOR
+
+# A plain square wave, for a melody.
+instrument LEAD
+  table      tone
+  volume     12 11 10 10 9
+  distortion tone
+  release    2
+
+# Distortion C, for a bass. Its table skips notes - see which in the tracker's colours.
+instrument BASS
+  table      buzz
+  volume     12 11 10 9 8
+  distortion buzz
+  release    3
+
+# Four drums: a falling thump, a burst of noise, and a short and a long hiss.
+instrument KICK
+  table      none
+  volume     15 13 10 7 4 2 0
+  distortion buzz
+  audf       40 55 70 85 100 115 130
+
+instrument SNARE
+  table      none
+  volume     13 11 9 7 5 4 3 2 1 0
+  distortion tone noise
+  audf       50 8 9 10 11 12 13
+
+instrument HAT
+  table      none
+  volume     8 5 3 1 0
+  distortion noise
+  audf       2
+
+instrument OPEN
+  table      none
+  volume     8 7 6 5 4 3 2 2 1 1 0
+  distortion noise
+  audf       1
+
+channel 1 drums DRUMS
+  kit   K=KICK S=SNARE H=HAT O=OPEN
+  track D1  O . . .  H . . .  O . . .  . . . .
+
+channel 2 notes BASS
+  voice BASS
+  track B1  . . . .  . . . .  . . . .  . . . .
+
+channel 3 notes LEAD
+  voice LEAD
+  track L1  A#4 . . -   F5  . . -   A#4 . . -  A4 . . -
+  track L2  F5  . . -   A4  . . -   G4  . . -  D#5 . . -
+  track L3  D5  . . -   C5  . . -   A#4 . . -  A4  . . -
+
+  track L4  A#4 - A4 -  A#4 - F5 .   . . A#4 .   . . A4 .   
+  track L5  . . A#4 .    . . A4 -    G4 - A4 -   F5 . . . 
+  track L6  A4 . . .     G4 . . .    A4 . . .    . . . .
+  
+channel 4 notes HARMONY
+  voice LEAD
+  track H1  A#3 . . .  . . . .  . . . .     F3 . . .
+  track H2  . . . .    . . . .  D#3 . . .   . . . .
+  track H3  . . . .    . . . .  . . . .     . . . .
+
+
+# The order list: a track per channel on each line, '.' for none.
+speed  7
+line   D1  B1  L1  H1
+line   D1  B1  L2  H2
+line   D1  B1  L3  H3
+line   D1  B1  L1  H1
+line   D1  B1  L2  H2
+line   D1  B1  L3  H3
+line   D1  B1  L4  H1
+line   D1  B1  L5  H2
+line   D1  B1  L6  H3
