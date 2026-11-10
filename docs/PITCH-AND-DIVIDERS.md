@@ -1,21 +1,5 @@
 # Pitch on POKEY: dividers, cents, and why a tune takes two channels
 
-POKEY cannot be told to play a note. It can only be told how far to count. Everything
-about how the chip is tuned follows from that one fact: why its top octave is sour,
-why a melody that has to be in tune costs two of the four channels, why the Atari's bass
-has notes missing, and why its composers picked their keys by the chip rather than by
-the song.
-
-This is the thing about POKEY most worth understanding before writing music for it, and
-the one most likely to surprise anyone who has worked with a chip, or a synthesiser, that
-takes a frequency.
-
-Every figure below was computed by `Pokey.Music.NoteTable`, for an NTSC Atari 800. Other
-machines run a different base clock, so their numbers move a little, but the shape stays
-the same.
-
----
-
 ## 1. The short version
 
 - A channel divides a clock by an **8-bit number**, so it has 256 pitches and no others.
