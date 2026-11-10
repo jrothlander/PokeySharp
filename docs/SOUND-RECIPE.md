@@ -2,10 +2,9 @@
 
 How to design a sound in PokeyLabForms and play it in a MonoGame project.
 
-This is the loop RimWalker itself uses: dial a voice in by ear in the lab, write the
-numbers down, and let the game render them through the same emulated chip at load time.
-Nothing is recorded and no audio file ships — the game builds every sound from about a
-dozen integers.
+Dial a voice in by ear in the lab, write the numbers down, and let the game render them 
+through the same emulated chip at load time. Nothing is recorded and no audio file ships 
+— the game builds every sound from about a dozen integers.
 
 Worked here with a maze game in mind (a chomp, a power-up, a death), but nothing about it
 is specific to that.
@@ -29,10 +28,6 @@ easiest to forget.
 ---
 
 ## Step 1 — design it in the lab
-
-```
-dotnet run --project PokeyLabForms
-```
 
 Work in the **Envelope** panel, top right. Ignore the measured-bands readout beneath the
 graph; that is calibration for one specific arcade sound and means nothing for yours.
