@@ -1,8 +1,15 @@
 # PokeySharp
 
-The Atari POKEY sound chip, emulated in C#. Four channels, the polynomial counters,
-AUDCTL, 16-bit pairs, the high-pass filters and volume-only mode — rendered through a box
+The Atari POKEY sound chip, emulated in C#. Four channels, the polynomial counters, AUDCTL, 16-bit pairs, the high-pass filters and volume-only mode — rendered through a box
 filter and a DC blocker, at whatever sample rate you ask for.
+
+## History
+
+I wrote this for retro game clones of Tempest and Galaga I built in C# and MonoGame. I didn't like the experience of working with retro sounds in modern games, so I decided to write a simple POKEY chip emulator that would create the sounds in the same way the original games did. It worked really well, and I have kept upgrading it over the past few months. I even built a full digital workbench that uses it to compose game music assets, export/import MIDI, WAV, and MP3 formats. 
+
+For the musical assets, the best option is to export them to WAV, then load the WAV as an asset. But for sound effects, they are so simple that I found it easier to load them at runtime. I prefer this approach because it allows me to create a sound bank that can be modified in a workbench and saved directly in the game's asset folder.
+
+I included a samples folder to demonstrate how to use it and how it works. I also made a few videos and created a YouTube channel for this. I am not a professional video editor, so they are a bit amateurish. I will work to make them better.
 
 **No dependencies.** Not on a UI framework, not on an audio API, not on a package. It is a
 library that turns register writes into samples.
@@ -59,6 +66,20 @@ right. It sings, too.
 | `samples/lasers` | The API applied to ten laser shots, one layer at a time. Console; writes WAVs. |
 | `samples/voicedump` | Speech to a WAV from the command line. Console. |
 
+#### PokeyLabForms
+This demonstrates each part of the POKEY chip itself. Not terribly useful if you just want to use it without understanding how it works. But if you want to dig into the details, this demo will show you how it works and allow you to play around with creating different sounds. It is also helpful to fine-tune sounds to get exactly what you need, then use the settings you discover here in your own sound banks for your games. 
+
+#### Demo1
+A C# MonoGame app that only has a menu and nothing else. The menu drives a sample bank of sounds, voices, and songs. I demonstrate how the emulator works and how to use Demo1 here: https://www.youtube.com/watch?v=WPIBTtdR2UY&t=5s
+
+#### Lasers
+This is a simple console app that reads the sound back to create WAV files. If you do not want to load your sounds in real-time, you can dump them as WAV files and load them as assets in your game. This console app allows you to just load them from a bank file and create the WAV. In MonoGame, you would need to recompile them 
+
+The demo includes a couple of console apps that will dump the sound banks to WAV files. If you want to convert them to WAVs and not load them during your game's initialization. 
+
+#### Voice Dump
+Similar to the Lasers demo but dumps various texted voices to WAVs. This is less about needing the WAV and more about showing you how to create the sound assets. In my games, I create the voice assets on the fly during the loading of the game content. I do not save them as WAV files. 
+
 ```
 dotnet run --project samples/PokeyLabForms
 ```
@@ -95,14 +116,6 @@ which settles the distortion table, the counter reload addends, the derived cloc
 the high-pass filters are built. It does not give the polynomial tap positions, so those
 are flagged as unverified in `src/Pokey/CLAUDE.md` — the sequences have the right periods
 and the right statistics, and may not be bit-identical to the silicon.
-
-## Status
-
-**0.1.0, and pre-1.0 for a reason**: the public surface is wide and some of it should
-probably be internal. Expect it to move before 1.0. `net8.0` only for now — a
-`netstandard2.0` build for Unity and .NET Framework is an hour's work and will happen if
-anyone asks.
-
 ## Licence
 
 MIT. The chip is Atari's; the emulation is mine.
