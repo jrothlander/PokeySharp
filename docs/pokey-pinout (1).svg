@@ -1,0 +1,322 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1200">
+
+  <!-- CHIP BODY (stretched: top=140, bottom=560) -->
+  <rect x="260" y="140" width="280" height="420" fill="#222" stroke="#000" stroke-width="2"/>
+
+  <!-- ORIENTATION NOTCH -->
+  <path d="M400 140 L385 115 L370 140 Z" fill="#444"/>
+
+  <!-- ROTATED CHIP LABEL -->
+  <text x="400" y="350" fill="#ffffff" font-size="22" text-anchor="middle"
+        transform="rotate(90 400 350)">POKEY CO12294</text>
+
+  <!-- FUNCTION COLORS -->
+  <!-- Data: #4FC3F7 -->
+  <!-- Address: #81C784 -->
+  <!-- POT: #FFB74D -->
+  <!-- Keyboard: #BA68C8 -->
+  <!-- Serial: #E57373 -->
+  <!-- Control: #FFD54F -->
+  <!-- Power: #90A4AE -->
+  <!-- Audio: #4DB6AC -->
+
+  <!-- LEFT SIDE PINS (1–5) -->
+
+  <!-- 1 VSS -->
+  <line x1="260" y1="160" x2="230" y2="160" stroke="#90A4AE" stroke-width="3"/>
+  <text x="270" y="165" fill="#fff" font-size="12">1</text>
+  <text x="220" y="165" font-size="12" text-anchor="end">VSS</text>
+
+  <!-- 2 D3 -->
+  <line x1="260" y1="180" x2="230" y2="180" stroke="#4FC3F7" stroke-width="3"/>
+  <text x="270" y="185" fill="#fff" font-size="12">2</text>
+  <text x="220" y="185" font-size="12" text-anchor="end">D3</text>
+
+  <!-- 3 D4 -->
+  <line x1="260" y1="200" x2="230" y2="200" stroke="#4FC3F7" stroke-width="3"/>
+  <text x="270" y="205" fill="#fff" font-size="12">3</text>
+  <text x="220" y="205" font-size="12" text-anchor="end">D4</text>
+
+  <!-- 4 D5 -->
+  <line x1="260" y1="220" x2="230" y2="220" stroke="#4FC3F7" stroke-width="3"/>
+  <text x="270" y="225" fill="#fff" font-size="12">4</text>
+  <text x="220" y="225" font-size="12" text-anchor="end">D5</text>
+
+  <!-- 5 D6 -->
+  <line x1="260" y1="240" x2="230" y2="240" stroke="#4FC3F7" stroke-width="3"/>
+  <text x="270" y="245" fill="#fff" font-size="12">5</text>
+  <text x="220" y="245" font-size="12" text-anchor="end">D6</text>
+
+    <!-- 6 D7 -->
+  <line x1="260" y1="260" x2="230" y2="260" stroke="#4FC3F7" stroke-width="3"/>
+  <text x="270" y="265" fill="#fff" font-size="12">6</text>
+  <text x="220" y="265" font-size="12" text-anchor="end">D7</text>
+
+  <!-- 7 Φ2 -->
+  <line x1="260" y1="280" x2="230" y2="280" stroke="#FFD54F" stroke-width="3"/>
+  <text x="270" y="285" fill="#fff" font-size="12">7</text>
+  <text x="220" y="285" font-size="12" text-anchor="end">Φ2</text>
+
+  <!-- 8 P6 -->
+  <line x1="260" y1="300" x2="230" y2="300" stroke="#FFB74D" stroke-width="3"/>
+  <text x="270" y="305" fill="#fff" font-size="12">8</text>
+  <text x="220" y="305" font-size="12" text-anchor="end">P6</text>
+
+  <!-- 9 P7 -->
+  <line x1="260" y1="320" x2="230" y2="320" stroke="#FFB74D" stroke-width="3"/>
+  <text x="270" y="325" fill="#fff" font-size="12">9</text>
+  <text x="220" y="325" font-size="12" text-anchor="end">P7</text>
+
+  <!-- 10 P4 -->
+  <line x1="260" y1="340" x2="230" y2="340" stroke="#FFB74D" stroke-width="3"/>
+  <text x="270" y="345" fill="#fff" font-size="12">10</text>
+  <text x="220" y="345" font-size="12" text-anchor="end">P4</text>
+
+    <!-- 11 P5 -->
+  <line x1="260" y1="360" x2="230" y2="360" stroke="#FFB74D" stroke-width="3"/>
+  <text x="270" y="365" fill="#fff" font-size="12">11</text>
+  <text x="220" y="365" font-size="12" text-anchor="end">P5</text>
+
+  <!-- 12 P2 -->
+  <line x1="260" y1="380" x2="230" y2="380" stroke="#FFB74D" stroke-width="3"/>
+  <text x="270" y="385" fill="#fff" font-size="12">12</text>
+  <text x="220" y="385" font-size="12" text-anchor="end">P2</text>
+
+  <!-- 13 P3 -->
+  <line x1="260" y1="400" x2="230" y2="400" stroke="#FFB74D" stroke-width="3"/>
+  <text x="270" y="405" fill="#fff" font-size="12">13</text>
+  <text x="220" y="405" font-size="12" text-anchor="end">P3</text>
+
+  <!-- 14 P0 -->
+  <line x1="260" y1="420" x2="230" y2="420" stroke="#FFB74D" stroke-width="3"/>
+  <text x="270" y="425" fill="#fff" font-size="12">14</text>
+  <text x="220" y="425" font-size="12" text-anchor="end">P0</text>
+
+  <!-- 15 P1 -->
+  <line x1="260" y1="440" x2="230" y2="440" stroke="#FFB74D" stroke-width="3"/>
+  <text x="270" y="445" fill="#fff" font-size="12">15</text>
+  <text x="220" y="445" font-size="12" text-anchor="end">P1</text>
+
+  <!-- 16 KR2 -->
+  <line x1="260" y1="460" x2="230" y2="460" stroke="#BA68C8" stroke-width="3"/>
+  <text x="270" y="465" fill="#fff" font-size="12">16</text>
+  <text x="220" y="465" font-size="12" text-anchor="end">KR2</text>
+
+  <!-- 17 VCC -->
+  <line x1="260" y1="480" x2="230" y2="480" stroke="#90A4AE" stroke-width="3"/>
+  <text x="270" y="485" fill="#fff" font-size="12">17</text>
+  <text x="220" y="485" font-size="12" text-anchor="end">VCC</text>
+
+  <!-- 18 K5 -->
+  <line x1="260" y1="500" x2="230" y2="500" stroke="#BA68C8" stroke-width="3"/>
+  <text x="270" y="505" fill="#fff" font-size="12">18</text>
+  <text x="220" y="505" font-size="12" text-anchor="end">K5</text>
+
+  <!-- 19 K4 -->
+  <line x1="260" y1="520" x2="230" y2="520" stroke="#BA68C8" stroke-width="3"/>
+  <text x="270" y="525" fill="#fff" font-size="12">19</text>
+  <text x="220" y="525" font-size="12" text-anchor="end">K4</text>
+
+  <!-- 20 K3 -->
+  <line x1="260" y1="540" x2="230" y2="540" stroke="#BA68C8" stroke-width="3"/>
+  <text x="270" y="545" fill="#fff" font-size="12">20</text>
+  <text x="220" y="545" font-size="12" text-anchor="end">K3</text>
+
+  <!-- 21 K2 -->
+  <line x1="540" y1="540" x2="570" y2="540" stroke="#BA68C8" stroke-width="3"/>
+  <text x="530" y="545" fill="#fff" font-size="12" text-anchor="end">21</text>
+  <text x="580" y="545" font-size="12" text-anchor="start">K2</text>
+
+  <!-- 22 K1 -->
+  <line x1="540" y1="520" x2="570" y2="520" stroke="#BA68C8" stroke-width="3"/>
+  <text x="530" y="525" fill="#fff" font-size="12" text-anchor="end">22</text>
+  <text x="580" y="525" font-size="12" text-anchor="start">K1</text>
+
+  <!-- 23 K0 -->
+  <line x1="540" y1="500" x2="570" y2="500" stroke="#BA68C8" stroke-width="3"/>
+  <text x="530" y="505" fill="#fff" font-size="12" text-anchor="end">23</text>
+  <text x="580" y="505" font-size="12" text-anchor="start">K0</text>
+
+  <!-- 24 SID -->
+  <line x1="540" y1="480" x2="570" y2="480" stroke="#E57373" stroke-width="3"/>
+  <text x="530" y="485" fill="#fff" font-size="12" text-anchor="end">24</text>
+  <text x="580" y="485" font-size="12" text-anchor="start">SID</text>
+
+  <!-- 25 KR1 -->
+  <line x1="540" y1="460" x2="570" y2="460" stroke="#BA68C8" stroke-width="3"/>
+  <text x="530" y="465" fill="#fff" font-size="12" text-anchor="end">25</text>
+  <text x="580" y="465" font-size="12" text-anchor="start">KR1</text>
+
+    <!-- 26 BCLK -->
+  <line x1="540" y1="440" x2="570" y2="440" stroke="#E57373" stroke-width="3"/>
+  <text x="530" y="445" fill="#fff" font-size="12" text-anchor="end">26</text>
+  <text x="580" y="445" font-size="12" text-anchor="start">BCLK</text>
+
+  <!-- 27 ACLK -->
+  <line x1="540" y1="420" x2="570" y2="420" stroke="#E57373" stroke-width="3"/>
+  <text x="530" y="425" fill="#fff" font-size="12" text-anchor="end">27</text>
+  <text x="580" y="425" font-size="12" text-anchor="start">ACLK</text>
+
+  <!-- 28 SOD -->
+  <line x1="540" y1="400" x2="570" y2="400" stroke="#E57373" stroke-width="3"/>
+  <text x="530" y="405" fill="#fff" font-size="12" text-anchor="end">28</text>
+  <text x="580" y="405" font-size="12" text-anchor="start">SOD</text>
+
+  <!-- 29 IRQ -->
+  <line x1="540" y1="380" x2="570" y2="380" stroke="#FFD54F" stroke-width="3"/>
+  <text x="530" y="385" fill="#fff" font-size="12" text-anchor="end">29</text>
+  <text x="580" y="385" font-size="12" text-anchor="start">IRQ</text>
+
+  <!-- 30 CS0 -->
+  <line x1="540" y1="360" x2="570" y2="360" stroke="#FFD54F" stroke-width="3"/>
+  <text x="530" y="365" fill="#fff" font-size="12" text-anchor="end">30</text>
+  <text x="580" y="365" font-size="12" text-anchor="start">CS0</text>
+
+  <!-- 31 CS1 -->
+  <line x1="540" y1="340" x2="570" y2="340" stroke="#FFD54F" stroke-width="3"/>
+  <text x="530" y="345" fill="#fff" font-size="12" text-anchor="end">31</text>
+  <text x="580" y="345" font-size="12" text-anchor="start">CS1</text>
+
+  <!-- 32 R/W -->
+  <line x1="540" y1="320" x2="570" y2="320" stroke="#FFD54F" stroke-width="3"/>
+  <text x="530" y="325" fill="#fff" font-size="12" text-anchor="end">32</text>
+  <text x="580" y="325" font-size="12" text-anchor="start">R/W</text>
+
+  <!-- 33 A3 -->
+  <line x1="540" y1="300" x2="570" y2="300" stroke="#81C784" stroke-width="3"/>
+  <text x="530" y="305" fill="#fff" font-size="12" text-anchor="end">33</text>
+  <text x="580" y="305" font-size="12" text-anchor="start">A3</text>
+
+  <!-- 34 A2 -->
+  <line x1="540" y1="280" x2="570" y2="280" stroke="#81C784" stroke-width="3"/>
+  <text x="530" y="285" fill="#fff" font-size="12" text-anchor="end">34</text>
+  <text x="580" y="285" font-size="12" text-anchor="start">A2</text>
+
+  <!-- 35 A1 -->
+  <line x1="540" y1="260" x2="570" y2="260" stroke="#81C784" stroke-width="3"/>
+  <text x="530" y="265" fill="#fff" font-size="12" text-anchor="end">35</text>
+  <text x="580" y="265" font-size="12" text-anchor="start">A1</text>
+
+    <!-- 36 A0 -->
+  <line x1="540" y1="240" x2="570" y2="240" stroke="#81C784" stroke-width="3"/>
+  <text x="530" y="245" fill="#fff" font-size="12" text-anchor="end">36</text>
+  <text x="580" y="245" font-size="12" text-anchor="start">A0</text>
+
+  <!-- 37 AUD -->
+  <line x1="540" y1="220" x2="570" y2="220" stroke="#4DB6AC" stroke-width="3"/>
+  <text x="530" y="225" fill="#fff" font-size="12" text-anchor="end">37</text>
+  <text x="580" y="225" font-size="12" text-anchor="start">AUD</text>
+
+  <!-- 38 D0 -->
+  <line x1="540" y1="200" x2="570" y2="200" stroke="#4FC3F7" stroke-width="3"/>
+  <text x="530" y="205" fill="#fff" font-size="12" text-anchor="end">38</text>
+  <text x="580" y="205" font-size="12" text-anchor="start">D0</text>
+
+  <!-- 39 D1 -->
+  <line x1="540" y1="180" x2="570" y2="180" stroke="#4FC3F7" stroke-width="3"/>
+  <text x="530" y="185" fill="#fff" font-size="12" text-anchor="end">39</text>
+  <text x="580" y="185" font-size="12" text-anchor="start">D1</text>
+
+  <!-- 40 D2 -->
+  <line x1="540" y1="160" x2="570" y2="160" stroke="#4FC3F7" stroke-width="3"/>
+  <text x="530" y="165" fill="#fff" font-size="12" text-anchor="end">40</text>
+  <text x="580" y="165" font-size="12" text-anchor="start">D2</text>
+  <!-- LEGEND BOX (right side, full height) -->
+  <rect x="620" y="150" width="200" height="260" fill="#111" stroke="#555" stroke-width="2" rx="6"/>
+
+  <text x="720" y="175" fill="#fff" font-size="14" text-anchor="middle">Legend</text>
+
+  <!-- Data -->
+  <rect x="630" y="195" width="15" height="15" fill="#4FC3F7"/>
+  <text x="655" y="207" fill="#fff" font-size="12">Data (D0–D7)</text>
+
+  <!-- Address -->
+  <rect x="630" y="220" width="15" height="15" fill="#81C784"/>
+  <text x="655" y="232" fill="#fff" font-size="12">Address (A0–A3)</text>
+
+  <!-- POT -->
+  <rect x="630" y="245" width="15" height="15" fill="#FFB74D"/>
+  <text x="655" y="257" fill="#fff" font-size="12">POT (P0–P7)</text>
+
+  <!-- Keyboard -->
+  <rect x="630" y="270" width="15" height="15" fill="#BA68C8"/>
+  <text x="655" y="282" fill="#fff" font-size="12">Keyboard (K0–K5, KR1–2)</text>
+
+  <!-- Serial -->
+  <rect x="630" y="295" width="15" height="15" fill="#E57373"/>
+  <text x="655" y="307" fill="#fff" font-size="12">Serial (SID, SOD, CLK)</text>
+
+  <!-- Control -->
+  <rect x="630" y="320" width="15" height="15" fill="#FFD54F"/>
+  <text x="655" y="332" fill="#fff" font-size="12">Control (IRQ, CS, R/W)</text>
+
+  <!-- Power -->
+  <rect x="630" y="345" width="15" height="15" fill="#90A4AE"/>
+  <text x="655" y="357" fill="#fff" font-size="12">Power (VCC, VSS)</text>
+
+  <!-- Audio -->
+  <rect x="630" y="370" width="15" height="15" fill="#4DB6AC"/>
+  <text x="655" y="382" fill="#fff" font-size="12">Audio (AUD)</text>
+
+    <!-- FULL PIN DESCRIPTION PANEL (three columns) -->
+  <rect x="50" y="600" width="800" height="320" fill="#111" stroke="#555" stroke-width="2" rx="6"/>
+
+  <text x="450" y="630" fill="#fff" font-size="18" text-anchor="middle">
+    POKEY Pin Descriptions
+  </text>
+  
+  <!-- COLUMN 1 (Pins 1–14) -->
+  <text x="90" y="660" fill="#fff" font-size="12">
+    <tspan x="90" dy="0">1  – VSS: Ground reference</tspan>
+    <tspan x="90" dy="18">2  – D3: Data bus bit 3</tspan>
+    <tspan x="90" dy="18">3  – D4: Data bus bit 4</tspan>
+    <tspan x="90" dy="18">4  – D5: Data bus bit 5</tspan>
+    <tspan x="90" dy="18">5  – D6: Data bus bit 6</tspan>
+    <tspan x="90" dy="18">6  – D7: Data bus bit 7</tspan>
+    <tspan x="90" dy="18">7  – Φ2: System clock input</tspan>
+    <tspan x="90" dy="18">8  – P6: POT input 6 (analog)</tspan>
+    <tspan x="90" dy="18">9  – P7: POT input 7 (analog)</tspan>
+    <tspan x="90" dy="18">10 – P4: POT input 4 (analog)</tspan>
+    <tspan x="90" dy="18">11 – P5: POT input 5 (analog)</tspan>
+    <tspan x="90" dy="18">12 – P2: POT input 2 (analog)</tspan>
+    <tspan x="90" dy="18">13 – P3: POT input 3 (analog)</tspan>
+    <tspan x="90" dy="18">14 – P0: POT input 0 (analog)</tspan>
+  </text>
+
+  <!-- COLUMN 2 (Pins 15–27) -->
+  <text x="360" y="660" fill="#fff" font-size="12">
+    <tspan x="360" dy="0">15 – P1: POT input 1 (analog)</tspan>
+    <tspan x="360" dy="18">16 – KR2: Keyboard row 2</tspan>
+    <tspan x="360" dy="18">17 – VCC: +5V power</tspan>
+    <tspan x="360" dy="18">18 – K5: Keyboard column 5</tspan>
+    <tspan x="360" dy="18">19 – K4: Keyboard column 4</tspan>
+    <tspan x="360" dy="18">20 – K3: Keyboard column 3</tspan>
+    <tspan x="360" dy="18">21 – K2: Keyboard column 2</tspan>
+    <tspan x="360" dy="18">22 – K1: Keyboard column 1</tspan>
+    <tspan x="360" dy="18">23 – K0: Keyboard column 0</tspan>
+    <tspan x="360" dy="18">24 – SID: Serial input data</tspan>
+    <tspan x="360" dy="18">25 – KR1: Keyboard row 1</tspan>
+    <tspan x="360" dy="18">26 – BCLK: Serial bit clock</tspan>
+    <tspan x="360" dy="18">27 – ACLK: Auxiliary serial clock</tspan>
+  </text>
+
+  <!-- COLUMN 3 (Pins 28–40) -->
+  <text x="630" y="660" fill="#fff" font-size="12">
+    <tspan x="630" dy="0">28 – SOD: Serial output data</tspan>
+    <tspan x="630" dy="18">29 – IRQ: Interrupt request</tspan>
+    <tspan x="630" dy="18">30 – CS0: Chip select 0</tspan>
+    <tspan x="630" dy="18">31 – CS1: Chip select 1</tspan>
+    <tspan x="630" dy="18">32 – R/W: Read/Write control</tspan>
+    <tspan x="630" dy="18">33 – A3: Address line 3</tspan>
+    <tspan x="630" dy="18">34 – A2: Address line 2</tspan>
+    <tspan x="630" dy="18">35 – A1: Address line 1</tspan>
+    <tspan x="630" dy="18">36 – A0: Address line 0</tspan>
+    <tspan x="630" dy="18">37 – AUD: Audio output</tspan>
+    <tspan x="630" dy="18">38 – D0: Data bus bit 0</tspan>
+    <tspan x="630" dy="18">39 – D1: Data bus bit 1</tspan>
+    <tspan x="630" dy="18">40 – D2: Data bus bit 2</tspan>
+  </text>
+
+  
+  
+</svg>
