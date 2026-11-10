@@ -1,19 +1,3 @@
-# Console platformer, 1985 -- evocations, not the originals.
-#
-# The originals run on an NES APU: two pulse channels with four selectable duty cycles, a
-# triangle, a noise channel and a hardware sweep unit. POKEY has none of that. It has one
-# square (distortion 5), several polynomial textures, and an envelope that rewrites
-# registers on a timer.
-#
-# So two things differ audibly no matter how these are tuned. There is no duty cycle here,
-# which is where the original's reedy quality comes from; and AUDF is 8-bit against the
-# NES's 11, so the top of a fast rise is coarse -- at AUDF 35 one step is 21Hz, against
-# 1.4Hz down at 140.
-#
-# What does carry across for free: a constant AUDF delta gives a hyperbolic pitch curve, so
-# the rise accelerates on its own -- which is close to what the NES sweep unit does by
-# decreasing the period geometrically.
-
 bank   Platformer
 clock  1512000
 tick   220
