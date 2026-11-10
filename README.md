@@ -14,10 +14,6 @@ I included a samples folder to demonstrate how to use it and how it works. I als
 **No dependencies.** Not on a UI framework, not on an audio API, not on a package. It is a
 library that turns register writes into samples.
 
-```
-dotnet add package PokeySharp
-```
-
 ```csharp
 using Pokey;
 
