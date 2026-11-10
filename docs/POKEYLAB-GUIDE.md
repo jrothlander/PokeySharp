@@ -28,18 +28,12 @@ Read it in order the first time. The later parts assume the earlier ones.
 
 ## 1. What you are looking at
 
-Run it with:
-
-```
-dotnet run --project PokeyLabForms
-```
-
 The window is one screen with everything on it, which is deliberate. The chip's
 registers, the envelope driving them, and the waveform coming out are all visible at
 once, because the whole point is watching one change the others.
 
 **The status bar at the bottom is the first thing to check.** It should say *Audio
-running*. If it says *No audio*, the chip is not advancing — every number on screen
+running*. If it says *No audio*, try restarting, as the chip is not advancing — every number on screen
 still works, but the scope will be flat and nothing will make a sound. The chip is
 ticked *inside* the audio render, so no audio means no time passing.
 
@@ -61,17 +55,14 @@ volume, so that an empty window is not mistaken for a broken one.
 
 ## 2. The chip: one channel
 
-POKEY has four channels. Each one is astonishingly simple, and understanding one is
-understanding all four.
+POKEY has four channels. Each one is astonishingly simple, and understanding one is understanding all four.
 
 A channel is **a counter, a switch, and a volume**.
 
-The counter counts down from whatever you put in **AUDF**. When it hits zero it reloads
-and *may* flip a one-bit switch. That switch being on or off is the entire output — the
-channel is either pushing or it is not. **Volume** says how hard.
+The counter counts down from whatever you put in **AUDF**. When it hits zero it reloads and *may* flip a one-bit switch. That switch being on or off is the 
+entire output — the channel is either pushing or it is not. **Volume** says how hard.
 
-That is it. Every sound POKEY can make is that switch flipping, or not flipping, at
-moments the counter picks.
+That is it. Every sound POKEY can make is that switch flipping, or not flipping, at moments the counter picks.
 
 ### Try this
 
@@ -83,7 +74,7 @@ Look at Channel 1. Drag the **AUDF** slider slowly and watch two things:
 You will notice the pitch does not move evenly. Dragging from 10 to 20 changes the pitch
 enormously; dragging from 200 to 210 barely changes it at all.
 
-**This is the single least intuitive thing about the chip, and it is worth sitting with.**
+**This is the single least intuitive thing about the chip, and it is worth pausing to think about.**
 AUDF is not a pitch. It is a *divider* — how many clock ticks to wait between flips. The
 pitch is what you get by dividing the clock by it, so the relationship is upside down:
 
@@ -94,32 +85,9 @@ the Hz readout sits right next to the slider — so you can watch the inverse ha
 
 ### The scope
 
-The scope shows the chip's actual output. With a pure tone you will see a square wave,
+The scope shows the chip's actual output. With a pure tone, you will see a square wave,
 because that is literally what the channel is doing: a switch, on and off, at even
 intervals.
-
-It is trigger-aligned, so a steady tone stands still instead of sliding sideways. If it
-were not, an unchanging sound would look like it was moving, which would be worse than
-useless.
-
-**Gain** and **Span** beneath it are the two scales, and the current setting is printed in
-the corner of the trace.
-
-Gain defaults to **×4**, and that number is not cosmetic. The mix sums four channels and
-divides by all four at full volume — `4 × 15 = 60` — so **one channel can never exceed a
-quarter of full scale**. Drawn against full scale a single voice would use a quarter of the
-frame however loud it was. At ×4 one channel at volume 15 fills the frame exactly; ×1 is
-the true full-scale picture, which is what you want when all four are playing.
-
-It does not auto-fit, deliberately. A scope that rescales itself to whatever it is showing
-is easier to read and tells you nothing — the trace height stops meaning amplitude, and
-turning a volume down would leave the picture unchanged. Fixed steps keep the height
-meaningful. A trace driven past the top flattens against the frame, which is the scale
-telling you it has run out.
-
-**Span** narrows how much of the captured window is drawn, stretched to the full width. The
-short settings are for high-pitched content — at 0.9 ms a mid-range tone is less than half a
-cycle and reads as a flat line, which is the zoom working, not a fault.
 
 ### The nine bytes
 
@@ -132,7 +100,7 @@ a slider reading *8*. The chip has never heard of any of that. It gets nine byte
 AUDF, four AUDC, and one AUDCTL. That is the entire audio programming interface, and the
 strip is all nine of them, live, as bits.
 
-Filled cell means the bit is set, outline means clear, exactly like the poly trains.
+Filled cell means the bit is set; outline means clear, exactly like the poly trains.
 **The colours mark the fields**, which is most of what the display is for:
 
 | Colour | Field |
@@ -146,8 +114,8 @@ top three cells are `101`, the low nibble is `0010`, and the hex on the end says
 That is the arithmetic in the open: **AUDC = distortion × 32 + volume**, and `$A2` is
 what Tempest's ROM actually contains for the player's shot.
 
-**A red outline round a cell means that bit moved since the last frame.** Start an
-envelope playing and the AUDF row lights up as the sweep runs. This is sampled, not
+**A red outline around a cell means that bit moved since the last frame.** Start an
+envelope playing, and the AUDF row lights up as the sweep runs. This is sampled, not
 exhaustive — the window redraws thirty times a second and the envelope ticks at two
 hundred and twenty, so you are seeing roughly one tick in seven. It is enough to see
 which bits are hot.
@@ -188,7 +156,7 @@ tab draws each as a row of cells — filled for a one, empty for a zero.
 pitch of its own. The 17-bit one repeats every 131,071 steps, which is longer than
 anyone waits, so it reads as noise. Same mechanism, opposite sound, and the only
 difference is how wide the register is. The red **REPEATS** marker on each row is the
-whole argument — you can see it on the short counters and it is nowhere on the long ones.
+whole argument — you can see it on the short counters.
 
 **The counters free-run; the channel samples them.** They advance regardless of what any
 channel is doing, and a channel looks at them once per divider period. The small blue
@@ -337,27 +305,6 @@ The grid still shows the table's own number, not the effective one. `−8` is wh
 table and what **Copy as C#** emits; the interpretation stays in the note and the
 tooltip where it cannot be mistaken for the data.
 
-### The graph, and the measured box
-
-The graph plots the sweep tick by tick, drawn from the same arithmetic that drives the
-registers — so it is the sound being played, not an idealisation.
-
-The green **MEASURED** box is where real recordings of a Tempest cabinet say its player's
-shot should start and end. The readout beneath judges four numbers against those bands
-and marks each **OK** or **no**.
-
-The box belongs to that one sound, so nothing in this repository is expected to land in
-it: the built-in zap and the bank sounds are other sounds entirely. Untick **Show the measured
-target box** to give the graph to the sound you are working on.
-
-**Switch it off with "Show the measured target box"** beneath the graph, and the axes go
-with it. That second part is the point. While the box is shown the axes are held wide
-enough to keep it on screen whatever is loaded, which is right when you are checking a
-voice against the captures — and wrong when you are designing one that has nothing to do
-with the shot, because a short quiet sweep ends up squashed into a corner of a plot sized
-for something else. Unchecked, the plot fits the sweep you actually have: the shot's own
-time axis reads 0.145 s rather than 0.229 s, and the curve fills the width.
-
 ### Taking a sound with you
 
 **Copy as C#**, under the AUDC grid, puts whatever is dialled in on the clipboard as
@@ -384,8 +331,8 @@ Open the **Voice** tab, bottom right.
 Speaking uses **none** of what you just learned. No divider, no poly counter, no
 distortion field.
 
-Instead the channel is put into **volume-only mode**, where the divider and poly are cut
-out entirely and the volume value is driven straight at the output. Something upstream
+Instead, the channel is put into **volume-only mode**, where the divider and poly are cut
+out entirely, and the volume value is driven straight at the output. Something upstream
 then rewrites that 4-bit number thousands of times a second, and the sound is whatever
 that upstream thing computed.
 
