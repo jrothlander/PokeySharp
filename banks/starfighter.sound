@@ -1,13 +1,3 @@
-# Fixed shooter, 1981 -- evocations, not the originals.
-#
-# The arcade used a Namco WSG for the short effects and sampled waveforms for the longer
-# ones, so as with the maze game nothing here can be a copy. What is worth reproducing is
-# the shape of the set: this game's sounds are unusually long for 1981, and several of them
-# are pitch gestures that last a whole second or more while something moves on screen.
-#
-# That is the thing to take from it. Most arcade sound is a fiftieth of a second; a capture
-# beam holding for a second and a half is what makes an event feel like an event.
-
 bank   Starfighter
 clock  1512000
 tick   220
